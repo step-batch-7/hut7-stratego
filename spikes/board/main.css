@@ -1,0 +1,118 @@
+body {
+  margin: 6rem;
+  padding: 6rem;
+  height: 100vh;
+  width: 100vw;
+}
+
+.face {
+  height: 5vh;
+  width: 100vh;
+  position: absolute;
+}
+
+.cube {
+  position: relative;
+  transform: rotateY(12deg) rotateX(-44deg);
+  transform-style: preserve-3d;
+  perspective: 100rem;
+}
+
+.front {
+  transform: rotateY(0deg) translateZ(50vh);
+  background-color: rgba(58, 0, 0, 1);
+  border: 1.5px solid grey;
+  box-sizing: border-box;
+}
+.right {
+  transform: rotateY(90deg) translateZ(50vh);
+  background-color: rgba(58, 0, 0, 1);
+  border: 1.5px solid grey;
+  box-sizing: border-box;
+}
+.back {
+  transform: rotateY(180deg) translateZ(50vh);
+  background-color: rgba(58, 0, 0, 1);
+  border: 1.5px solid grey;
+  box-sizing: border-box;
+}
+.left {
+  transform: rotateY(-90deg) translateZ(50vh);
+  background-color: rgba(58, 0, 0, 1);
+  border: 1.5px solid grey;
+  box-sizing: border-box;
+}
+.bottom {
+  height: 100vh;
+  width: 100vh;
+  transform: rotateX(90deg) translateZ(45vh);
+  background-color: rgba(58, 0, 0, 1);
+}
+.top {
+  height: 100vh;
+  width: 100vh;
+  transform: rotateX(-90deg) translateZ(-50vh);
+  background-color: #e1af80;
+  box-shadow: inset 0px 0px 2rem 1.4rem rgba(58, 0, 0, 1);
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.tile {
+  height: 10vh;
+  width: 10vh;
+  box-sizing: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  border-collapse: collapse;
+}
+
+.tile:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.lake {
+  background-color: #008dd3;
+  border: none;
+}
+
+.lake:hover {
+  background-color: #008dd3;
+}
+
+.front-boo {
+  width: 50vh;
+  margin-top: 17rem;
+  background-color: red;
+  padding: 2.5vh;
+}
+
+.center {
+  padding-top: 0.4rem;
+  text-align: center;
+}
+
+.bigOne {
+  color: grey;
+  font-family: Arial;
+  font-weight: 700;
+  font-size: 1.4rem;
+}
+
+.middle {
+  color: grey;
+  font-family: Arial;
+  font-weight: 700;
+  font-size: 0.8rem;
+  position: relative;
+  top: -0.4rem;
+}
+
+.mode {
+  color: grey;
+  font-family: Arial;
+  font-weight: 700;
+  position: relative;
+  top: -1.1rem;
+  left: -0.1rem;
+  font-size: 0.5rem;
+}
