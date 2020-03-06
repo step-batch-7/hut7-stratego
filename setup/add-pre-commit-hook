@@ -1,5 +1,5 @@
 cat << EOF > .git/hooks/pre-commit
 npm run preCommit &> /dev/null
-exit 0
+exit $?
 EOF
 chmod +x .git/hooks/pre-commit
