@@ -1,0 +1,140 @@
+body {
+  font-family: sans-serif;
+  background-attachment: fixed;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url('../images/background.png');
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-size: cover;
+}
+
+h1 {
+  color: #fdd847;
+  font-family: sans-serif;
+  text-align: center;
+}
+
+p {
+  color: #fdd847;
+}
+
+input {
+  border: none;
+  width: 11rem;
+  border-bottom: 1.2px solid #fdd847;
+  background-color: transparent;
+  padding: 2px;
+  font-size: 1rem;
+  color: #fdd847;
+  margin-top: 3rem;
+  outline: none;
+}
+
+#hostGame,
+#waitingBlock,
+#message {
+  display: none;
+}
+
+#homePage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: transparent;
+  border: 2px solid #fdd847;
+  padding: 1rem 0.9rem;
+  border-radius: 8px;
+  color: #fdd847;
+  font-weight: 700;
+  font-size: 20px;
+  text-align: center;
+  height: 26rem;
+  width: 17rem;
+}
+
+.title {
+  color: #fdd847;
+  position: absolute;
+  top: -4px;
+  padding: 39px 75.6px;
+  font-weight: 300;
+  font-size: 2rem;
+}
+
+.gameIdMsg {
+  text-align: center;
+  margin-top: 7rem;
+  color: #fdd847;
+  font-size: 1.5rem;
+  font-weight: 100;
+}
+
+.gameId {
+  margin-top: 1rem;
+  color: #fdd847;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+#loadingGif {
+  margin-top: 2rem;
+  border: transparent;
+  width: 7rem;
+}
+
+.waitingMsg {
+  margin-top: 3rem;
+  font-size: 1.2rem;
+  font-weight: 100;
+}
+
+.inputFields {
+  font-size: 1rem;
+  padding: 1.8rem 0.5rem;
+  color: #fdd847;
+}
+
+.inputFields > label {
+  font-weight: 400;
+}
+
+::placeholder {
+  color: #fdd847;
+  opacity: 30%;
+}
+
+#message {
+  font-weight: 100;
+}
+
+.host {
+  font-weight: 500;
+  padding: 0.8rem 4rem;
+  border-radius: 25px;
+  color: #fdd847;
+  border: 1px solid #fdd847;
+  cursor: pointer;
+  margin: 1.6rem 3rem;
+  text-align: center;
+  background-color: transparent;
+}
+
+.host:hover {
+  background-color: #fdd847;
+  color: #1f0000;
+}
+
+.host:active {
+  border: 1px ridge #1f0000;
+}
