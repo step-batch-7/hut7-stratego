@@ -1,0 +1,42 @@
+body {
+  background-image: url(../images/background.png);
+}
+
+.setUpBoard {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+  background-image: url(../images/burntWood.jpg);
+  background-position: center;
+  height: 46em;
+  width: 46em;
+  background-size: cover;
+  margin: 2em 8em;
+}
+
+.enemyTerritory {
+  height: 27.57em;
+  width: 46em;
+}
+
+.territory {
+  display: flex;
+  flex-wrap: wrap;
+  height: 18.43em;
+  width: 46em;
+}
+
+.tile {
+  height: 4.6em;
+  width: 4.6em;
+  box-sizing: border-box;
+  border-top: 2px solid black;
+  border-left: 2px solid black;
+}
+
+.palette {
+  margin: 0.5em 5em;
+  border: 4px ridge #fdd847;
+  height: 8em;
+  width: 105em;
+}
