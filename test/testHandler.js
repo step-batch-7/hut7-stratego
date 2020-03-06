@@ -7,6 +7,12 @@ describe('request for static pages', () => {
       .get('/')
       .expect(200)
       .expect(/Stratego/)
-      .expect('Content-Length', '226', done);
+      .end(err => {
+        if (err) {
+          done(err);
+          return;
+        }
+        done();
+      });
   });
 });
