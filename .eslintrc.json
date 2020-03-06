@@ -63,7 +63,6 @@
         "prefer-const": "error",
         "no-magic-numbers": "error",
         "no-process-exit": "error",
-        "no-process-env": "error",
         "no-return-assign": "error",
         "no-useless-return": "error",
         "max-depth": "error",
