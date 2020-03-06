@@ -1,6 +1,5 @@
 body {
   font-family: sans-serif;
-  background-attachment: fixed;
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
     url('../images/background.png');
   position: absolute;
@@ -23,7 +22,6 @@ p {
 
 input {
   border: none;
-  width: 11rem;
   border-bottom: 1.2px solid #fdd847;
   background-color: transparent;
   padding: 2px;
@@ -50,12 +48,9 @@ input {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: transparent;
   border: 2px solid #fdd847;
   padding: 1rem 0.9rem;
   border-radius: 8px;
-  color: #fdd847;
-  font-weight: 700;
   font-size: 20px;
   text-align: center;
   height: 26rem;
@@ -72,7 +67,6 @@ input {
 }
 
 .gameIdMsg {
-  text-align: center;
   margin-top: 7rem;
   color: #fdd847;
   font-size: 1.5rem;
@@ -82,31 +76,24 @@ input {
 .gameId {
   margin-top: 1rem;
   color: #fdd847;
-  text-align: center;
   font-size: 1.5rem;
-  font-weight: 500;
 }
 
 #loadingGif {
   margin-top: 2rem;
-  border: transparent;
   width: 7rem;
 }
 
 .waitingMsg {
   margin-top: 3rem;
-  font-size: 1.2rem;
   font-weight: 100;
+  color: #fdd847;
 }
 
 .inputFields {
   font-size: 1rem;
   padding: 1.8rem 0.5rem;
   color: #fdd847;
-}
-
-.inputFields > label {
-  font-weight: 400;
 }
 
 ::placeholder {
@@ -119,15 +106,12 @@ input {
 }
 
 .host {
-  font-weight: 500;
   padding: 0.8rem 4rem;
   border-radius: 25px;
   color: #fdd847;
   border: 1px solid #fdd847;
   cursor: pointer;
-  margin: 1.6rem 3rem;
-  text-align: center;
-  background-color: transparent;
+  margin: 1.9rem 3rem;
 }
 
 .host:hover {
