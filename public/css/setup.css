@@ -31,13 +31,12 @@ body {
   height: 7.4vh;
   width: 7.4vh;
   box-sizing: border-box;
-  border-top: 0.2vh solid;
-  border-left: 0.2vh solid;
+  border: 1px solid;
   cursor: pointer;
 }
 
 .tile:hover {
-  border-color: green;
+  border: 2px solid #fdd847;
 }
 
 .palette {
