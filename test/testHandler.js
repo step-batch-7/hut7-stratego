@@ -18,4 +18,36 @@ describe('Server', () => {
       });
     });
   });
+
+  context('get', function() {
+    context('/gameId', function() {
+      it('should response back with gameId for /gameId', function(done) {
+        request(app)
+          .get('/gameId')
+          .expect(200)
+          .end(function(err) {
+            if (err) {
+              return done(err);
+            }
+            done();
+          });
+      });
+    });
+  });
+
+  context('post', function() {
+    context('/hostGame', function() {
+      it('should create game with given player name for /hostGame', done => {
+        request(app)
+          .post('/hostGame')
+          .expect(200)
+          .end(function(err) {
+            if (err) {
+              return done(err);
+            }
+            done();
+          });
+      });
+    });
+  });
 });
