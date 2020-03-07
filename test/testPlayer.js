@@ -20,13 +20,29 @@ describe('Player', () => {
       const piece = new Piece('marshal', [0, 0]);
       assert.strictEqual(player.addPiece(piece), 1);
     });
-    it('should add given piece in player army', () => {
+    it('should not add given piece in player army if piece is not an instance of Piece class', () => {
       const player = new Player('venky', 'red');
       const piece = {
         name: 'scout',
         position: [9, 9]
       };
       assert.strictEqual(player.addPiece(piece), 0);
+    });
+  });
+  context('.movePiece()', function() {
+    it('should update position of piece to given position if piece exists', () => {
+      const player = new Player('venky', 'red');
+      const piece = new Piece('marshal', [0, 0]);
+      player.addPiece(piece);
+      const currentPosition = player.movePiece([0, 0], [0, 7]);
+      assert.deepStrictEqual(currentPosition, [0, 7]);
+    });
+    it('should not update position of piece to given position if piece does not exists', () => {
+      const player = new Player('venky', 'red');
+      const piece = new Piece('marshal', [9, 9]);
+      player.addPiece(piece);
+      const currentPosition = player.movePiece([0, 0], [0, 7]);
+      assert.isUndefined(currentPosition);
     });
   });
 });

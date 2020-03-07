@@ -4,7 +4,7 @@ const { app } = require('./../lib/routes');
 describe('Server', () => {
   context('Middleware', function() {
     context('express static', function() {
-      it('should response back with index.html for /', function(done) {
+      it('should response back with game.html for /game.html', function(done) {
         request(app)
           .get('/game.html')
           .expect(200)
