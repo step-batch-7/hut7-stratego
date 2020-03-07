@@ -3,44 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" />
     <link rel="stylesheet" href="./css/mainPage.css" />
-    <script src="./js/mainPage.js"></script>
+    <title>mainPage</title>
   </head>
   <body>
-    <!-- home page -->
     <div id="homePage" class="center">
       <div class="title">Stratego</div>
-      <div class="host" onclick="showHost()">
-        Host
-      </div>
-    </div>
-    <!-- host game -->
-    <div id="hostGame" class="center">
-      <div class="title">Stratego</div>
-      <br />
-      <div class="inputFields">
-        <label for="username">Name:</label>
-        <input
-          name="username"
-          class="placeholderColor"
-          placeholder="enter name"
-          type="text"
-          autocomplete="off"
-        />
-        <p id="message">please enter your name</p>
-      </div>
-      <div class="host" onclick="showWaiting()">
-        Host
-      </div>
-    </div>
-    <!-- waiting page -->
-    <div id="waitingBlock" class="center">
-      <div class="title">Stratego</div>
-      <div class="gameIdMsg">Your GameID</div>
-      <div class="gameId">25314</div>
-      <img id="loadingGif" src="images/loading.gif" />
-      <div class="waitingMsg">Waiting for other player to join</div>
+      <a href="hostPage.html" class="host">host</a>
     </div>
   </body>
 </html>

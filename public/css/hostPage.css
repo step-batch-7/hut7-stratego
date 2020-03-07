@@ -16,10 +16,24 @@ h1 {
   text-align: center;
 }
 
-#homePage {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+p {
+  color: #fdd847;
+}
+
+input {
+  border: none;
+  border-bottom: 1.2px solid #fdd847;
+  background-color: transparent;
+  padding: 2px;
+  font-size: 1rem;
+  color: #fdd847;
+  margin-top: 3rem;
+  outline: none;
+}
+
+#waitingBlock,
+#message {
+  display: none;
 }
 
 .center {
@@ -45,6 +59,46 @@ h1 {
   font-size: 2rem;
 }
 
+.gameIdMsg {
+  margin-top: 7rem;
+  color: #fdd847;
+  font-size: 1.5rem;
+  font-weight: 100;
+}
+
+.gameId {
+  margin-top: 1rem;
+  color: #fdd847;
+  font-size: 1.5rem;
+}
+
+#loadingGif {
+  margin-top: 2rem;
+  width: 7rem;
+  color: #fdd847;
+}
+
+.waitingMsg {
+  margin-top: 3rem;
+  font-weight: 100;
+  color: #fdd847;
+}
+
+.inputFields {
+  font-size: 1rem;
+  padding: 3.8rem 0.5rem;
+  color: #fdd847;
+}
+
+::placeholder {
+  color: #fdd847;
+  opacity: 30%;
+}
+
+#message {
+  font-weight: 100;
+}
+
 .host {
   padding: 0.8rem 4rem;
   border-radius: 25px;
@@ -63,6 +117,7 @@ h1 {
   border: 1px ridge #1f0000;
 }
 
-a {
-  text-decoration: none;
+#back {
+  font-size: 2rem;
+  color: #fdd847;
 }
