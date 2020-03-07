@@ -31,11 +31,6 @@ input {
   outline: none;
 }
 
-#waitingBlock,
-#message {
-  display: none;
-}
-
 .center {
   position: absolute;
   top: 50%;
@@ -96,6 +91,7 @@ input {
 }
 
 #message {
+  visibility: hidden;
   font-weight: 100;
 }
 
