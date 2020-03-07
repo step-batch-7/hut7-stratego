@@ -6,12 +6,14 @@
     <title>Hosting</title>
     <link rel="stylesheet" href="./css/waiting.css" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" />
+    <script src="js/waiting.js"></script>
+    <script src="js/request.js"></script>
   </head>
-  <body>
+  <body onload="getId()">
     <div id="waitingBlock" class="center">
       <div class="title">Stratego</div>
       <div class="gameIdMsg">Your GameID</div>
-      <div class="gameId">25314</div>
+      <div class="gameId"></div>
       <i class="fa fa-spinner fa-pulse fa-3x fa-fw" id="loadingGif"></i>
       <div class="waitingMsg">Waiting for other player to join</div>
     </div>

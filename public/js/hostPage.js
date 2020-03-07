@@ -1,7 +1,11 @@
+const gotoWaiting = function(response) {
+  window.location.href = 'waiting.html';
+};
+
 const showWaiting = function() {
-  const input = document.querySelector('.placeholderColor').value;
-  if (input.trim()) {
-    window.location.href = 'waiting.html';
+  const playerName = document.querySelector('.placeholderColor').value;
+  if (playerName.trim()) {
+    sendReq('post', '/hostGame', gotoWaiting(), JSON.stringify({ playerName }));
     return;
   }
   document.querySelector('#message').style.visibility = 'visible';

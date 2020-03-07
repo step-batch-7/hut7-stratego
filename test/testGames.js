@@ -36,4 +36,10 @@ describe('Games', () => {
       assert.strictEqual(games.createNewGame('player'), 0);
     });
   });
+  context('getGameId', () => {
+    it('should give the last game id', () => {
+      const games = new Games();
+      assert.strictEqual(games.getGameId(), 0);
+    });
+  });
 });
