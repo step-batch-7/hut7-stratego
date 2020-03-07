@@ -16,21 +16,6 @@ h1 {
   text-align: center;
 }
 
-p {
-  color: #fdd847;
-}
-
-input {
-  border: none;
-  border-bottom: 1.2px solid #fdd847;
-  background-color: transparent;
-  padding: 2px;
-  font-size: 1rem;
-  color: #fdd847;
-  margin-top: 3rem;
-  outline: none;
-}
-
 .center {
   position: absolute;
   top: 50%;
@@ -54,41 +39,27 @@ input {
   font-size: 2rem;
 }
 
-.inputFields {
-  font-size: 1rem;
-  padding: 3.8rem 0.5rem;
+.gameIdMsg {
+  margin-top: 7rem;
   color: #fdd847;
-}
-
-::placeholder {
-  color: #fdd847;
-  opacity: 30%;
-}
-
-#message {
-  visibility: hidden;
+  font-size: 1.5rem;
   font-weight: 100;
 }
 
-.host {
-  padding: 0.8rem 4rem;
-  border-radius: 25px;
+.gameId {
+  margin-top: 1rem;
   color: #fdd847;
-  border: 1px solid #fdd847;
-  cursor: pointer;
-  margin: 1.9rem 3rem;
+  font-size: 1.5rem;
 }
 
-.host:hover {
-  background-color: #fdd847;
-  color: #1f0000;
+#loadingGif {
+  margin-top: 2rem;
+  width: 7rem;
+  color: #fdd847;
 }
 
-.host:active {
-  border: 1px ridge #1f0000;
-}
-
-#back {
-  font-size: 2rem;
+.waitingMsg {
+  margin-top: 3rem;
+  font-weight: 100;
   color: #fdd847;
 }

@@ -8,7 +8,24 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" />
     <script src="./js/hostPage.js"></script>
   </head>
-  <body onload="main()">
-    <div id="hostDisplay"></div>
+  <body>
+    <a href="index.html"><i class="far fa-arrow-alt-circle-left" id="back"></i></a>
+    <div id="hostGame" class="center">
+      <div class="title">Stratego</div>
+      <div class="inputFields">
+        <label for="username">Name:</label>
+        <input
+          name="username"
+          class="placeholderColor"
+          placeholder="enter name"
+          type="text"
+          autocomplete="off"
+        />
+        <p id="message">please enter your name</p>
+      </div>
+      <div class="host" onclick="showWaiting()">
+        Host
+      </div>
+    </div>
   </body>
 </html>
