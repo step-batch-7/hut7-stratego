@@ -1,18 +1,21 @@
 const request = require('supertest');
 const { app } = require('./../lib/routes');
 
-describe('request for static pages', () => {
-  it('should response back with index.html for /', done => {
-    request(app)
-      .get('/')
-      .expect(200)
-      .expect(/Stratego/)
-      .end(err => {
-        if (err) {
-          done(err);
-          return;
-        }
-        done();
+describe('Server', () => {
+  context('Middleware', function() {
+    context('express static', function() {
+      it('should response back with index.html for /', function(done) {
+        request(app)
+          .get('/game.html')
+          .expect(200)
+          .expect(/Stratego/)
+          .end(function(err) {
+            if (err) {
+              return done(err);
+            }
+            done();
+          });
       });
+    });
   });
 });
