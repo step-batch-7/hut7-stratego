@@ -91,9 +91,16 @@ const createPalette = function(pieces) {
   });
 };
 
+const removeSelectedPiece = function() {
+  const activePieces = Array.from(document.querySelectorAll('.active'));
+  activePieces.forEach(activePiece => activePiece.classList.remove('active'));
+};
+
 const selectPiece = function(setUpInfo, pieceContainer) {
+  removeSelectedPiece();
   setUpInfo.selectedPiece =
     pieceContainer.lastElementChild.firstElementChild.innerText;
+  pieceContainer.firstElementChild.firstElementChild.classList.add('active');
 };
 
 const placePiece = function(setUpInfo, tile) {
@@ -106,6 +113,7 @@ const placePiece = function(setUpInfo, tile) {
   }
   tile.firstElementChild || tile.appendChild(image);
   setUpInfo.selectedPiece = undefined;
+  removeSelectedPiece();
 };
 
 const attachListeners = function() {

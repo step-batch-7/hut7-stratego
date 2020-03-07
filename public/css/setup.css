@@ -54,6 +54,11 @@ body {
   border: 2px solid #fdd847;
 }
 
+.active {
+  transform: scale(1.1);
+  border: 3px solid #fdd847 !important;
+}
+
 .palette {
   display: flex;
   justify-content: space-around;
