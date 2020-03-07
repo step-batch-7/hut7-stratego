@@ -7,16 +7,19 @@ body {
   display: flex;
   flex-direction: column;
   border: 0.1vh solid;
-  background-image: url(../images/burntWood.jpg);
+  background-image: url(../images/setupBoardBackGround.jpg);
   background-position: center;
   height: 74vh;
   width: 74vh;
+  border: 0.3vw ridge #fdd847;
   background-size: cover;
   margin: 3vh 12vh;
 }
 
 .enemyTerritory {
-  height: 44.35vh;
+  display: flex;
+  flex-wrap: wrap;
+  height: 44.33vh;
   width: 74vh;
 }
 
@@ -27,14 +30,26 @@ body {
   width: 74vh;
 }
 
-.tile {
+.tile,
+.enemyTerritoryTile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   height: 7.4vh;
   width: 7.4vh;
   box-sizing: border-box;
-  border: 1px solid;
-  cursor: pointer;
+  border: 1px solid rgba(30, 0, 0, 0.7);
+}
+.enemyTerritoryTile {
+  opacity: 0.3;
+}
+.lake {
+  opacity: 1;
 }
 
+.tile {
+  cursor: pointer;
+}
 .tile:hover {
   border: 2px solid #fdd847;
 }
@@ -69,6 +84,11 @@ body {
 }
 
 .boardPieceImage {
-  height: 7.3vh;
-  width: 7.3vh;
+  height: 7vh;
+  width: 7vh;
+}
+
+.lake {
+  border: none;
+  background-image: url(../images/sea.png);
 }

@@ -11,6 +11,30 @@ const createTerritory = function() {
   }
 };
 
+const createEnemyTerritory = function() {
+  const lakePositions = [
+    '4_2',
+    '4_3',
+    '5_2',
+    '5_3',
+    '4_6',
+    '4_7',
+    '5_6',
+    '5_7'
+  ];
+  const territory = document.querySelector('.enemyTerritory');
+  for (let row = 9; row >= 4; row--) {
+    for (let column = 0; column < 10; column++) {
+      const tile = document.createElement('div');
+      tile.id = `${row}_${column}`;
+      this[tile.id];
+      lakePositions.includes(tile.id) && tile.classList.add('lake');
+      tile.classList.add('enemyTerritoryTile');
+      territory.appendChild(tile);
+    }
+  }
+};
+
 const createElement = (element, className) => {
   const htmlElement = document.createElement(element);
   htmlElement.classList.add(className);
@@ -101,6 +125,7 @@ const attachListeners = function() {
 const main = function() {
   const setUpInfo = { selectedPiece: '', piecesInfo: [] };
   createTerritory();
+  createEnemyTerritory();
   const pieces = [
     { name: 'marshal', count: 1 },
     { name: 'scout', count: 2 },
