@@ -33,11 +33,43 @@ body {
   box-sizing: border-box;
   border-top: 0.2vh solid;
   border-left: 0.2vh solid;
+  cursor: pointer;
+}
+
+.tile:hover {
+  border-color: green;
 }
 
 .palette {
+  display: flex;
+  justify-content: space-around;
   margin: 0vw 5vw;
   border: 0.3vw ridge #fdd847;
-  height: 14.8vh;
-  width: 90vw;
+  height: 12vh;
+  padding: 1em;
+  width: fit-content;
+}
+
+.pieceData {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #fdd847;
+}
+
+.pieceContainer {
+  width: 9vh;
+  padding: 0 0.5em;
+  cursor: pointer;
+}
+
+.pieceImage {
+  height: 7.3vh;
+  width: 7.3vh;
+  border: 2px ridge #fdd847;
+}
+
+.boardPieceImage {
+  height: 7.3vh;
+  width: 7.3vh;
 }
