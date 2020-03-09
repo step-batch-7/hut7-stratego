@@ -30,6 +30,21 @@ describe('GET', () => {
         });
     });
   });
+
+  context('/army', function() {
+    it('should response back with piecesInfo', function(done) {
+      request(app)
+        .get('/army')
+        .expect(200)
+        .expect(/position/)
+        .end(function(err) {
+          if (err) {
+            return done(err);
+          }
+          done();
+        });
+    });
+  });
 });
 
 describe('POST', () => {

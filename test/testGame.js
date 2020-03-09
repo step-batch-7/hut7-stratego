@@ -27,6 +27,15 @@ describe('Game', () => {
     });
   });
 
+  context('.getId', () => {
+    it('should return the id of the game', () => {
+      const gameId = 123;
+      const player = new Player('venky', 'red');
+      const game = new Game(gameId, player, createBattleField(1, 1));
+      assert.strictEqual(game.getId(), 123);
+    });
+  });
+
   context('.addPlayer()', () => {
     it('should add the given player in Game', () => {
       const player1 = new Player('venky', 'red');

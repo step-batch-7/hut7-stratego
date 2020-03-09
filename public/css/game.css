@@ -20,3 +20,8 @@
 .piece {
   background-color: #000;
 }
+
+.pieceImage {
+  height: 100%;
+  width: 100%;
+}

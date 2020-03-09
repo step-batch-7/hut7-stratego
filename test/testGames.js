@@ -4,7 +4,7 @@ const { Game } = require('../lib/game');
 const { Player } = require('./../lib/player');
 
 describe('Games', () => {
-  context('addGame', () => {
+  context('.addGame()', () => {
     it('should add new game into games', () => {
       const gameId = 123;
       const player = new Player('venky', 'red');
@@ -32,13 +32,24 @@ describe('Games', () => {
       assert.strictEqual(games.addGame(game), 0);
     });
   });
-  context('createNewGame', () => {
+
+  context('.getGame()', () => {
+    it('should return the game of given gameId', () => {
+      const games = new Games();
+      const gameId = games.createNewGame('venky');
+      const game = games.getGame(gameId);
+      assert.isTrue(game instanceof Game);
+    });
+  });
+
+  context('.createNewGame()', () => {
     it('should give game id of the new game', () => {
       const games = new Games();
       assert.strictEqual(games.createNewGame('player'), 0);
     });
   });
-  context('getGameId', () => {
+
+  context('.getGameId()', () => {
     it('should give the last game id', () => {
       const games = new Games();
       assert.strictEqual(games.getGameId(), 0);

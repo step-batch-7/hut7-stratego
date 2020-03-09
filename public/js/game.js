@@ -26,26 +26,37 @@ const createBoard = function() {
   }
   return board;
 };
-const createPiece = function() {
+const createPiece = function(pieceName) {
   const piece = document.createElement('div');
-  piece.style.height = htmlLength(BOARD_LENGTH / 10 - 1);
-  piece.style.width = htmlLength(BOARD_LENGTH / 10 - 1);
+  const pieceImage = createImage(pieceName, 'pieceImage');
+  const pieceLength = BOARD_LENGTH / numberOfTilesInRow;
+  piece.style.height = htmlLength(pieceLength);
+  piece.style.width = htmlLength(pieceLength);
   piece.classList.add('piece');
   piece.classList.add('center');
+  piece.appendChild(pieceImage);
   return piece;
 };
 
-const createPieceAt = function(tileId) {
+const createPieceAt = function(pieceName, tileId) {
   const tile = document.getElementById(tileId);
-  const piece = createPiece();
+  const piece = createPiece(pieceName);
   tile.appendChild(piece);
+};
+
+const setupBoard = function(army) {
+  army.forEach(soldier => {
+    const { name, position } = soldier;
+    const tileId = position.join('_');
+    createPieceAt(name, tileId);
+  });
 };
 
 const main = function() {
   const root = document.getElementById('root');
   const board = createBoard();
   root.appendChild(board);
-  createPieceAt('0_4');
+  sendReq('GET', '/army', setupBoard);
 };
 
 window.onload = main;
