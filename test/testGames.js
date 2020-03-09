@@ -48,4 +48,35 @@ describe('Games', () => {
       assert.strictEqual(games.createNewGame('player'), 1);
     });
   });
+
+  context('.addPlayerInGame()', () => {
+    it('should add player in the existing game', () => {
+      const games = new Games();
+      const gameId = games.createNewGame('player');
+      assert.strictEqual(games.addPlayerInGame(gameId, 'player1'), true);
+    });
+    it('should not add player in the non existing game', () => {
+      const games = new Games();
+      games.createNewGame('player');
+      assert.strictEqual(games.addPlayerInGame(500, 'player1'), false);
+    });
+  });
+
+  context('.isGameFull()', () => {
+    it('should send true if game is full', () => {
+      const games = new Games();
+      const gameId = games.createNewGame('player');
+      games.addPlayerInGame(gameId, 'player1');
+      assert.strictEqual(games.isGameFull(gameId), true);
+    });
+    it('should send false if game is not full', () => {
+      const games = new Games();
+      const gameId = games.createNewGame('player');
+      assert.strictEqual(games.isGameFull(gameId), false);
+    });
+    it('should give undefined if game is not existed', () => {
+      const games = new Games();
+      assert.strictEqual(games.isGameFull(10), undefined);
+    });
+  });
 });

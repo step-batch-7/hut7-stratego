@@ -10,3 +10,16 @@ const sendReq = function(method, url, callback, content) {
   xhr.setRequestHeader('Content-Type', 'application/json');
   xhr.send(content);
 };
+
+const sendGetReq = function(url, callback) {
+  const xhr = new XMLHttpRequest();
+  xhr.onload = function() {
+    callback(this);
+  };
+  xhr.onerror = function(err) {
+    const { log } = console;
+    log(err);
+  };
+  xhr.open('GET', url);
+  xhr.send();
+};

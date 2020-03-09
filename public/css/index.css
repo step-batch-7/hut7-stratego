@@ -80,6 +80,12 @@ a {
   font-weight: 100;
 }
 
+#nameValid,
+#gameIdValid {
+  visibility: hidden;
+  font-weight: 100;
+}
+
 .host {
   padding: 0.8rem 4rem;
   border-radius: 25px;

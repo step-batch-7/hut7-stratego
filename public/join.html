@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>hostPage</title>
+    <link rel="stylesheet" href="./css/index.css" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+    />
+    <script src="./js/hostPage.js"></script>
+  </head>
+  <body>
+    <a href="index.html"
+      ><i class="far fa-arrow-alt-circle-left" id="back"></i
+    ></a>
+    <div id="hostGame" class="center">
+      <div class="title">Stratego</div>
+      <form
+        method="POST"
+        action="join"
+        class="inputFields"
+        onsubmit="return isValidInput()"
+      >
+        <label for="username">Name:</label>
+        <input
+          name="playerName"
+          class="input"
+          placeholder="Enter Name"
+          type="text"
+          autocomplete="off"
+        />
+        <p id="nameValid">Please enter your name</p>
+        <label for="username">Game Id:</label>
+        <input
+          name="gameId"
+          class="input"
+          placeholder="enter Game Id"
+          type="text"
+          autocomplete="off"
+        />
+        <p id="gameIdValid">Please enter Game Id</p>
+        <input class="host" value="Join" type="submit" />
+      </form>
+    </div>
+  </body>
+</html>

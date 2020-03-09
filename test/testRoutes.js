@@ -1,21 +1,6 @@
 const request = require('supertest');
 const { app } = require('../lib/routes');
-describe('GET', () => {
-  context('/game.html', function() {
-    it('should response back with game.html', function(done) {
-      request(app)
-        .get('/game.html')
-        .expect(200)
-        .expect(/Stratego/)
-        .end(function(err) {
-          if (err) {
-            return done(err);
-          }
-          done();
-        });
-    });
-  });
-});
+
 describe('POST', () => {
   context('/host', function() {
     it('should create game with given player name for /host', done => {
@@ -88,6 +73,101 @@ describe('POST', () => {
         .post('/movePiece')
         .send({ sourceTileId: '0_1', targetTileId: '0_9' })
         .expect(400)
+        .end(function(err) {
+          if (err) {
+            return done(err);
+          }
+          done();
+        });
+    });
+  });
+  context('/join', function() {
+    it('should join game with given player name and gameId for /join', done => {
+      request(app)
+        .post('/join')
+        .send('playerName=player&gameId=1')
+        .expect(302)
+        .end(function(err) {
+          if (err) {
+            return done(err);
+          }
+          done();
+        });
+    });
+    it('should give bad request if the player name is not given', done => {
+      request(app)
+        .post('/host')
+        .send('name=player')
+        .expect(400)
+        .end(function(err) {
+          if (err) {
+            return done(err);
+          }
+          done();
+        });
+    });
+    it('should give game started if game is already started for /join', done => {
+      request(app)
+        .post('/join')
+        .send('playerName=player&gameId=1')
+        .expect(/game is already started/)
+        .end(function(err) {
+          if (err) {
+            return done(err);
+          }
+          done();
+        });
+    });
+  });
+});
+
+describe('GET', () => {
+  context('/game.html', function() {
+    it('should response back with game.html', function(done) {
+      request(app)
+        .get('/game.html')
+        .expect(200)
+        .expect(/Stratego/)
+        .end(function(err) {
+          if (err) {
+            return done(err);
+          }
+          done();
+        });
+    });
+  });
+  context('/setup', function() {
+    it('should send to index page if cookies are not set', function(done) {
+      request(app)
+        .get('/setup')
+        .expect(302)
+        .expect(/\//)
+        .end(function(err) {
+          if (err) {
+            return done(err);
+          }
+          done();
+        });
+    });
+    it('should send to setup if game is full', function(done) {
+      request(app)
+        .get('/setup')
+        .set('cookie', 'gameId=1')
+        .expect(302)
+        .expect(/setup.html/)
+        .end(function(err) {
+          if (err) {
+            return done(err);
+          }
+          done();
+        });
+    });
+    it('should send to waiting if game is not full', function(done) {
+      request(app)
+        .get('/setup')
+        .set('cookie', 'gameId=2')
+        .expect(302)
+        .expect(/waiting.html/)
         .end(function(err) {
           if (err) {
             return done(err);

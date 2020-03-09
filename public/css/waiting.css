@@ -1,0 +1,58 @@
+body {
+  font-family: sans-serif;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url('../images/background.png');
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-size: cover;
+}
+h1 {
+  color: #fdd847;
+  font-family: sans-serif;
+  text-align: center;
+}
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 2px solid #fdd847;
+  padding: 1rem 0.9rem;
+  border-radius: 8px;
+  font-size: 20px;
+  text-align: center;
+  height: 26rem;
+  width: 17rem;
+}
+.title {
+  color: #fdd847;
+  position: absolute;
+  top: -4px;
+  padding: 39px 75.6px;
+  font-weight: 300;
+  font-size: 2rem;
+}
+.gameIdMsg {
+  margin-top: 7rem;
+  color: #fdd847;
+  font-size: 1.5rem;
+  font-weight: 100;
+}
+.gameId {
+  margin-top: 1rem;
+  color: #fdd847;
+  font-size: 1.5rem;
+}
+#loadingGif {
+  margin-top: 2rem;
+  width: 7rem;
+  color: #fdd847;
+}
+.waitingMsg {
+  margin-top: 3rem;
+  font-weight: 100;
+  color: #fdd847;
+}
