@@ -52,11 +52,12 @@ const appendChildren = function(parent, ...children) {
 
 const createPalette = function(pieces) {
   const palette = document.querySelector('.palette');
+  palette.innerHTML = '';
   pieces.forEach(piece => {
     const pieceContainer = createElement('div', 'pieceContainer');
+    piece.count === 0 && pieceContainer.classList.add('unavailable');
     const pieceImageContainer = createElement('div', 'pieceImageContainer');
-    const pieceImage = createImage(piece.name, 'pieceImage');
-    pieceImageContainer.appendChild(pieceImage);
+    pieceImageContainer.appendChild(createImage(piece.name, 'pieceImage'));
     const pieceData = createElement('div', 'pieceData');
     const pieceName = createElementWithData('span', piece.name);
     const pieceCount = createElementWithData('span', 'x' + piece.count);
@@ -78,30 +79,40 @@ const selectPiece = function(setUpInfo, pieceContainer) {
   pieceContainer.firstElementChild.firstElementChild.classList.add('active');
 };
 
-const placePiece = function(setUpInfo, tile) {
+const decreaseCount = function(pieceName, pieces) {
+  const piece = pieces.find(piece => piece.name === pieceName);
+  piece.count--;
+  const activePiece = document.querySelector('.active');
+  piece.count === 0 &&
+    activePiece.parentElement.parentElement.classList.add('unavailable');
+  activePiece.parentElement.nextSibling.lastChild.innerText = 'x' + piece.count;
+};
+
+const placePiece = function(setUpInfo, tile, pieces) {
   const position = tile.id;
   const name = setUpInfo.selectedPiece;
   setUpInfo.piecesInfo.push({ position, name });
   const image = createImage(name, 'boardPieceImage');
-  if (!image) {
+  if (!image || tile.firstElementChild) {
     return;
   }
-  tile.firstElementChild || tile.appendChild(image);
+  tile.appendChild(image);
+  decreaseCount(name, pieces);
   setUpInfo.selectedPiece = undefined;
   removeSelectedPiece();
 };
 
-const attachListeners = function() {
+const attachListeners = function(setUpInfo, pieces) {
   const pieceContainers = Array.from(
     document.querySelectorAll('.pieceContainer')
   );
   pieceContainers.forEach(pieceContainer => {
-    pieceContainer.onclick = selectPiece.bind(null, this, pieceContainer);
+    pieceContainer.onclick = selectPiece.bind(null, setUpInfo, pieceContainer);
   });
 
   const tiles = Array.from(document.querySelectorAll('.tile'));
   tiles.forEach(tile => {
-    tile.onclick = placePiece.bind(null, this, tile);
+    tile.onclick = placePiece.bind(null, setUpInfo, tile, pieces);
   });
 };
 
@@ -110,20 +121,20 @@ const main = function() {
   createEnemyTerritory();
   createTerritory();
   const pieces = [
-    { name: 'marshal', count: 1 },
-    { name: 'scout', count: 2 },
-    { name: 'bomb', count: 2 },
-    { name: 'miner', count: 2 },
     { name: 'flag', count: 1 },
-    { name: 'colonel', count: 1 },
+    { name: 'bomb', count: 2 },
+    { name: 'marshal', count: 1 },
+    { name: 'miner', count: 2 },
+    { name: 'scout', count: 2 },
     { name: 'general', count: 1 },
-    { name: 'lieutenant', count: 1 },
-    { name: 'sergeant', count: 1 },
-    { name: 'captain', count: 1 },
-    { name: 'major', count: 1 },
-    { name: 'spy', count: 1 }
+    { name: 'spy', count: 1 },
+    { name: 'colonel', count: 0 },
+    { name: 'lieutenant', count: 0 },
+    { name: 'sergeant', count: 0 },
+    { name: 'captain', count: 0 },
+    { name: 'major', count: 0 }
   ];
   createPalette(pieces);
-  attachListeners.bind(setUpInfo)();
+  attachListeners.bind(null, setUpInfo, pieces)();
 };
 window.onload = main;
