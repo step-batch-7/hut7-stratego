@@ -1,44 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SetUp page</title>
-    <link rel="stylesheet" href="./css/setup.css" />
-    <script src="./js/setup.js"></script>
-    <script src="./js/htmlUtils.js"></script>
-    <style>
-      #panel {
-        background: transparent;
-        border: 3px ridge #fdd847;
-        width: 50vh;
-        margin: 2.8rem;
-        height: 60vh;
-        color: #fdd847;
-        padding: 1rem;
-      }
-      #boardAndInfoPanel {
-        display: flex;
-      }
-      .imageInInfo {
-        width: 15vh;
-        border: 1px solid;
-      }
-    </style>
-  </head>
 
-  <body>
-    <div id="boardAndInfoPanel">
-      <div class="setUpBoard">
-        <div class="enemyTerritory"></div>
-        <div class="territory"></div>
-      </div>
-      <div id="panel">
-        <div class="infoPanel">
-          <img src="fightimage" alt="fight" class="imageInInfo" />
-        </div>
-      </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SetUp page</title>
+  <link rel="stylesheet" href="./css/setup.css" />
+  <script src="./js/setup.js"></script>
+  <script src="./js/htmlUtils.js"></script>
+</head>
+
+<body>
+  <div id="boardAndInfoPanel">
+    <div class="setUpBoard">
+      <div class="enemyTerritory"></div>
+      <div class="territory"></div>
     </div>
-    <div class="palette"></div>
-  </body>
+    <div id="panel">
+      <div class="infoPanel">
+        <img src="./images/soldierLogo.png" alt="fight" id="infoImage" />
+      </div>
+      <a href="./game.html">Start Game</a>
+    </div>
+  </div>
+  <div class="palette"></div>
+</body>
+
 </html>

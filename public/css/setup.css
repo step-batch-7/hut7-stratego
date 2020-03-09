@@ -101,3 +101,51 @@ body {
   border: none;
   background-image: url(../images/sea.png);
 }
+
+#panel {
+  background: transparent;
+  border: 3px ridge #fdd847;
+  width: 50vh;
+  margin: 2.8rem;
+  height: 60vh;
+  color: #fdd847;
+  padding: 1rem;
+  position: relative;
+}
+
+#panel > a {
+  width: 40%;
+  height: 5%;
+  font-size: 1.2rem;
+  position: absolute;
+  bottom: 5%;
+  left: 30%;
+  text-decoration: none;
+  color: #fdd847;
+  border: 1px solid;
+  text-align: center;
+  padding: 1%;
+}
+
+#boardAndInfoPanel {
+  display: flex;
+}
+
+.imageInInfo {
+  width: 15vh;
+  border: 1px solid;
+}
+
+#infoImage {
+  width: 100%;
+  margin: 20% 0%;
+}
+
+.infoPanel {
+  width: 100%;
+  text-align: center;
+}
+.infoPanel > p {
+  text-align: left;
+  font-size: 1.4em;
+}

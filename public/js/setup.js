@@ -63,19 +63,21 @@ const removeSelectedPiece = function() {
 };
 
 const showPieceInfo = function() {
-  const infoPanel = document.querySelector('#panel');
-  document.querySelector('.infoPanel').remove();
+  const infoPanel = document.querySelector('.infoPanel');
+  infoPanel.innerText = '';
   const selectedPiece = document.querySelector('.active').src;
   const name = selectedPiece
     .split('/')
     .pop()
     .split('.')[0];
   const image = createImage(name, 'imageInInfo');
-  const pieceName = createElementWithData('h3', name);
-  const info = createElementWithData('p', 'somecontent');
-  const div = createElement('div', 'infoPanel');
-  appendChildren(infoPanel, div);
-  appendChildren(div, image, pieceName, info);
+  const pieceName = createElementWithData('h2', name.toUpperCase());
+  const requiredPiece = pieceInfo.find(
+    piece => piece.Piece.toLowerCase() === name
+  );
+  const rank = createElementWithData('p', `Rank : ${requiredPiece.Rank}`);
+  const info = createElementWithData('p', `Ability : ${requiredPiece.ability}`);
+  appendChildren(infoPanel, image, pieceName, rank, info);
 };
 
 const selectPiece = function(setUpInfo, pieceContainer) {
