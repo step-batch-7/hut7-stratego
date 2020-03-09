@@ -3,8 +3,7 @@ const createTerritory = function() {
   for (let row = 3; row >= 0; row--) {
     for (let column = 0; column < 10; column++) {
       const tile = document.createElement('div');
-      tile.id = `${row}_${column}`;
-      this[tile.id];
+      tile.id = `${column}_${row}`;
       tile.classList.add('tile');
       territory.appendChild(tile);
     }
@@ -13,20 +12,20 @@ const createTerritory = function() {
 
 const createEnemyTerritory = function() {
   const lakePositions = [
-    '4_2',
-    '4_3',
-    '5_2',
-    '5_3',
-    '4_6',
-    '4_7',
-    '5_6',
-    '5_7'
+    '2_4',
+    '3_4',
+    '2_5',
+    '3_5',
+    '6_4',
+    '7_4',
+    '6_5',
+    '7_5'
   ];
   const territory = document.querySelector('.enemyTerritory');
   for (let row = 9; row >= 4; row--) {
     for (let column = 0; column < 10; column++) {
       const tile = document.createElement('div');
-      tile.id = `${row}_${column}`;
+      tile.id = `${column}_${row}`;
       this[tile.id];
       lakePositions.includes(tile.id) && tile.classList.add('lake');
       tile.classList.add('enemyTerritoryTile');
@@ -92,8 +91,8 @@ const createPalette = function(pieces) {
 };
 
 const removeSelectedPiece = function() {
-  const activePieces = Array.from(document.querySelectorAll('.active'));
-  activePieces.forEach(activePiece => activePiece.classList.remove('active'));
+  const activePiece = document.querySelector('.active');
+  activePiece && activePiece.classList.remove('active');
 };
 
 const selectPiece = function(setUpInfo, pieceContainer) {
@@ -132,8 +131,8 @@ const attachListeners = function() {
 
 const main = function() {
   const setUpInfo = { selectedPiece: '', piecesInfo: [] };
-  createTerritory();
   createEnemyTerritory();
+  createTerritory();
   const pieces = [
     { name: 'marshal', count: 1 },
     { name: 'scout', count: 2 },
