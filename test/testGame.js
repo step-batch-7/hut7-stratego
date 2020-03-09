@@ -175,7 +175,12 @@ describe('Game', () => {
       };
       game.arrangeBattleField(setUpInfo);
       const currentPosition = game.movePiece('red', '0_0', '0_1');
-      assert.deepStrictEqual(currentPosition, [0, 1]);
+      const expected = {
+        done: true,
+        sourceTileId: [0, 0],
+        targetTileId: [0, 1]
+      };
+      assert.deepStrictEqual(currentPosition, expected);
     });
 
     it('should not update the position of the piece if the given target position is a lake', () => {
@@ -187,7 +192,10 @@ describe('Game', () => {
       };
       game.arrangeBattleField(setUpInfo);
       const currentPosition = game.movePiece('red', '1_4', '2_4');
-      assert.deepStrictEqual(currentPosition, [1, 4]);
+      const expected = {
+        done: false
+      };
+      assert.deepStrictEqual(currentPosition, expected);
     });
 
     it('should not update the position of the piece if the given target position is occupied', () => {
@@ -202,7 +210,10 @@ describe('Game', () => {
       };
       game.arrangeBattleField(setUpInfo);
       const currentPosition = game.movePiece('red', '1_4', '2_4');
-      assert.deepStrictEqual(currentPosition, [1, 4]);
+      const expected = {
+        done: false
+      };
+      assert.deepStrictEqual(currentPosition, expected);
     });
 
     it('should not move the piece to diagonal of current position', () => {
@@ -214,7 +225,10 @@ describe('Game', () => {
       };
       game.arrangeBattleField(setUpInfo);
       const currentPosition = game.movePiece('red', '1_4', '3_4');
-      assert.deepStrictEqual(currentPosition, [1, 4]);
+      const expected = {
+        done: false
+      };
+      assert.deepStrictEqual(currentPosition, expected);
     });
   });
 });

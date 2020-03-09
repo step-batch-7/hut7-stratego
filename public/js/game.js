@@ -30,9 +30,6 @@ const createBoard = function() {
 
 const createPiece = function(pieceName) {
   const piece = createImage(pieceName, 'pieceImage');
-  const pieceLength = BOARD_LENGTH / numberOfTilesInRow;
-  piece.style.height = htmlLength(pieceLength);
-  piece.style.width = htmlLength(pieceLength);
   piece.classList.add('piece');
   return piece;
 };
@@ -41,23 +38,20 @@ const selectPiece = function(moveInfo) {
   moveInfo.sourceTileId = event.target.parentElement.id;
 };
 
-const movePiece = function(moveInfo, coordinates) {
-  const position = coordinates.join('_');
-  const sourceTileId = moveInfo.sourceTileId;
-  const sourceTile = document.getElementById(sourceTileId);
-  const targetTile = document.getElementById(position);
-  const piece = sourceTile.firstChild;
-  targetTile.appendChild(piece);
+const movePiece = function(res) {
+  if (res.done) {
+    const position = res.targetTileId.join('_');
+    const sourceTileId = res.sourceTileId.join('_');
+    const sourceTile = document.getElementById(sourceTileId);
+    const targetTile = document.getElementById(position);
+    const piece = sourceTile.firstChild;
+    targetTile.appendChild(piece);
+  }
 };
 
-const selectTile = function(moveInfo) {
+const updateTile = function(moveInfo) {
   moveInfo.targetTileId = event.target.id;
-  sendReq(
-    'POST',
-    '/movePiece',
-    movePiece.bind(null, moveInfo),
-    JSON.stringify(moveInfo)
-  );
+  sendReq('POST', '/movePiece', movePiece, JSON.stringify(moveInfo));
 };
 
 const createPieceAt = function(pieceName, tileId) {
@@ -80,7 +74,7 @@ const setupBoard = function(army) {
 const attachListeners = function(moveInfo) {
   const tiles = Array.from(document.querySelectorAll('.tile'));
   tiles.forEach(tile => {
-    tile.onclick = selectTile.bind(null, moveInfo);
+    tile.onclick = updateTile.bind(null, moveInfo);
   });
 
   const pieces = Array.from(document.querySelectorAll('.piece'));

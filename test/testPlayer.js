@@ -35,14 +35,22 @@ describe('Player', () => {
       const piece = new Piece('marshal', [0, 0]);
       player.addPiece(piece);
       const currentPosition = player.movePiece([0, 0], [0, 7]);
-      assert.deepStrictEqual(currentPosition, [0, 7]);
+      const expected = {
+        done: true,
+        sourceTileId: [0, 0],
+        targetTileId: [0, 7]
+      };
+      assert.deepStrictEqual(currentPosition, expected);
     });
     it('should not update position of piece to given position if piece does not exists', () => {
       const player = new Player('venky', 'red');
       const piece = new Piece('marshal', [9, 9]);
       player.addPiece(piece);
       const currentPosition = player.movePiece([0, 0], [0, 7]);
-      assert.isUndefined(currentPosition);
+      const expected = {
+        done: false
+      };
+      assert.deepStrictEqual(currentPosition, expected);
     });
   });
 });
