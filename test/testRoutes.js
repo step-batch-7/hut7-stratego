@@ -16,12 +16,15 @@ describe('GET', () => {
         });
     });
   });
+});
 
-  context('/gameId', function() {
-    it('should response back with gameId for /gameId', function(done) {
+describe('POST', () => {
+  context('/host', function() {
+    it('should create game with given player name for /host', done => {
       request(app)
-        .get('/gameId')
-        .expect(200)
+        .post('/host')
+        .send('playerName=player')
+        .expect(302)
         .end(function(err) {
           if (err) {
             return done(err);
@@ -30,6 +33,7 @@ describe('GET', () => {
         });
     });
   });
+<<<<<<< HEAD
 
   context('/army', function() {
     it('should response back with piecesInfo', function(done) {
@@ -50,9 +54,14 @@ describe('GET', () => {
 describe('POST', () => {
   context('/hostGame', function() {
     it('should create game with given player name for /hostGame', done => {
+=======
+  context('/host', function() {
+    it('should give bad request if the player name is not given', done => {
+>>>>>>> |#13|Apurva/Sravani|Modified hostpage.
       request(app)
-        .post('/hostGame')
-        .expect(200)
+        .post('/host')
+        .send('name=player')
+        .expect(400)
         .end(function(err) {
           if (err) {
             return done(err);

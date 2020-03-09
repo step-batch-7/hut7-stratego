@@ -1,12 +1,9 @@
-const gotoWaiting = function(response) {
-  window.location.href = 'waiting.html';
-};
-
-const showWaiting = function() {
+const isValidName = function() {
   const playerName = document.querySelector('.placeholderColor').value;
   if (playerName.trim()) {
-    sendReq('post', '/hostGame', gotoWaiting(), JSON.stringify({ playerName }));
-    return;
+    return true;
   }
+  document.querySelector('.placeholderColor').value = '';
   document.querySelector('#message').style.visibility = 'visible';
+  return false;
 };

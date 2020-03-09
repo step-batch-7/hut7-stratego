@@ -45,6 +45,7 @@ describe('Games', () => {
   context('.createNewGame()', () => {
     it('should give game id of the new game', () => {
       const games = new Games();
+<<<<<<< HEAD
       assert.strictEqual(games.createNewGame('player'), 0);
     });
   });
@@ -53,6 +54,9 @@ describe('Games', () => {
     it('should give the last game id', () => {
       const games = new Games();
       assert.strictEqual(games.getGameId(), 0);
+=======
+      assert.strictEqual(games.createNewGame('player'), 1);
+>>>>>>> |#13|Apurva/Sravani|Modified hostpage.
     });
   });
 });
