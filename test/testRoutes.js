@@ -1,6 +1,5 @@
 const request = require('supertest');
 const { app } = require('../lib/routes');
-
 describe('GET', () => {
   context('/game.html', function() {
     it('should response back with game.html', function(done) {
@@ -17,7 +16,6 @@ describe('GET', () => {
     });
   });
 });
-
 describe('POST', () => {
   context('/host', function() {
     it('should create game with given player name for /host', done => {
@@ -45,7 +43,6 @@ describe('POST', () => {
         });
     });
   });
-
   context('/army', function() {
     it('should response back with piecesInfo', function(done) {
       request(app)
@@ -60,7 +57,6 @@ describe('POST', () => {
         });
     });
   });
-
   context('/movePiece', function() {
     it('should respond with new position if its a valid move', function(done) {
       request(app)
@@ -75,7 +71,6 @@ describe('POST', () => {
           done();
         });
     });
-
     it('should respond with current position if its an invalid move', done => {
       request(app)
         .post('/movePiece')

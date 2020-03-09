@@ -72,11 +72,28 @@ const removeSelectedPiece = function() {
   activePiece && activePiece.classList.remove('active');
 };
 
+const showPieceInfo = function() {
+  const infoPanel = document.querySelector('#panel');
+  document.querySelector('.infoPanel').remove();
+  const selectedPiece = document.querySelector('.active').src;
+  const name = selectedPiece
+    .split('/')
+    .pop()
+    .split('.')[0];
+  const image = createImage(name, 'imageInInfo');
+  const pieceName = createElementWithData('h3', name);
+  const info = createElementWithData('p', 'somecontent');
+  const div = createElement('div', 'infoPanel');
+  appendChildren(infoPanel, div);
+  appendChildren(div, image, pieceName, info);
+};
+
 const selectPiece = function(setUpInfo, pieceContainer) {
   removeSelectedPiece();
   setUpInfo.selectedPiece =
     pieceContainer.lastElementChild.firstElementChild.innerText;
   pieceContainer.firstElementChild.firstElementChild.classList.add('active');
+  showPieceInfo();
 };
 
 const decreaseCount = function(pieceName, pieces) {
