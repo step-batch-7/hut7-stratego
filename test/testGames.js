@@ -36,7 +36,7 @@ describe('Games', () => {
   context('.getGame()', () => {
     it('should return the game of given gameId', () => {
       const games = new Games();
-      const gameId = games.createNewGame('venky');
+      const gameId = games.createNewGame('stratego');
       const game = games.getGame(gameId);
       assert.isTrue(game instanceof Game);
     });
@@ -45,18 +45,7 @@ describe('Games', () => {
   context('.createNewGame()', () => {
     it('should give game id of the new game', () => {
       const games = new Games();
-<<<<<<< HEAD
-      assert.strictEqual(games.createNewGame('player'), 0);
-    });
-  });
-
-  context('.getGameId()', () => {
-    it('should give the last game id', () => {
-      const games = new Games();
-      assert.strictEqual(games.getGameId(), 0);
-=======
       assert.strictEqual(games.createNewGame('player'), 1);
->>>>>>> |#13|Apurva/Sravani|Modified hostpage.
     });
   });
 });

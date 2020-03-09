@@ -32,8 +32,19 @@ describe('POST', () => {
           done();
         });
     });
+    it('should give bad request if the player name is not given', done => {
+      request(app)
+        .post('/host')
+        .send('name=player')
+        .expect(400)
+        .end(function(err) {
+          if (err) {
+            return done(err);
+          }
+          done();
+        });
+    });
   });
-<<<<<<< HEAD
 
   context('/army', function() {
     it('should response back with piecesInfo', function(done) {
@@ -49,19 +60,28 @@ describe('POST', () => {
         });
     });
   });
-});
 
-describe('POST', () => {
-  context('/hostGame', function() {
-    it('should create game with given player name for /hostGame', done => {
-=======
-  context('/host', function() {
-    it('should give bad request if the player name is not given', done => {
->>>>>>> |#13|Apurva/Sravani|Modified hostpage.
+  context('/movePiece', function() {
+    it('should respond with new position if its a valid move', function(done) {
       request(app)
-        .post('/host')
-        .send('name=player')
-        .expect(400)
+        .post('/movePiece')
+        .send({ sourceTileId: '0_1', targetTileId: '0_2' })
+        .expect(200)
+        .expect(/[0,2]/)
+        .end(function(err) {
+          if (err) {
+            return done(err);
+          }
+          done();
+        });
+    });
+
+    it('should respond with current position if its an invalid move', done => {
+      request(app)
+        .post('/movePiece')
+        .send({ sourceTileId: '0_1', targetTileId: '0_9' })
+        .expect(200)
+        .expect(/[0,1]/)
         .end(function(err) {
           if (err) {
             return done(err);

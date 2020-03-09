@@ -26,29 +26,65 @@ const createBoard = function() {
   }
   return board;
 };
+
 const createPiece = function(pieceName) {
-  const piece = document.createElement('div');
-  const pieceImage = createImage(pieceName, 'pieceImage');
+  const piece = createImage(pieceName, 'pieceImage');
   const pieceLength = BOARD_LENGTH / numberOfTilesInRow;
   piece.style.height = htmlLength(pieceLength);
   piece.style.width = htmlLength(pieceLength);
   piece.classList.add('piece');
-  piece.classList.add('center');
-  piece.appendChild(pieceImage);
   return piece;
+};
+
+const selectPiece = function(moveInfo) {
+  moveInfo.sourceTileId = event.target.parentElement.id;
+};
+
+const movePiece = function(moveInfo, coordinates) {
+  const position = coordinates.join('_');
+  const sourceTileId = moveInfo.sourceTileId;
+  const sourceTile = document.getElementById(sourceTileId);
+  const targetTile = document.getElementById(position);
+  const piece = sourceTile.firstChild;
+  targetTile.appendChild(piece);
+};
+
+const selectTile = function(moveInfo) {
+  moveInfo.targetTileId = event.target.id;
+  sendReq(
+    'POST',
+    '/movePiece',
+    movePiece.bind(null, moveInfo),
+    JSON.stringify(moveInfo)
+  );
 };
 
 const createPieceAt = function(pieceName, tileId) {
   const tile = document.getElementById(tileId);
   const piece = createPiece(pieceName);
+  piece.onclick = selectPiece;
   tile.appendChild(piece);
 };
 
 const setupBoard = function(army) {
+  const moveInfo = { sourceTileId: '', targetTileId: '' };
   army.forEach(soldier => {
     const { name, position } = soldier;
     const tileId = position.join('_');
     createPieceAt(name, tileId);
+  });
+  attachListeners(moveInfo);
+};
+
+const attachListeners = function(moveInfo) {
+  const tiles = Array.from(document.querySelectorAll('.tile'));
+  tiles.forEach(tile => {
+    tile.onclick = selectTile.bind(null, moveInfo);
+  });
+
+  const pieces = Array.from(document.querySelectorAll('.piece'));
+  pieces.forEach(piece => {
+    piece.onclick = selectPiece.bind(null, moveInfo);
   });
 };
 
