@@ -1,0 +1,22 @@
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.board {
+  border: 1px solid;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.tile {
+  position: relative;
+  border: 1px solid;
+  box-sizing: border-box;
+}
+
+.piece {
+  background-color: #000;
+}
