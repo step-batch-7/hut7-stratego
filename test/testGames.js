@@ -1,20 +1,22 @@
 const assert = require('chai').assert;
-const { Games } = require('../lib/games');
+const { Games, createBattleField } = require('../lib/games');
 const { Game } = require('../lib/game');
+const { Player } = require('./../lib/player');
 
 describe('Games', () => {
   context('addGame', () => {
     it('should add new game into games', () => {
       const gameId = 123;
-      const game = new Game(gameId);
+      const player = new Player('venky', 'red');
+      const game = new Game(gameId, player, createBattleField(10, 10));
       const games = new Games();
       assert.strictEqual(games.addGame(game), 1);
     });
-    it('should not add new game into games if the new game is not instance of the game class', () => {
+    it('should not add new game if its not instance of the game class', () => {
       const games = new Games();
       const game = {
         id: 123,
-        players: [],
+        players: [{ name: 'venky', unit: 'red' }],
         battleField: {},
         lakePositions: [
           [2, 4],

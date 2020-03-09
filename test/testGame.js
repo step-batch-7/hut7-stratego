@@ -1,13 +1,14 @@
 const assert = require('chai').assert;
-const { Game, createBattleFieldTemplate } = require('./../lib/game');
+const { Game } = require('./../lib/game');
 const { Player } = require('./../lib/player');
+const { createBattleField } = require('./../lib/games');
 
 describe('Game', () => {
   context('.getStatus()', () => {
     it('should give the status of the game', () => {
       const gameId = 123;
       const player = new Player('venky', 'red');
-      const game = new Game(gameId, player, createBattleFieldTemplate(1, 1));
+      const game = new Game(gameId, player, createBattleField(1, 1));
       assert.deepStrictEqual(game.getStatus(), {
         id: 123,
         players: [player],
@@ -29,14 +30,14 @@ describe('Game', () => {
   context('.addPlayer()', () => {
     it('should add the given player in Game', () => {
       const player1 = new Player('venky', 'red');
-      const game = new Game(123, player1, createBattleFieldTemplate(10, 10));
+      const game = new Game(123, player1, createBattleField(10, 10));
       const player2 = new Player('rajat', 'blue');
       const numberOfPlayers = game.addPlayer(player2);
       assert.strictEqual(numberOfPlayers, 2);
     });
     it('should not add player if its not an instance of Player class ', () => {
       const player1 = new Player('venky', 'red');
-      const game = new Game(123, player1, createBattleFieldTemplate(10, 10));
+      const game = new Game(123, player1, createBattleField(10, 10));
       const player2 = {
         name: 'venky',
         unit: 'red'
@@ -49,13 +50,13 @@ describe('Game', () => {
   context('.getPlayer()', () => {
     it('should give player of given unit', () => {
       const player = new Player('venky', 'red');
-      const game = new Game(123, player, createBattleFieldTemplate(10, 10));
+      const game = new Game(123, player, createBattleField(10, 10));
       assert.strictEqual(game.getPlayer('red'), player);
     });
 
     it('should give undefined when player of the given unit does not exists', () => {
       const player = new Player('venky', 'red');
-      const game = new Game(123, player, createBattleFieldTemplate(10, 10));
+      const game = new Game(123, player, createBattleField(10, 10));
       assert.isUndefined(game.getPlayer('blue'));
     });
   });
@@ -63,7 +64,7 @@ describe('Game', () => {
   context('.arrangeBattleField()', () => {
     it('should record the position of all components of the board', () => {
       const player = new Player('venky', 'red');
-      const game = new Game(123, player, createBattleFieldTemplate(10, 10));
+      const game = new Game(123, player, createBattleField(10, 10));
       const setUpInfo = {
         unit: 'red',
         piecesInfo: [{ position: '0_0', name: 'marshal' }]
@@ -73,7 +74,7 @@ describe('Game', () => {
 
     it('should not update the battleField if unit is other than red or blue', () => {
       const player = new Player('venky', 'red');
-      const game = new Game(123, player, createBattleFieldTemplate(10, 10));
+      const game = new Game(123, player, createBattleField(10, 10));
       const setUpInfo = {
         unit: 'green',
         piecesInfo: [{ position: '0_0', name: 'marshal' }]
@@ -83,7 +84,7 @@ describe('Game', () => {
 
     it('should not update the battleField if piece is not a game component', () => {
       const player = new Player('venky', 'red');
-      const game = new Game(123, player, createBattleFieldTemplate(10, 10));
+      const game = new Game(123, player, createBattleField(10, 10));
       const setUpInfo = {
         unit: 'red',
         piecesInfo: [{ position: '0_0', name: 'cannon' }]
@@ -95,7 +96,7 @@ describe('Game', () => {
   context('.isTargetOnLake()', () => {
     it('should return true if target is on Lake', () => {
       const player = new Player('venky', 'red');
-      const game = new Game(123, player, createBattleFieldTemplate(10, 10));
+      const game = new Game(123, player, createBattleField(10, 10));
       const setUpInfo = {
         unit: 'red',
         piecesInfo: [{ position: '2_4', name: 'marshal' }]
@@ -106,7 +107,7 @@ describe('Game', () => {
 
     it('should return false if target is not on Lake', () => {
       const player = new Player('venky', 'red');
-      const game = new Game(123, player, createBattleFieldTemplate(10, 10));
+      const game = new Game(123, player, createBattleField(10, 10));
       const setUpInfo = {
         unit: 'red',
         piecesInfo: [{ position: '0_0', name: 'marshal' }]
@@ -119,7 +120,7 @@ describe('Game', () => {
   context('.isOccupied()', () => {
     it('should return true if given position is occupied', () => {
       const player = new Player('venky', 'red');
-      const game = new Game(123, player, createBattleFieldTemplate(10, 10));
+      const game = new Game(123, player, createBattleField(10, 10));
       const setUpInfo = {
         unit: 'red',
         piecesInfo: [{ position: '0_0', name: 'marshal' }]
@@ -130,7 +131,7 @@ describe('Game', () => {
 
     it('should return false if given position is not occupied', () => {
       const player = new Player('venky', 'red');
-      const game = new Game(123, player, createBattleFieldTemplate(10, 10));
+      const game = new Game(123, player, createBattleField(10, 10));
       const setUpInfo = {
         unit: 'red',
         piecesInfo: [{ position: '0_0', name: 'marshal' }]
@@ -143,7 +144,7 @@ describe('Game', () => {
   context('updateBattleField', () => {
     it('should update piece from current position to target position', () => {
       const player = new Player('venky', 'red');
-      const game = new Game(123, player, createBattleFieldTemplate(10, 10));
+      const game = new Game(123, player, createBattleField(10, 10));
       const setUpInfo = {
         unit: 'red',
         piecesInfo: [{ position: '0_0', name: 'marshal' }]
@@ -158,7 +159,7 @@ describe('Game', () => {
   context('.movePiece()', () => {
     it('should update the position of piece of given player', () => {
       const player = new Player('venky', 'red');
-      const game = new Game(123, player, createBattleFieldTemplate(10, 10));
+      const game = new Game(123, player, createBattleField(10, 10));
       const setUpInfo = {
         unit: 'red',
         piecesInfo: [{ position: '0_0', name: 'marshal' }]
@@ -170,7 +171,7 @@ describe('Game', () => {
 
     it('should not update the position of the piece if the given target position is a lake', () => {
       const player = new Player('venky', 'red');
-      const game = new Game(123, player, createBattleFieldTemplate(10, 10));
+      const game = new Game(123, player, createBattleField(10, 10));
       const setUpInfo = {
         unit: 'red',
         piecesInfo: [{ position: '1_4', name: 'marshal' }]
@@ -182,7 +183,7 @@ describe('Game', () => {
 
     it('should not update the position of the piece if the given target position is occupied', () => {
       const player = new Player('venky', 'red');
-      const game = new Game(123, player, createBattleFieldTemplate(10, 10));
+      const game = new Game(123, player, createBattleField(10, 10));
       const setUpInfo = {
         unit: 'red',
         piecesInfo: [
@@ -197,7 +198,7 @@ describe('Game', () => {
 
     it('should not move the piece to diagonal of current position', () => {
       const player = new Player('venky', 'red');
-      const game = new Game(123, player, createBattleFieldTemplate(10, 10));
+      const game = new Game(123, player, createBattleField(10, 10));
       const setUpInfo = {
         unit: 'red',
         piecesInfo: [{ position: '1_4', name: 'marshal' }]
