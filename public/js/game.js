@@ -1,14 +1,15 @@
-const BOARD_LENGTH = 30;
+const BOARD_LENGTH = 74;
 const numberOfTilesInRow = 10;
 
-const htmlLength = length => `${length}rem`;
+const htmlLength = length => `${length}vh`;
 
 const createTile = function(row, column) {
   const tile = document.createElement('div');
   tile.style.height = htmlLength(BOARD_LENGTH / numberOfTilesInRow);
   tile.style.width = htmlLength(BOARD_LENGTH / numberOfTilesInRow);
   tile.classList.add('tile');
-  tile.id = `${row}_${column}`;
+  tile.id = `${column}_${row}`;
+  lakePositions.includes(tile.id) && tile.classList.add('lake');
   return tile;
 };
 
@@ -16,7 +17,7 @@ const createBoard = function() {
   const board = document.createElement('div');
   board.style.height = htmlLength(BOARD_LENGTH);
   board.style.width = htmlLength(BOARD_LENGTH);
-  board.classList.add('board');
+  board.className = 'board center';
   board.id = 'board';
   for (let row = 9; row >= 0; row--) {
     for (let column = 0; column < 10; column++) {

@@ -11,16 +11,6 @@ const createTerritory = function() {
 };
 
 const createEnemyTerritory = function() {
-  const lakePositions = [
-    '2_4',
-    '3_4',
-    '2_5',
-    '3_5',
-    '6_4',
-    '7_4',
-    '6_5',
-    '7_5'
-  ];
   const territory = document.querySelector('.enemyTerritory');
   for (let row = 9; row >= 4; row--) {
     for (let column = 0; column < 10; column++) {
