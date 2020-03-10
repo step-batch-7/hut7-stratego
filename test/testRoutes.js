@@ -75,7 +75,8 @@ describe('POST', () => {
       request(app)
         .post('/movePiece')
         .send({ sourceTileId: '0_1', targetTileId: '0_9' })
-        .expect(400)
+        .expect(200)
+        .expect(/[0,1]/)
         .end(function(err) {
           if (err) {
             return done(err);
