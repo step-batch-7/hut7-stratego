@@ -36,10 +36,12 @@ body {
   border: 1px solid;
   box-sizing: border-box;
   border: 1px solid rgba(30, 0, 0, 0.7);
+  cursor: pointer;
 }
 
 .lake {
   background-image: url('../images/sea.png');
+  border: none;
 }
 
 .pieceImage {
