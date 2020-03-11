@@ -11,7 +11,8 @@ const createImage = (name, className) => {
     marshal: './images/marshal.png',
     miner: './images/miner.png',
     sergeant: './images/sergeant.png',
-    spy: './images/spy.png'
+    spy: './images/spy.png',
+    opponent: './images/opponent.png'
   };
   if (!imagesUrl[name]) {
     return;

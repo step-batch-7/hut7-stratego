@@ -41,18 +41,16 @@ const movePiece = function(res) {
   targetTile.appendChild(piece);
 };
 
-const updateTile = function(moveInfo) {
-  const clickedTile = event.target;
-  const hasPiece = clickedTile.className.includes('piece');
-  if (hasPiece) {
-    moveInfo.sourceTileId = clickedTile.parentElement.id;
+const updateTile = function(moveInfo, tile) {
+  if (tile.firstChild) {
+    moveInfo.sourceTileId = tile.id;
   } else {
-    moveInfo.targetTileId = clickedTile.id;
-    const isAnyFieldEmpty = Object.values(moveInfo).every(
-      tileId => tileId !== ''
-    );
-    if (isAnyFieldEmpty) {
+    moveInfo.targetTileId = tile.id;
+    const hasAllFields = Object.values(moveInfo).every(tileId => tileId !== '');
+    if (hasAllFields) {
       sendReq('POST', '/movePiece', movePiece, JSON.stringify(moveInfo));
+      moveInfo.sourceTileId = '';
+      moveInfo.targetTileId = '';
     }
   }
 };
@@ -76,7 +74,7 @@ const setupBoard = function(army) {
 const attachListeners = function(moveInfo) {
   const tiles = Array.from(document.querySelectorAll('.tile'));
   tiles.forEach(tile => {
-    tile.onclick = updateTile.bind(null, moveInfo);
+    tile.onclick = updateTile.bind(null, moveInfo, tile);
   });
 };
 
