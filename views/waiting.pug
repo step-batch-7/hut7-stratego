@@ -1,0 +1,17 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    title Stratego | Waiting
+    link(rel='stylesheet', href='./css/waiting.css')
+    link(rel='stylesheet', href='https://use.fontawesome.com/releases/v5.7.0/css/all.css')
+    script(src='js/waiting.js')
+    script(src='js/request.js')
+  body
+    #waitingBlock.center
+      .title Stratego
+      .gameIdMsg Your GameID
+      #gameId.gameId=gameId
+      i#loadingGif.fa.fa-spinner.fa-pulse.fa-3x.fa-fw
+      .waitingMsg Waiting for other player to join

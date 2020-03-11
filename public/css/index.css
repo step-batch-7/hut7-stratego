@@ -1,19 +1,7 @@
 body {
   font-family: sans-serif;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url('../images/background.png');
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
+  background-image: url('../images/background.png');
   background-size: cover;
-}
-
-h1 {
-  color: #fdd847;
-  font-family: sans-serif;
-  text-align: center;
 }
 
 .center {
@@ -83,6 +71,13 @@ a {
   font-weight: 100;
   font-size: 0.8rem;
   text-align: left;
+}
+
+.serverMsg {
+  color: #fdd847;
+  font-weight: 100;
+  font-size: 1rem;
+  text-align: center;
 }
 
 .btn {

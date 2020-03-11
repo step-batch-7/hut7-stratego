@@ -110,7 +110,7 @@ describe('POST', () => {
       request(app)
         .post('/join')
         .send('playerName=player&gameId=1')
-        .expect(302)
+        .expect(200)
         .end(function(err) {
           if (err) {
             return done(err);
@@ -122,7 +122,7 @@ describe('POST', () => {
       request(app)
         .post('/join')
         .send('playerName=player&gameId=100')
-        .expect(302)
+        .expect(200)
         .end(function(err) {
           if (err) {
             return done(err);
@@ -165,8 +165,8 @@ describe('GET', () => {
       request(app)
         .get('/setup')
         .set('cookie', 'gameId=1')
-        .expect(302)
-        .expect(/setup.html/)
+        .expect(200)
+        .expect(/setup/)
         .end(function(err) {
           if (err) {
             return done(err);
@@ -178,8 +178,36 @@ describe('GET', () => {
       request(app)
         .get('/setup')
         .set('cookie', 'gameId=2')
-        .expect(302)
-        .expect(/waiting.html/)
+        .expect(200)
+        .expect(/waiting/)
+        .end(function(err) {
+          if (err) {
+            return done(err);
+          }
+          done();
+        });
+    });
+  });
+  context('/host', function() {
+    it('should serve the host page', function(done) {
+      request(app)
+        .get('/host')
+        .expect(200)
+        .expect(/Stratego | Host/)
+        .end(function(err) {
+          if (err) {
+            return done(err);
+          }
+          done();
+        });
+    });
+  });
+  context('/join', function() {
+    it('should serve the join page', function(done) {
+      request(app)
+        .get('/join')
+        .expect(200)
+        .expect(/Stratego | Join/)
         .end(function(err) {
           if (err) {
             return done(err);

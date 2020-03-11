@@ -1,0 +1,29 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    title Stratego | Host
+    link(rel='stylesheet', href='./css/index.css')
+    link(rel='stylesheet', href='https://use.fontawesome.com/releases/v5.7.0/css/all.css')
+    script(src='./js/hostPage.js')
+  body
+    a(href='/')
+      i#back.far.fa-arrow-alt-circle-left
+    #hostGame.center
+      .title Stratego
+      form.inputFields(method='POST', action='host', onsubmit='return isValidName()')
+        table
+          tbody
+            tr
+            tr
+              td
+                label(for='username') Name : 
+              td
+                div
+                  input.input(name='playerName', placeholder='Enter Name', type='text', autocomplete='off')
+            tr
+              td
+              td
+                p#message.errorMsg Please enter your name
+        input.btn.input(value='Host', type='submit')
