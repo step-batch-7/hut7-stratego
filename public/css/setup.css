@@ -16,8 +16,9 @@ body {
   margin: 3vh 12vh;
 }
 .unavailable {
-  filter: blur(1px);
+  filter: opacity(0.4);
   pointer-events: none;
+  cursor: not-allowed;
 }
 
 .enemyTerritory {

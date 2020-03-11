@@ -8,15 +8,20 @@ const isValidName = function() {
   return false;
 };
 
+const toggleErrorMsgVisibility = function(errorMsgId1, errorMsgId2) {
+  document.querySelector(errorMsgId1).style.visibility = 'hidden';
+  document.querySelector(errorMsgId2).style.visibility = 'visible';
+};
+
 const isValidInput = function() {
   const playerName = document.querySelector('[name=playerName]').value;
   const gameId = document.querySelector('[name=gameId]').value;
   if (!playerName.trim()) {
-    document.querySelector('#nameValid').style.visibility = 'visible';
+    toggleErrorMsgVisibility('#gameIdValid', '#nameValid');
     return false;
   }
   if (!gameId.trim()) {
-    document.querySelector('#gameIdValid').style.visibility = 'visible';
+    toggleErrorMsgVisibility('#nameValid', '#gameIdValid');
     return false;
   }
   return true;

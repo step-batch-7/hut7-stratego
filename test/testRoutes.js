@@ -110,7 +110,19 @@ describe('POST', () => {
       request(app)
         .post('/join')
         .send('playerName=player&gameId=1')
-        .expect(/game is already started/)
+        .expect(302)
+        .end(function(err) {
+          if (err) {
+            return done(err);
+          }
+          done();
+        });
+    });
+    it('should give not exist if game does not exists', done => {
+      request(app)
+        .post('/join')
+        .send('playerName=player&gameId=100')
+        .expect(302)
         .end(function(err) {
           if (err) {
             return done(err);

@@ -16,19 +16,35 @@ h1 {
   text-align: center;
 }
 
-p {
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 2px solid #fdd847;
+  padding: 1rem 0.9rem;
+  border-radius: 8px;
+  height: 26rem;
+  width: 17rem;
+}
+
+#back {
+  font-size: 2rem;
   color: #fdd847;
 }
 
-input {
+.input {
   border: none;
   border-bottom: 1.2px solid #fdd847;
   background-color: transparent;
   padding: 2px;
   font-size: 1rem;
   color: #fdd847;
-  margin-top: 3rem;
   outline: none;
+}
+
+td {
+  text-align: right;
 }
 
 a {
@@ -41,20 +57,6 @@ a {
   justify-content: center;
 }
 
-.center {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border: 2px solid #fdd847;
-  padding: 1rem 0.9rem;
-  border-radius: 8px;
-  font-size: 20px;
-  text-align: center;
-  height: 26rem;
-  width: 17rem;
-}
-
 .title {
   color: #fdd847;
   position: absolute;
@@ -65,9 +67,9 @@ a {
 }
 
 .inputFields {
-  font-size: 1rem;
   padding: 3.8rem 0.5rem;
   color: #fdd847;
+  margin-top: 3rem;
 }
 
 ::placeholder {
@@ -75,18 +77,15 @@ a {
   opacity: 30%;
 }
 
-#message {
+.errorMsg {
+  color: #fdd847;
   visibility: hidden;
   font-weight: 100;
+  font-size: 0.8rem;
+  text-align: left;
 }
 
-#nameValid,
-#gameIdValid {
-  visibility: hidden;
-  font-weight: 100;
-}
-
-.host {
+.btn {
   padding: 0.8rem 4rem;
   border-radius: 25px;
   color: #fdd847;
@@ -95,16 +94,15 @@ a {
   margin: 1.9rem 3rem;
 }
 
-.host:hover {
+.btn:hover {
   background-color: #fdd847;
   color: #1f0000;
 }
 
-.host:active {
+.btn:active {
   border: 1px ridge #1f0000;
 }
 
-#back {
-  font-size: 2rem;
-  color: #fdd847;
+.form-input {
+  display: flex;
 }

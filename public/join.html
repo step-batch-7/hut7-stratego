@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>hostPage</title>
+    <title>Stratego | Join</title>
     <link rel="stylesheet" href="./css/index.css" />
     <link
       rel="stylesheet"
@@ -23,25 +23,48 @@
         class="inputFields"
         onsubmit="return isValidInput()"
       >
-        <label for="username">Name:</label>
-        <input
-          name="playerName"
-          class="input"
-          placeholder="Enter Name"
-          type="text"
-          autocomplete="off"
-        />
-        <p id="nameValid">Please enter your name</p>
-        <label for="username">Game Id:</label>
-        <input
-          name="gameId"
-          class="input"
-          placeholder="enter Game Id"
-          type="text"
-          autocomplete="off"
-        />
-        <p id="gameIdValid">Please enter Game Id</p>
-        <input class="host" value="Join" type="submit" />
+       
+        <table>
+          <tr>
+            <tr>
+                <td><label for="username">Name : </label></td>
+                <td>
+                  <div>
+                    <input
+                      name="playerName"
+                      class="input"
+                      placeholder="Enter Name"
+                      type="text"
+                      autocomplete="off"
+                    />
+                    
+                  </div>
+                </td>
+            </tr>
+           <tr><td></td>
+            <td><p id="nameValid" class="errorMsg">Please enter your name</p></td></tr>
+          </tr>
+          <tr>
+              <tr>
+                  <td> <label for="username">Game Id : </label></td>
+                  <td>
+                    <div>
+                        <input
+                        name="gameId"
+                        class="input"
+                        placeholder="Enter Game Id"
+                        type="number"
+                        autocomplete="off"
+                      />
+                    </div>
+                  </td>
+              </tr>
+             <tr><td></td>
+              <td><p id="gameIdValid" class="errorMsg">Please enter Game Id</p></td></tr>
+            </tr>
+        </table>
+
+        <input class="btn input" value="Join" type="submit" />
       </form>
     </div>
   </body>
