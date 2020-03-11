@@ -232,7 +232,43 @@ describe('Game', () => {
         piecesInfo: [{ position: '1_4', name: 'scout' }]
       };
       game.arrangeBattleField(setUpInfo);
-      assert.isTrue(game.movePiece('red', '1_4', '8_4'));
+      assert.isTrue(game.movePiece('red', '1_4', '1_8'));
+    });
+
+    it('should not move the scout to as many tiles vertically and horizontally if lake comes in-between', () => {
+      const player = new Player('venky', 'red');
+      const game = new Game(123, player, createBattleField(10, 10));
+      const setUpInfo = {
+        unit: 'red',
+        piecesInfo: [{ position: '1_4', name: 'scout' }]
+      };
+      game.arrangeBattleField(setUpInfo);
+      assert.isFalse(game.movePiece('red', '1_4', '8_4'));
+    });
+
+    it('should not move the scout to as many tiles vertically and horizontally if other piece comes in-between', () => {
+      const player = new Player('venky', 'red');
+      const game = new Game(123, player, createBattleField(10, 10));
+      const setUpInfo = {
+        unit: 'red',
+        piecesInfo: [
+          { position: '2_3', name: 'scout' },
+          { position: '4_3', name: 'marshal' }
+        ]
+      };
+      game.arrangeBattleField(setUpInfo);
+      assert.isFalse(game.movePiece('red', '2_3', '7_3'));
+    });
+
+    it('should not move diagonaly', () => {
+      const player = new Player('venky', 'red');
+      const game = new Game(123, player, createBattleField(10, 10));
+      const setUpInfo = {
+        unit: 'red',
+        piecesInfo: [{ position: '2_3', name: 'scout' }]
+      };
+      game.arrangeBattleField(setUpInfo);
+      assert.isFalse(game.movePiece('red', '2_3', '3_2'));
     });
   });
 });
