@@ -260,7 +260,7 @@ describe('Game', () => {
       assert.isFalse(game.movePiece('red', '2_3', '7_3'));
     });
 
-    it('should not move diagonaly', () => {
+    it('should not move scout diagonaly', () => {
       const player = new Player('venky', 'red');
       const game = new Game(123, player, createBattleField(10, 10));
       const setUpInfo = {
