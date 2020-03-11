@@ -61,7 +61,7 @@ describe('POST', () => {
     it('should respond with new position if its a valid move', function(done) {
       request(app)
         .post('/movePiece')
-        .send({ sourceTileId: '0_1', targetTileId: '0_2' })
+        .send({ sourceTileId: '2_0', targetTileId: '3_0' })
         .expect(200)
         .expect(/sourceTileId/)
         .end(function(err) {
@@ -71,7 +71,19 @@ describe('POST', () => {
           done();
         });
     });
-    it('should respond with current position if its an invalid move', done => {
+    it('should respond with bad request if its an invalid move', done => {
+      request(app)
+        .post('/movePiece')
+        .send({ sourceTileId: '0_1', targetTileId: '0_9' })
+        .expect(400)
+        .end(function(err) {
+          if (err) {
+            return done(err);
+          }
+          done();
+        });
+    });
+    it('should respond with bad request if its an immovable piece', done => {
       request(app)
         .post('/movePiece')
         .send({ sourceTileId: '0_1', targetTileId: '0_9' })
