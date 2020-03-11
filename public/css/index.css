@@ -101,3 +101,32 @@ a {
 .form-input {
   display: flex;
 }
+
+.gameIdMsg {
+  margin-top: 7rem;
+  color: #fdd847;
+  font-size: 1.5rem;
+  font-weight: 100;
+}
+
+.gameId {
+  margin-top: 1rem;
+  color: #fdd847;
+  font-size: 1.5rem;
+}
+
+#loadingGif {
+  margin-top: 2rem;
+  width: 7rem;
+  color: #fdd847;
+}
+
+.waitingMsg {
+  margin-top: 3rem;
+  font-weight: 100;
+  color: #fdd847;
+}
+
+#waitingBlock {
+  text-align: center;
+}

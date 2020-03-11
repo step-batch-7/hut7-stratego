@@ -14,7 +14,7 @@ const sendReq = function(method, url, callback, content) {
 const sendGetReq = function(url, callback) {
   const xhr = new XMLHttpRequest();
   xhr.onload = function() {
-    callback(this);
+    callback(this.responseText);
   };
   xhr.onerror = function(err) {
     const { log } = console;

@@ -1,12 +1,13 @@
-const areAllPlayerJoin = function(responseText) {
-  if (responseText.responseURL.match('setup')) {
+const areAllPlayersJoined = function(responseText) {
+  const { playerJoined } = JSON.parse(responseText);
+  if (playerJoined) {
     window.location.href = 'setup';
   }
 };
 
 const main = function() {
   setInterval(() => {
-    sendGetReq('/setup', areAllPlayerJoin);
+    sendGetReq('/areAllPlayersJoined', areAllPlayersJoined);
   }, 2000);
 };
 

@@ -3,7 +3,7 @@ const { app } = require('../lib/routes');
 
 describe('POST', () => {
   context('/host', function() {
-    it('should create game with given player name for /host', done => {
+    it('should create game with given player name for /host', function(done) {
       request(app)
         .post('/host')
         .send('playerName=player')
@@ -15,7 +15,7 @@ describe('POST', () => {
           done();
         });
     });
-    it('should give bad request if the player name is not given', done => {
+    it('should give bad request if the player name is not given', function(done) {
       request(app)
         .post('/host')
         .send('name=player')
@@ -56,7 +56,7 @@ describe('POST', () => {
           done();
         });
     });
-    it('should respond with bad request if its an invalid move', done => {
+    it('should respond with bad request if its an invalid move', function(done) {
       request(app)
         .post('/movePiece')
         .send({ sourceTileId: '0_1', targetTileId: '0_9' })
@@ -68,7 +68,7 @@ describe('POST', () => {
           done();
         });
     });
-    it('should respond with bad request if its an immovable piece', done => {
+    it('should respond with bad request if its an immovable piece', function(done) {
       request(app)
         .post('/movePiece')
         .send({ sourceTileId: '0_1', targetTileId: '0_9' })
@@ -82,7 +82,7 @@ describe('POST', () => {
     });
   });
   context('/join', function() {
-    it('should join game with given player name and gameId for /join', done => {
+    it('should join game with given player name and gameId for /join', function(done) {
       request(app)
         .post('/join')
         .send('playerName=player&gameId=2')
@@ -94,7 +94,7 @@ describe('POST', () => {
           done();
         });
     });
-    it('should give bad request if the player name is not given', done => {
+    it('should give bad request if the player name is not given', function(done) {
       request(app)
         .post('/host')
         .send('name=player')
@@ -106,10 +106,11 @@ describe('POST', () => {
           done();
         });
     });
-    it('should give game started if game is already started for /join', done => {
+    it('should give game started if game is already started for /join', function(done) {
+      this.timeout(4000);
       request(app)
         .post('/join')
-        .send('playerName=player&gameId=1')
+        .send('playerName=player&gameId=2')
         .expect(200)
         .end(function(err) {
           if (err) {
@@ -118,7 +119,7 @@ describe('POST', () => {
           done();
         });
     });
-    it('should give not exist if game does not exists', done => {
+    it('should give not exist if game does not exists', function(done) {
       request(app)
         .post('/join')
         .send('playerName=player&gameId=100')
@@ -208,6 +209,34 @@ describe('GET', () => {
         .get('/join')
         .expect(200)
         .expect(/Stratego | Join/)
+        .end(function(err) {
+          if (err) {
+            return done(err);
+          }
+          done();
+        });
+    });
+  });
+  context('/areAllPlayersJoined', function() {
+    it('should give false if the game is not full', function(done) {
+      request(app)
+        .get('/areAllPlayersJoined')
+        .set('cookie', 'gameId=6')
+        .expect(200)
+        .expect('{"playerJoined":false}')
+        .end(function(err) {
+          if (err) {
+            return done(err);
+          }
+          done();
+        });
+    });
+    it('should give true if the game is full', function(done) {
+      request(app)
+        .get('/areAllPlayersJoined')
+        .set('cookie', 'gameId=2')
+        .expect(200)
+        .expect('{"playerJoined":true}')
         .end(function(err) {
           if (err) {
             return done(err);

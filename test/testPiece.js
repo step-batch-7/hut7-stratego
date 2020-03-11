@@ -1,7 +1,7 @@
 const assert = require('chai').assert;
 const { Piece } = require('./../lib/piece');
 
-describe('Piece', () => {
+describe('Piece', function() {
   context('.getStatus()', function() {
     it('should give the status of the piece', function() {
       const piece = new Piece('marshal', [0, 0], true);

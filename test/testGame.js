@@ -3,9 +3,9 @@ const { Game } = require('./../lib/game');
 const { Player } = require('./../lib/player');
 const { createBattleField } = require('./../lib/games');
 
-describe('Game', () => {
-  context('.getStatus()', () => {
-    it('should give the status of the game', () => {
+describe('Game', function() {
+  context('.getStatus()', function() {
+    it('should give the status of the game', function() {
       const gameId = 123;
       const player = new Player('venky', 'red');
       const game = new Game(gameId, player, createBattleField(1, 1));
@@ -27,8 +27,8 @@ describe('Game', () => {
     });
   });
 
-  context('.getId', () => {
-    it('should return the id of the game', () => {
+  context('.getId', function() {
+    it('should return the id of the game', function() {
       const gameId = 123;
       const player = new Player('venky', 'red');
       const game = new Game(gameId, player, createBattleField(1, 1));
@@ -36,15 +36,15 @@ describe('Game', () => {
     });
   });
 
-  context('.addPlayer()', () => {
-    it('should add the given player in Game', () => {
+  context('.addPlayer()', function() {
+    it('should add the given player in Game', function() {
       const player1 = new Player('venky', 'red');
       const game = new Game(123, player1, createBattleField(10, 10));
       const player2 = new Player('rajat', 'blue');
       const numberOfPlayers = game.addPlayer(player2);
       assert.strictEqual(numberOfPlayers, 2);
     });
-    it('should not add player if its not an instance of Player class ', () => {
+    it('should not add player if its not an instance of Player class ', function() {
       const player1 = new Player('venky', 'red');
       const game = new Game(123, player1, createBattleField(10, 10));
       const player2 = {
@@ -56,22 +56,22 @@ describe('Game', () => {
     });
   });
 
-  context('.getPlayer()', () => {
-    it('should give player of given unit', () => {
+  context('.getPlayer()', function() {
+    it('should give player of given unit', function() {
       const player = new Player('venky', 'red');
       const game = new Game(123, player, createBattleField(10, 10));
       assert.strictEqual(game.getPlayer('red'), player);
     });
 
-    it('should give undefined when player of the given unit does not exists', () => {
+    it('should give undefined when player of the given unit does not exists', function() {
       const player = new Player('venky', 'red');
       const game = new Game(123, player, createBattleField(10, 10));
       assert.isUndefined(game.getPlayer('blue'));
     });
   });
 
-  context('.arrangeBattleField()', () => {
-    it('should record the position of all components of the board', () => {
+  context('.arrangeBattleField()', function() {
+    it('should record the position of all components of the board', function() {
       const player = new Player('venky', 'red');
       const game = new Game(123, player, createBattleField(10, 10));
       const setUpInfo = {
@@ -81,7 +81,7 @@ describe('Game', () => {
       assert.isTrue(game.arrangeBattleField(setUpInfo));
     });
 
-    it('should not update the battleField if unit is other than red or blue', () => {
+    it('should not update the battleField if unit is other than red or blue', function() {
       const player = new Player('venky', 'red');
       const game = new Game(123, player, createBattleField(10, 10));
       const setUpInfo = {
@@ -91,7 +91,7 @@ describe('Game', () => {
       assert.isFalse(game.arrangeBattleField(setUpInfo));
     });
 
-    it('should not update the battleField if piece is not a game component', () => {
+    it('should not update the battleField if piece is not a game component', function() {
       const player = new Player('venky', 'red');
       const game = new Game(123, player, createBattleField(10, 10));
       const setUpInfo = {
@@ -102,8 +102,8 @@ describe('Game', () => {
     });
   });
 
-  context('.isTargetOnLake()', () => {
-    it('should return true if target is on Lake', () => {
+  context('.isTargetOnLake()', function() {
+    it('should return true if target is on Lake', function() {
       const player = new Player('venky', 'red');
       const game = new Game(123, player, createBattleField(10, 10));
       const setUpInfo = {
@@ -114,7 +114,7 @@ describe('Game', () => {
       assert.isTrue(game.isTargetOnLake([2, 4]));
     });
 
-    it('should return false if target is not on Lake', () => {
+    it('should return false if target is not on Lake', function() {
       const player = new Player('venky', 'red');
       const game = new Game(123, player, createBattleField(10, 10));
       const setUpInfo = {
@@ -126,8 +126,8 @@ describe('Game', () => {
     });
   });
 
-  context('.isOccupied()', () => {
-    it('should return true if given position is occupied', () => {
+  context('.isOccupied()', function() {
+    it('should return true if given position is occupied', function() {
       const player = new Player('venky', 'red');
       const game = new Game(123, player, createBattleField(10, 10));
       const setUpInfo = {
@@ -138,7 +138,7 @@ describe('Game', () => {
       assert.isTrue(game.isOccupied([0, 0]));
     });
 
-    it('should return false if given position is not occupied', () => {
+    it('should return false if given position is not occupied', function() {
       const player = new Player('venky', 'red');
       const game = new Game(123, player, createBattleField(10, 10));
       const setUpInfo = {
@@ -150,8 +150,8 @@ describe('Game', () => {
     });
   });
 
-  context('updateBattleField', () => {
-    it('should update piece from current position to target position', () => {
+  context('updateBattleField', function() {
+    it('should update piece from current position to target position', function() {
       const player = new Player('venky', 'red');
       const game = new Game(123, player, createBattleField(10, 10));
       const setUpInfo = {
@@ -165,8 +165,8 @@ describe('Game', () => {
     });
   });
 
-  context('.movePiece()', () => {
-    it('should update the position of piece of given player', () => {
+  context('.movePiece()', function() {
+    it('should update the position of piece of given player', function() {
       const player = new Player('venky', 'red');
       const game = new Game(123, player, createBattleField(10, 10));
       const setUpInfo = {
@@ -177,7 +177,7 @@ describe('Game', () => {
       assert.isTrue(game.movePiece('red', '0_0', '0_1'));
     });
 
-    it('should not update the position of the piece if the given target position is a lake', () => {
+    it('should not update the position of the piece if the given target position is a lake', function() {
       const player = new Player('venky', 'red');
       const game = new Game(123, player, createBattleField(10, 10));
       const setUpInfo = {
@@ -188,7 +188,7 @@ describe('Game', () => {
       assert.isFalse(game.movePiece('red', '1_4', '2_4'));
     });
 
-    it('should not update the position of the piece if the given target position is occupied', () => {
+    it('should not update the position of the piece if the given target position is occupied', function() {
       const player = new Player('venky', 'red');
       const game = new Game(123, player, createBattleField(10, 10));
       const setUpInfo = {
@@ -202,7 +202,7 @@ describe('Game', () => {
       assert.isFalse(game.movePiece('red', '1_4', '2_4'));
     });
 
-    it('should not move the piece to diagonal of current position', () => {
+    it('should not move the piece to diagonal of current position', function() {
       const player = new Player('venky', 'red');
       const game = new Game(123, player, createBattleField(10, 10));
       const setUpInfo = {
@@ -213,7 +213,7 @@ describe('Game', () => {
       assert.isFalse(game.movePiece('red', '1_4', '3_4'));
     });
 
-    it('should not move the piece if the piece is immovalble', () => {
+    it('should not move the piece if the piece is immovalble', function() {
       const player = new Player('venky', 'red');
       const game = new Game(123, player, createBattleField(10, 10));
       const setUpInfo = {
@@ -224,7 +224,7 @@ describe('Game', () => {
       assert.isFalse(game.movePiece('red', '1_4', '3_4'));
     });
 
-    it('should move the scout to as many tiles vertically and horizontally', () => {
+    it('should move the scout to as many tiles vertically and horizontally', function() {
       const player = new Player('venky', 'red');
       const game = new Game(123, player, createBattleField(10, 10));
       const setUpInfo = {
@@ -235,7 +235,7 @@ describe('Game', () => {
       assert.isTrue(game.movePiece('red', '1_4', '1_8'));
     });
 
-    it('should not move the scout to as many tiles vertically and horizontally if lake comes in-between', () => {
+    it('should not move the scout to as many tiles vertically and horizontally if lake comes in-between', function() {
       const player = new Player('venky', 'red');
       const game = new Game(123, player, createBattleField(10, 10));
       const setUpInfo = {
@@ -246,7 +246,7 @@ describe('Game', () => {
       assert.isFalse(game.movePiece('red', '1_4', '8_4'));
     });
 
-    it('should not move the scout to as many tiles vertically and horizontally if other piece comes in-between', () => {
+    it('should not move the scout to as many tiles vertically and horizontally if other piece comes in-between', function() {
       const player = new Player('venky', 'red');
       const game = new Game(123, player, createBattleField(10, 10));
       const setUpInfo = {
@@ -260,7 +260,7 @@ describe('Game', () => {
       assert.isFalse(game.movePiece('red', '2_3', '7_3'));
     });
 
-    it('should not move scout diagonaly', () => {
+    it('should not move scout diagonaly', function() {
       const player = new Player('venky', 'red');
       const game = new Game(123, player, createBattleField(10, 10));
       const setUpInfo = {
