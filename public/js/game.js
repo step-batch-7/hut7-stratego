@@ -28,10 +28,17 @@ const createBoard = function() {
   return board;
 };
 
-const createPiece = function(pieceName) {
+const createPiece = function(pieceName, unit) {
   const piece = createImage(pieceName, 'pieceImage');
   piece.classList.add('piece');
+  piece.classList.add(unit);
   return piece;
+};
+
+const createPieceAt = function(pieceName, tileId, unit) {
+  const tile = document.getElementById(tileId);
+  const piece = createPiece(pieceName, unit);
+  tile.appendChild(piece);
 };
 
 const movePiece = function(res) {
@@ -41,40 +48,56 @@ const movePiece = function(res) {
   targetTile.appendChild(piece);
 };
 
-const updateTile = function(moveInfo, tile) {
-  if (tile.firstChild) {
+const isMyPiece = function(tile) {
+  return tile.firstChild && tile.firstChild.classList.contains('red');
+};
+
+const hasAllFields = function({ sourceTileId, targetTileId }) {
+  return sourceTileId && targetTileId;
+};
+
+const sendActionReq = function(moveInfo) {
+  const reqUrls = { move: '/movePiece', attack: '/attack' };
+  const callbackLookup = { move: movePiece, attack: () => {} };
+  const url = reqUrls[moveInfo.action];
+  const callback = callbackLookup[moveInfo.action];
+  sendReq('POST', url, callback, JSON.stringify(moveInfo));
+};
+
+const updateMoveInfo = function(moveInfo, tile) {
+  if (isMyPiece(tile)) {
     moveInfo.sourceTileId = tile.id;
-  } else {
-    moveInfo.targetTileId = tile.id;
-    const hasAllFields = Object.values(moveInfo).every(tileId => tileId !== '');
-    if (hasAllFields) {
-      sendReq('POST', '/movePiece', movePiece, JSON.stringify(moveInfo));
-      moveInfo.sourceTileId = '';
-      moveInfo.targetTileId = '';
-    }
+    return;
   }
+  moveInfo.targetTileId = tile.id;
+  moveInfo.action = tile.firstChild ? 'attack' : 'move';
+  if (hasAllFields(moveInfo)) {
+    sendActionReq(moveInfo);
+  }
+  moveInfo.sourceTileId = '';
+  moveInfo.targetTileId = '';
 };
 
-const createPieceAt = function(pieceName, tileId) {
-  const tile = document.getElementById(tileId);
-  const piece = createPiece(pieceName);
-  tile.appendChild(piece);
-};
-
-const setupBoard = function(army) {
-  const moveInfo = { sourceTileId: '', targetTileId: '' };
+const placeArmyOnBoard = function(army, unit) {
   army.forEach(soldier => {
     const { name, position } = soldier;
     const tileId = position.join('_');
-    createPieceAt(name, tileId);
+    createPieceAt(name, tileId, unit);
   });
+};
+
+const setupBoard = function(army) {
+  const moveInfo = { sourceTileId: '', targetTileId: '', action: 'move' };
+  const { redArmy, blueArmy } = army;
+  placeArmyOnBoard(redArmy, 'red');
+  placeArmyOnBoard(blueArmy, 'blue');
   attachListeners(moveInfo);
 };
 
 const attachListeners = function(moveInfo) {
   const tiles = Array.from(document.querySelectorAll('.tile'));
   tiles.forEach(tile => {
-    tile.onclick = updateTile.bind(null, moveInfo, tile);
+    tile.onclick = updateMoveInfo.bind(null, moveInfo, tile);
   });
 };
 
