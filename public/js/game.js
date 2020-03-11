@@ -41,6 +41,8 @@ const createPieceAt = function(pieceName, tileId, unit) {
   tile.appendChild(piece);
 };
 
+const attackPiece = function(res) {};
+
 const movePiece = function(res) {
   const sourceTile = document.getElementById(res.sourceTileId);
   const targetTile = document.getElementById(res.targetTileId);
@@ -58,7 +60,7 @@ const hasAllFields = function({ sourceTileId, targetTileId }) {
 
 const sendActionReq = function(moveInfo) {
   const reqUrls = { move: '/movePiece', attack: '/attack' };
-  const callbackLookup = { move: movePiece, attack: () => {} };
+  const callbackLookup = { move: movePiece, attack: attackPiece };
   const url = reqUrls[moveInfo.action];
   const callback = callbackLookup[moveInfo.action];
   sendReq('POST', url, callback, JSON.stringify(moveInfo));
