@@ -85,7 +85,7 @@ describe('POST', () => {
     it('should join game with given player name and gameId for /join', done => {
       request(app)
         .post('/join')
-        .send('playerName=player&gameId=1')
+        .send('playerName=player&gameId=2')
         .expect(302)
         .end(function(err) {
           if (err) {
@@ -177,9 +177,9 @@ describe('GET', () => {
     it('should send to waiting if game is not full', function(done) {
       request(app)
         .get('/setup')
-        .set('cookie', 'gameId=2')
+        .set('cookie', 'gameId=3')
         .expect(200)
-        .expect(/waiting/)
+        .expect(/Stratego | Waiting/)
         .end(function(err) {
           if (err) {
             return done(err);
