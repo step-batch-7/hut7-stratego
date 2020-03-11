@@ -12,17 +12,7 @@ describe('Game', function() {
       assert.deepStrictEqual(game.getStatus(), {
         id: 123,
         players: [player],
-        battleField: { '0_0': undefined },
-        lakePositions: [
-          [2, 4],
-          [3, 4],
-          [2, 5],
-          [3, 5],
-          [6, 4],
-          [7, 4],
-          [6, 5],
-          [7, 5]
-        ]
+        battleField: { '0_0': undefined }
       });
     });
   });
@@ -102,32 +92,8 @@ describe('Game', function() {
     });
   });
 
-  context('.isTargetOnLake()', function() {
-    it('should return true if target is on Lake', function() {
-      const player = new Player('venky', 'red');
-      const game = new Game(123, player, createBattleField(10, 10));
-      const setUpInfo = {
-        unit: 'red',
-        piecesInfo: [{ position: '2_4', name: 'marshal' }]
-      };
-      game.arrangeBattleField(setUpInfo);
-      assert.isTrue(game.isTargetOnLake([2, 4]));
-    });
-
-    it('should return false if target is not on Lake', function() {
-      const player = new Player('venky', 'red');
-      const game = new Game(123, player, createBattleField(10, 10));
-      const setUpInfo = {
-        unit: 'red',
-        piecesInfo: [{ position: '0_0', name: 'marshal' }]
-      };
-      game.arrangeBattleField(setUpInfo);
-      assert.isFalse(game.isTargetOnLake([1, 4]));
-    });
-  });
-
-  context('.isOccupied()', function() {
-    it('should return true if given position is occupied', function() {
+  context('.isOccupied()', () => {
+    it('should return true if given position is occupied', () => {
       const player = new Player('venky', 'red');
       const game = new Game(123, player, createBattleField(10, 10));
       const setUpInfo = {
