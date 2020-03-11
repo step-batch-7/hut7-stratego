@@ -174,7 +174,7 @@ describe('Game', () => {
         piecesInfo: [{ position: '0_0', name: 'marshal' }]
       };
       game.arrangeBattleField(setUpInfo);
-      assert.deepStrictEqual(game.movePiece('red', '0_0', '0_1'), true);
+      assert.isTrue(game.movePiece('red', '0_0', '0_1'));
     });
 
     it('should not update the position of the piece if the given target position is a lake', () => {
@@ -185,7 +185,7 @@ describe('Game', () => {
         piecesInfo: [{ position: '1_4', name: 'marshal' }]
       };
       game.arrangeBattleField(setUpInfo);
-      assert.deepStrictEqual(game.movePiece('red', '1_4', '2_4'), false);
+      assert.isFalse(game.movePiece('red', '1_4', '2_4'));
     });
 
     it('should not update the position of the piece if the given target position is occupied', () => {
@@ -199,7 +199,7 @@ describe('Game', () => {
         ]
       };
       game.arrangeBattleField(setUpInfo);
-      assert.deepStrictEqual(game.movePiece('red', '1_4', '2_4'), false);
+      assert.isFalse(game.movePiece('red', '1_4', '2_4'));
     });
 
     it('should not move the piece to diagonal of current position', () => {
@@ -210,7 +210,29 @@ describe('Game', () => {
         piecesInfo: [{ position: '1_4', name: 'marshal' }]
       };
       game.arrangeBattleField(setUpInfo);
-      assert.deepStrictEqual(game.movePiece('red', '1_4', '3_4'), false);
+      assert.isFalse(game.movePiece('red', '1_4', '3_4'));
+    });
+
+    it('should not move the piece if the piece is immovalble', () => {
+      const player = new Player('venky', 'red');
+      const game = new Game(123, player, createBattleField(10, 10));
+      const setUpInfo = {
+        unit: 'red',
+        piecesInfo: [{ position: '1_4', name: 'bomb' }]
+      };
+      game.arrangeBattleField(setUpInfo);
+      assert.isFalse(game.movePiece('red', '1_4', '3_4'));
+    });
+
+    it('should move the scout to as many tiles vertically and horizontally', () => {
+      const player = new Player('venky', 'red');
+      const game = new Game(123, player, createBattleField(10, 10));
+      const setUpInfo = {
+        unit: 'red',
+        piecesInfo: [{ position: '1_4', name: 'scout' }]
+      };
+      game.arrangeBattleField(setUpInfo);
+      assert.isTrue(game.movePiece('red', '1_4', '8_4'));
     });
   });
 });
