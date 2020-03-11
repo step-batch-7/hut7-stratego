@@ -34,33 +34,32 @@ const createPiece = function(pieceName) {
   return piece;
 };
 
-const selectPiece = function(moveInfo) {
-  moveInfo.sourceTileId = event.target.parentElement.id;
-};
-
-const movePiece = function(moveInfo, coordinates) {
-  const position = coordinates.join('_');
-  const sourceTileId = moveInfo.sourceTileId;
-  const sourceTile = document.getElementById(sourceTileId);
-  const targetTile = document.getElementById(position);
+const movePiece = function(res) {
+  const sourceTile = document.getElementById(res.sourceTileId);
+  const targetTile = document.getElementById(res.targetTileId);
   const piece = sourceTile.firstChild;
   targetTile.appendChild(piece);
 };
 
-const selectTile = function(moveInfo) {
-  moveInfo.targetTileId = event.target.id;
-  sendReq(
-    'POST',
-    '/movePiece',
-    movePiece.bind(null, moveInfo),
-    JSON.stringify(moveInfo)
-  );
+const updateTile = function(moveInfo) {
+  const clickedTile = event.target;
+  const hasPiece = clickedTile.className.includes('piece');
+  if (hasPiece) {
+    moveInfo.sourceTileId = clickedTile.parentElement.id;
+  } else {
+    moveInfo.targetTileId = clickedTile.id;
+    const isAnyFieldEmpty = Object.values(moveInfo).every(
+      tileId => tileId !== ''
+    );
+    if (isAnyFieldEmpty) {
+      sendReq('POST', '/movePiece', movePiece, JSON.stringify(moveInfo));
+    }
+  }
 };
 
 const createPieceAt = function(pieceName, tileId) {
   const tile = document.getElementById(tileId);
   const piece = createPiece(pieceName);
-  piece.onclick = selectPiece;
   tile.appendChild(piece);
 };
 
@@ -77,12 +76,7 @@ const setupBoard = function(army) {
 const attachListeners = function(moveInfo) {
   const tiles = Array.from(document.querySelectorAll('.tile'));
   tiles.forEach(tile => {
-    tile.onclick = selectTile.bind(null, moveInfo);
-  });
-
-  const pieces = Array.from(document.querySelectorAll('.piece'));
-  pieces.forEach(piece => {
-    piece.onclick = selectPiece.bind(null, moveInfo);
+    tile.onclick = updateTile.bind(null, moveInfo);
   });
 };
 
