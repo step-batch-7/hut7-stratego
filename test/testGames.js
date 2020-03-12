@@ -90,7 +90,18 @@ describe('Games', function() {
         piecesInfo: [{ position: '9_9', name: 'flag' }]
       };
       games.arrangeBattleField(gameId, dummySetupData);
-      const expected = [{ movable: false, position: [9, 9], name: 'flag' }];
+      const expected = {
+        redArmy: [
+          {
+            name: 'flag',
+            position: [9, 9],
+            movable: false,
+            isAlive: true,
+            rank: 0
+          }
+        ],
+        blueArmy: []
+      };
       assert.deepStrictEqual(games.getArmy(gameId, 'blue'), expected);
     });
   });
