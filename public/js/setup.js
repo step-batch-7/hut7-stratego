@@ -125,11 +125,9 @@ const checkIfBoardSet = function(setUpInfo) {
   const { piecesInfo } = setUpInfo;
   const placedPiecesCount = piecesInfo.length;
   const fightBtn = document.querySelector('.fightBtn');
+  fightBtn.classList.add('disabled');
   if (placedPiecesCount === 10) {
     fightBtn.classList.remove('disabled');
-    fightBtn.addEventListener('click', function() {
-      sendReq('POST', '/setupData', redirectToUrl, JSON.stringify(setUpInfo));
-    });
   }
 };
 
@@ -149,6 +147,7 @@ const placePiece = function(setUpInfo, tile, pieces) {
 };
 
 const attachListeners = function(setUpInfo, pieces) {
+  const fightBtn = document.querySelector('.fightBtn');
   const pieceContainers = Array.from(
     document.querySelectorAll('.pieceContainer')
   );
@@ -159,6 +158,9 @@ const attachListeners = function(setUpInfo, pieces) {
   const tiles = Array.from(document.querySelectorAll('.tile'));
   tiles.forEach(tile => {
     tile.onclick = placePiece.bind(null, setUpInfo, tile, pieces);
+  });
+  fightBtn.addEventListener('click', function() {
+    sendReq('POST', '/setupData', redirectToUrl, JSON.stringify(setUpInfo));
   });
 };
 
