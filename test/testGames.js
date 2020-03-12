@@ -150,4 +150,19 @@ describe('Games', function() {
       assert.isFalse(games.movePiece(gameId, 'blue', '9_9', '8_9'));
     });
   });
+
+  context('isSetupDone', function() {
+    it('should give true if setup is done', function() {
+      const games = createGames();
+      const gameId = games.createNewGame('venky');
+      assert.isFalse(games.isSetupDone(gameId));
+    });
+
+    it('should give true if setup is done', function() {
+      const games = createGames();
+      const gameId = games.createNewGame('venky');
+      games.addPlayerInGame(gameId, 'player');
+      assert.isTrue(games.isSetupDone(gameId));
+    });
+  });
 });

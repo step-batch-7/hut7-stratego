@@ -7,12 +7,44 @@ describe('GET', () => {
   afterEach(() => {
     restore();
   });
-  context('/game.html', function() {
+  context('/game', function() {
     it('should response back with game', function(done) {
       request(app)
         .get('/game')
+        .set('cookie', ['gameId=1', 'unit=red'])
         .expect(200)
         .expect(/Stratego/)
+        .end(function(err) {
+          if (err) {
+            return done(err);
+          }
+          done();
+        });
+    });
+
+    it('should redirect to /setup when game is not full', function(done) {
+      const isSetupDone = stub()
+        .withArgs(1)
+        .returns(false);
+      replace(games, 'isSetupDone', isSetupDone);
+      request(app)
+        .get('/game')
+        .set('cookie', ['gameId=1', 'unit=red'])
+        .expect(302)
+        .expect(/setup/)
+        .end(function(err) {
+          if (err) {
+            return done(err);
+          }
+          done();
+        });
+    });
+
+    it('should redirect to /', function(done) {
+      request(app)
+        .get('/game')
+        .expect(302)
+        .expect(/\//)
         .end(function(err) {
           if (err) {
             return done(err);
@@ -178,9 +210,21 @@ describe('POST', () => {
     it('should response back with piecesInfo', function(done) {
       request(app)
         .get('/army')
-        .set('Cookie', ['unit=blue'])
+        .set('Cookie', ['unit=blue', 'gameId=1'])
         .expect(200)
         .expect(/[{}]]/)
+        .end(function(err) {
+          if (err) {
+            return done(err);
+          }
+          done();
+        });
+    });
+
+    it('should response back with piecesInfo', function(done) {
+      request(app)
+        .get('/army')
+        .expect(404)
         .end(function(err) {
           if (err) {
             return done(err);
