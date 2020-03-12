@@ -1,6 +1,6 @@
 const assert = require('chai').assert;
 const { Player } = require('./../lib/player');
-const { Piece } = require('./../lib/piece');
+const { Piece, StablePiece } = require('./../lib/piece');
 
 describe('Player', function() {
   context('.getStatus()', function() {
@@ -44,7 +44,7 @@ describe('Player', function() {
     });
     it('should not update position of piece to given position if piece is immovable', function() {
       const player = new Player('venky', 'red');
-      const piece = new Piece('bomb', [0, 1], false);
+      const piece = new StablePiece('bomb', [0, 1], false);
       player.addPiece(piece);
       assert.isFalse(player.movePiece([0, 1], [0, 2]));
     });

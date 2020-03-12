@@ -180,19 +180,19 @@ describe('Games', function() {
       const dummySetupData2 = {
         unit: 'blue',
         piecesInfo: [
-          { position: '0_1', name: 'flag' },
+          { position: '2_2', name: 'flag' },
           { position: '9_8', name: 'marshal' },
-          { position: '0_1', name: 'flag' }
+          { position: '0_2', name: 'flag' }
         ]
       };
       games.arrangeBattleField(gameId, dummySetupData1);
       games.arrangeBattleField(gameId, dummySetupData2);
     });
     it('should return attack status won if defenders rank is less than attackers rank', () => {
-      assert.strictEqual(games.attack(gameId, '1_2', '0_1', 'red'), 'won');
+      assert.strictEqual(games.attack(gameId, '1_2', '2_2', 'red'), 'won');
     });
     it('should return attack status lost if defenders rank is greater than attackers rank', () => {
-      assert.strictEqual(games.attack(gameId, '1_2', '0_1', 'red'), 'won');
+      assert.strictEqual(games.attack(gameId, '1_2', '0_2', 'red'), 'won');
     });
   });
 });
