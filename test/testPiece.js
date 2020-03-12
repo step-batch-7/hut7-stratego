@@ -7,7 +7,8 @@ describe('Piece', function() {
       const piece = new Piece('marshal', [0, 0], true);
       assert.deepStrictEqual(piece.getStatus(), {
         name: 'marshal',
-        position: [0, 0]
+        position: [0, 0],
+        rank: 10
       });
     });
   });

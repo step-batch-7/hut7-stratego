@@ -49,4 +49,12 @@ describe('Player', function() {
       assert.isFalse(player.movePiece([0, 1], [0, 2]));
     });
   });
+  context('.killPiece()', function() {
+    it('should kill the piece of given position', function() {
+      const player = new Player('venky', 'red');
+      const piece = new Piece('marshal', [0, 0], true);
+      player.addPiece(piece);
+      assert.isTrue(player.killPiece([0, 0]));
+    });
+  });
 });

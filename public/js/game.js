@@ -41,7 +41,19 @@ const createPieceAt = function(pieceName, tileId, unit) {
   tile.appendChild(piece);
 };
 
-const attackPiece = function(res) {};
+const attackPiece = function(res) {
+  const { sourceTileId, targetTileId, status } = res;
+  const tileIds = {
+    won: [targetTileId],
+    lost: [sourceTileId],
+    draw: [sourceTileId, targetTileId]
+  };
+
+  const tileIdToClear = tileIds[status];
+  tileIdToClear.forEach(tileId => {
+    document.getElementById(tileId).innerHTML = '';
+  });
+};
 
 const movePiece = function(res) {
   const sourceTile = document.getElementById(res.sourceTileId);
@@ -89,7 +101,12 @@ const placeArmyOnBoard = function(army, unit) {
 };
 
 const setupBoard = function(army) {
-  const moveInfo = { sourceTileId: '', targetTileId: '', action: 'move' };
+  const moveInfo = {
+    sourceTileId: '',
+    targetTileId: '',
+    action: 'move',
+    unit: 'red'
+  };
   const { redArmy, blueArmy } = army;
   placeArmyOnBoard(redArmy, 'red');
   placeArmyOnBoard(blueArmy, 'blue');
