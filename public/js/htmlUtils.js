@@ -19,6 +19,7 @@ const createImage = (name, className) => {
   }
   const htmlImgElement = document.createElement('img');
   htmlImgElement.src = imagesUrl[name];
+  htmlImgElement.id = name;
   htmlImgElement.classList.add(className);
   return htmlImgElement;
 };

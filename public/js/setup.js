@@ -95,20 +95,38 @@ const decreaseCount = function(pieceName, pieces) {
   piece.count === 0 &&
     activePiece.parentElement.parentElement.classList.add('unavailable');
   activePiece.parentElement.nextSibling.lastChild.innerText = 'x' + piece.count;
+  removeSelectedPiece();
+};
+
+const increasePieceCount = function(pieceInfo, pieceName) {
+  const piece = pieceInfo.find(piece => piece.name === pieceName);
+  piece.count += 1;
+  const activePiece = document.querySelector(
+    `.pieceImageContainer #${pieceName}`
+  );
+  activePiece.parentElement.parentElement.classList.remove('unavailable');
+  activePiece.parentElement.nextSibling.lastChild.innerText = 'x' + piece.count;
+};
+
+const removePieceFromTile = function(tile, pieces) {
+  const name = tile.firstElementChild.id;
+  tile.firstElementChild.remove();
+  increasePieceCount(pieces, name);
 };
 
 const placePiece = function(setUpInfo, tile, pieces) {
-  const position = tile.id;
   const name = setUpInfo.selectedPiece;
-  setUpInfo.piecesInfo.push({ position, name });
+  setUpInfo.piecesInfo.push({ position: tile.id, name });
   const image = createImage(name, 'boardPieceImage');
-  if (!image || tile.firstElementChild) {
+  if (tile.firstElementChild) {
+    return removePieceFromTile(tile, pieces);
+  }
+  if (!image) {
     return;
   }
   tile.appendChild(image);
   decreaseCount(name, pieces);
   setUpInfo.selectedPiece = undefined;
-  removeSelectedPiece();
 };
 
 const attachListeners = function(setUpInfo, pieces) {
