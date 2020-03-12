@@ -55,6 +55,10 @@ describe('GET', () => {
   });
   context('/setup', function() {
     it('should send to index page if cookies are not set', function(done) {
+      const getGame = stub()
+        .withArgs(1)
+        .returns(false);
+      replace(games, 'getGame', getGame);
       request(app)
         .get('/setup')
         .expect(302)
@@ -67,11 +71,19 @@ describe('GET', () => {
         });
     });
     it('should send to setup if game is full', function(done) {
+      const isGameFull = stub()
+        .withArgs(1)
+        .returns(true);
+      const getGame = stub()
+        .withArgs(1)
+        .returns(true);
+      replace(games, 'isGameFull', isGameFull);
+      replace(games, 'getGame', getGame);
       request(app)
         .get('/setup')
         .set('cookie', 'gameId=1')
         .expect(200)
-        .expect(/setup/)
+        .expect(/Stratego | Setup/)
         .end(function(err) {
           if (err) {
             return done(err);
@@ -80,9 +92,17 @@ describe('GET', () => {
         });
     });
     it('should send to waiting if game is not full', function(done) {
+      const isGameFull = stub()
+        .withArgs(1)
+        .returns(false);
+      const getGame = stub()
+        .withArgs(1)
+        .returns(true);
+      replace(games, 'isGameFull', isGameFull);
+      replace(games, 'getGame', getGame);
       request(app)
         .get('/setup')
-        .set('cookie', 'gameId=3')
+        .set('cookie', 'gameId=1')
         .expect(200)
         .expect(/Stratego | Waiting/)
         .end(function(err) {
