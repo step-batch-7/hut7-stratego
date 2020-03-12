@@ -2,8 +2,8 @@ const createImage = (name, className, unit) => {
   const imagesUrl = {
     red: {
       scout: './images/redScout.png',
-      bomb: './images/redBomb.png',
-      captain: './images/redCaptain.png',
+      bomb: './images/RedBomb.png',
+      captain: './images/RedCaptain.png',
       colonel: './images/redColonel.png',
       flag: './images/redFlag.png',
       general: './images/redGeneral.png',
