@@ -1,7 +1,7 @@
 const sendReq = function(method, url, callback, content) {
   const xhr = new XMLHttpRequest();
   xhr.onload = function() {
-    if (this.status === 200) {
+    if (this.status === 200 || this.status === 302) {
       callback && callback(this.response);
     }
   };

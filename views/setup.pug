@@ -7,13 +7,15 @@ html(lang='en')
     link(rel='stylesheet', href='./css/setup.css')
     script(src='./js/setup.js')
     script(src='./js/htmlUtils.js')
+    script(src='./js/request.js')
   body
     #boardAndInfoPanel
       .setUpBoard
         .enemyTerritory
         .territory
-      #panel
-        .infoPanel
-          img#infoImage(src='./images/soldierLogo.png', alt='fight')
-        a(href='./game.html') Start Game
+      .container
+        #panel
+          .infoPanel
+            img#infoImage(src='./images/soldierLogo.png', alt='fight')
+        span.fightBtn.disabled FIGHT
     .palette

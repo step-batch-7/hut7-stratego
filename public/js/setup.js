@@ -108,6 +108,25 @@ const removePieceFromTile = function(tile, pieces) {
   increasePieceCount(pieces, name);
 };
 
+const redirectToUrl = function(res) {
+  if (res.page) {
+    window.location.href = `/${res.page}`;
+  }
+};
+
+const checkIfBoardSet = function(setUpInfo) {
+  setUpInfo.selectedPiece = undefined;
+  const { piecesInfo } = setUpInfo;
+  const placedPiecesCount = piecesInfo.length;
+  const fightBtn = document.querySelector('.fightBtn');
+  if (placedPiecesCount === 10) {
+    fightBtn.classList.remove('disabled');
+    fightBtn.addEventListener('click', function() {
+      sendReq('POST', '/setupData', redirectToUrl, JSON.stringify(setUpInfo));
+    });
+  }
+};
+
 const placePiece = function(setUpInfo, tile, pieces) {
   const name = setUpInfo.selectedPiece;
   setUpInfo.piecesInfo.push({ position: tile.id, name });
@@ -120,7 +139,7 @@ const placePiece = function(setUpInfo, tile, pieces) {
   }
   tile.appendChild(image);
   decreaseCount(name, pieces);
-  setUpInfo.selectedPiece = undefined;
+  checkIfBoardSet(setUpInfo);
 };
 
 const attachListeners = function(setUpInfo, pieces) {

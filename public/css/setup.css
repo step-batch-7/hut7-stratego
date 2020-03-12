@@ -150,3 +150,22 @@ body {
   text-align: left;
   font-size: 1.4em;
 }
+
+.container {
+  text-align: center;
+}
+
+.fightBtn {
+  text-align: center;
+  color: #fdd847;
+  font-size: 2rem;
+}
+
+.fightBtn:hover {
+  cursor: pointer;
+}
+
+.disabled {
+  pointer-events: none;
+  filter: opacity(0.4);
+}
