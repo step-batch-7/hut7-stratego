@@ -102,8 +102,12 @@ const increasePieceCount = function(pieceInfo, pieceName) {
   activePiece.parentElement.nextSibling.lastChild.innerText = 'x' + piece.count;
 };
 
-const removePieceFromTile = function(tile, pieces) {
+const removePieceFromTile = function(tile, pieces, setUpInfo) {
   const name = tile.firstElementChild.id;
+  const removedPieceIndex = setUpInfo.piecesInfo.findIndex(
+    piece => piece.name === name
+  );
+  setUpInfo.piecesInfo.splice(removedPieceIndex, 1);
   tile.firstElementChild.remove();
   increasePieceCount(pieces, name);
 };
@@ -129,14 +133,14 @@ const checkIfBoardSet = function(setUpInfo) {
 
 const placePiece = function(setUpInfo, tile, pieces) {
   const name = setUpInfo.selectedPiece;
-  setUpInfo.piecesInfo.push({ position: tile.id, name });
   const image = createImage(name, 'boardPieceImage');
   if (tile.firstElementChild) {
-    return removePieceFromTile(tile, pieces);
+    return removePieceFromTile(tile, pieces, setUpInfo);
   }
   if (!image) {
     return;
   }
+  setUpInfo.piecesInfo.push({ position: tile.id, name });
   tile.appendChild(image);
   decreaseCount(name, pieces);
   checkIfBoardSet(setUpInfo);
