@@ -1,24 +1,41 @@
-const createImage = (name, className) => {
+const createImage = (name, className, unit) => {
   const imagesUrl = {
-    scout: './images/scout.png',
-    bomb: './images/bomb.png',
-    captain: './images/captain.png',
-    colonel: './images/colonel.png',
-    flag: './images/flag.png',
-    general: './images/general.png',
-    lieutenant: './images/lieutenant.png',
-    major: './images/major.png',
-    marshal: './images/marshal.png',
-    miner: './images/miner.png',
-    sergeant: './images/sergeant.png',
-    spy: './images/spy.png',
-    opponent: './images/opponent.png'
+    red: {
+      scout: './images/redScout.png',
+      bomb: './images/redBomb.png',
+      captain: './images/redCaptain.png',
+      colonel: './images/redColonel.png',
+      flag: './images/redFlag.png',
+      general: './images/redGeneral.png',
+      lieutenant: './images/redLieutenant.png',
+      major: './images/redMajor.png',
+      marshal: './images/redMarshal.png',
+      miner: './images/redMiner.png',
+      sergeant: './images/redSergeant.png',
+      spy: './images/redSpy.png',
+      opponent: './images/opponent.png'
+    },
+    blue: {
+      scout: './images/blueScout.png',
+      bomb: './images/blueBomb.png',
+      captain: './images/blueCaptain.png',
+      colonel: './images/blueColonel.png',
+      flag: './images/blueFlag.png',
+      general: './images/blueGeneral.png',
+      lieutenant: './images/blueLieutenant.png',
+      major: './images/blueMajor.png',
+      marshal: './images/blueMarshal.png',
+      miner: './images/blueMiner.png',
+      sergeant: './images/blueSergeant.png',
+      spy: './images/blueSpy.png',
+      opponent: './images/opponent.png'
+    }
   };
-  if (!imagesUrl[name]) {
+  if (!imagesUrl[unit][name]) {
     return;
   }
   const htmlImgElement = document.createElement('img');
-  htmlImgElement.src = imagesUrl[name];
+  htmlImgElement.src = imagesUrl[unit][name];
   htmlImgElement.id = name;
   htmlImgElement.classList.add(className);
   return htmlImgElement;

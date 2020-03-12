@@ -29,7 +29,7 @@ const createBoard = function() {
 };
 
 const createPiece = function(pieceName, unit) {
-  const piece = createImage(pieceName, 'pieceImage');
+  const piece = createImage(pieceName, 'pieceImage', unit);
   piece.classList.add('piece');
   piece.classList.add(unit);
   return piece;

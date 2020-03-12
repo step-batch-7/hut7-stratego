@@ -46,7 +46,9 @@ const createPalette = function(pieces) {
     const pieceContainer = createElement('div', 'pieceContainer');
     piece.count === 0 && pieceContainer.classList.add('unavailable');
     const pieceImageContainer = createElement('div', 'pieceImageContainer');
-    pieceImageContainer.appendChild(createImage(piece.name, 'pieceImage'));
+    pieceImageContainer.appendChild(
+      createImage(piece.name, 'pieceImage', 'red')
+    );
     const pieceData = createElement('div', 'pieceData');
     const pieceName = createElementWithData('span', piece.name);
     const pieceCount = createElementWithData('span', 'x' + piece.count);
@@ -65,7 +67,7 @@ const showPieceInfo = function() {
   const infoPanel = document.querySelector('.infoPanel');
   infoPanel.innerText = '';
   const name = document.querySelector('.active').id;
-  const image = createImage(name, 'imageInInfo');
+  const image = createImage(name, 'imageInInfo', 'red');
   const pieceName = createElementWithData('h2', name.toUpperCase());
   const requiredPiece = pieceInfo.find(
     piece => piece.Piece.toLowerCase() === name
@@ -133,7 +135,7 @@ const checkIfBoardSet = function(setUpInfo) {
 
 const placePiece = function(setUpInfo, tile, pieces) {
   const name = setUpInfo.selectedPiece;
-  const image = createImage(name, 'boardPieceImage');
+  const image = createImage(name, 'boardPieceImage', 'red');
   if (tile.firstElementChild) {
     return removePieceFromTile(tile, pieces, setUpInfo);
   }
