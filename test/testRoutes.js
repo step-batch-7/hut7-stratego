@@ -355,7 +355,7 @@ describe('POST', () => {
     });
   });
   context('/setupData', function() {
-    it('should tell to go to game page when the pieceInfo is valid', done => {
+    it('should tell to go to game page when the pieceInfo is valid for the host player', done => {
       const arrangeBattleField = stub()
         .withArgs(1, [{}])
         .returns(true);
@@ -386,7 +386,37 @@ describe('POST', () => {
           done();
         });
     });
-
+    it('should tell to go to game page when the pieceInfo is valid for the joined player', done => {
+      const arrangeBattleField = stub()
+        .withArgs(1, [{}])
+        .returns(true);
+      replace(games, 'arrangeBattleField', arrangeBattleField);
+      const piecesInfo = [
+        { position: '9_9', name: 'flag' },
+        { position: '1_0', name: 'marshal' },
+        { position: '2_0', name: 'scout' },
+        { position: '3_0', name: 'miner' },
+        { position: '4_0', name: 'bomb' },
+        { position: '5_0', name: 'bomb' },
+        { position: '6_0', name: 'miner' },
+        { position: '7_0', name: 'scout' },
+        { position: '8_0', name: 'general' },
+        { position: '9_0', name: 'spy' }
+      ];
+      request(app)
+        .post('/setupData')
+        .set('cookie', 'unit=red')
+        .set('Content-Type', 'application/json')
+        .send(JSON.stringify({ piecesInfo }))
+        .expect(200)
+        .expect(/game/)
+        .end(function(err) {
+          if (err) {
+            return done(err);
+          }
+          done();
+        });
+    });
     it('should tell to go to game page when the pieceInfo is valid', done => {
       const arrangeBattleField = stub()
         .withArgs(1, [{}])
@@ -409,6 +439,57 @@ describe('POST', () => {
         .set('Content-Type', 'application/json')
         .send(JSON.stringify({ piecesInfo }))
         .expect(/Bad Request/)
+        .expect(400)
+        .end(function(err) {
+          if (err) {
+            return done(err);
+          }
+          done();
+        });
+    });
+  });
+  context('/attack', function() {
+    it('should give lost if the defender has more rank than attacker', function(done) {
+      const attack = stub()
+        .withArgs(1, '1_0', '1_1', 'red')
+        .returns('lost');
+      replace(games, 'attack', attack);
+      request(app)
+        .post('/attack')
+        .set('cookie', 'gameId=1')
+        .send({
+          sourceTileId: '1_0',
+          targetTileId: '1_1',
+          unit: 'red'
+        })
+        .expect(
+          JSON.stringify({
+            action: 'attack',
+            sourceTileId: '1_0',
+            targetTileId: '1_1',
+            status: 'lost'
+          })
+        )
+        .end(function(err) {
+          if (err) {
+            return done(err);
+          }
+          done();
+        });
+    });
+    it('should give bad request for the invalid attack move', function(done) {
+      const attack = stub()
+        .withArgs(1, '1_0', '9_0', 'red')
+        .returns('unsuccessful');
+      replace(games, 'attack', attack);
+      request(app)
+        .post('/attack')
+        .set('cookie', 'gameId=1')
+        .send({
+          sourceTileId: '1_0',
+          targetTileId: '9_0',
+          unit: 'red'
+        })
         .expect(400)
         .end(function(err) {
           if (err) {
