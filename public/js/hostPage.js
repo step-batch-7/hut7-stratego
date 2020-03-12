@@ -26,3 +26,21 @@ const isValidInput = function() {
   }
   return true;
 };
+
+const removeErrorMessage = function() {
+  const serverMsg = document.querySelector('.serverMsg');
+  serverMsg.style.visibility = 'hidden';
+};
+
+const attachListeners = function() {
+  const inputs = document.querySelectorAll('[type=text]');
+  inputs.forEach(input => {
+    input.onkeyup = removeErrorMessage;
+  });
+};
+
+const main = function() {
+  attachListeners();
+};
+
+window.onload = main;

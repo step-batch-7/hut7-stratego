@@ -74,9 +74,10 @@ a {
 }
 
 .serverMsg {
-  color: #fdd847;
+  color: rgb(200, 200, 200);
+  font-style: italic;
   font-weight: 100;
-  font-size: 1rem;
+  font-size: 1.2rem;
   text-align: center;
 }
 
