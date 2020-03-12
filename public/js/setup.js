@@ -42,7 +42,6 @@ const appendChildren = function(parent, ...children) {
 
 const createPalette = function(pieces) {
   const palette = document.querySelector('.palette');
-  palette.innerHTML = '';
   pieces.forEach(piece => {
     const pieceContainer = createElement('div', 'pieceContainer');
     piece.count === 0 && pieceContainer.classList.add('unavailable');
@@ -65,11 +64,7 @@ const removeSelectedPiece = function() {
 const showPieceInfo = function() {
   const infoPanel = document.querySelector('.infoPanel');
   infoPanel.innerText = '';
-  const selectedPiece = document.querySelector('.active').src;
-  const name = selectedPiece
-    .split('/')
-    .pop()
-    .split('.')[0];
+  const name = document.querySelector('.active').id;
   const image = createImage(name, 'imageInInfo');
   const pieceName = createElementWithData('h2', name.toUpperCase());
   const requiredPiece = pieceInfo.find(
@@ -82,18 +77,17 @@ const showPieceInfo = function() {
 
 const selectPiece = function(setUpInfo, pieceContainer) {
   removeSelectedPiece();
-  setUpInfo.selectedPiece =
-    pieceContainer.lastElementChild.firstElementChild.innerText;
-  pieceContainer.firstElementChild.firstElementChild.classList.add('active');
+  setUpInfo.selectedPiece = pieceContainer.querySelector('span').innerText;
+  pieceContainer.querySelector('img').classList.add('active');
   showPieceInfo();
 };
 
 const decreaseCount = function(pieceName, pieces) {
   const piece = pieces.find(piece => piece.name === pieceName);
-  piece.count--;
+  piece.count -= 1;
   const activePiece = document.querySelector('.active');
   piece.count === 0 &&
-    activePiece.parentElement.parentElement.classList.add('unavailable');
+    activePiece.closest('.pieceContainer').classList.add('unavailable');
   activePiece.parentElement.nextSibling.lastChild.innerText = 'x' + piece.count;
   removeSelectedPiece();
 };
@@ -104,7 +98,7 @@ const increasePieceCount = function(pieceInfo, pieceName) {
   const activePiece = document.querySelector(
     `.pieceImageContainer #${pieceName}`
   );
-  activePiece.parentElement.parentElement.classList.remove('unavailable');
+  activePiece.closest('.pieceContainer').classList.remove('unavailable');
   activePiece.parentElement.nextSibling.lastChild.innerText = 'x' + piece.count;
 };
 
