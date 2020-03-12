@@ -4,6 +4,7 @@ body {
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
+  font-family: Helvetica, sans-serif !important;
 }
 
 .center {

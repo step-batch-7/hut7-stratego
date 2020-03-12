@@ -2,6 +2,7 @@ body {
   font-family: sans-serif;
   background-image: url('../images/background.png');
   background-size: cover;
+  font-family: Helvetica, sans-serif !important;
 }
 
 .center {

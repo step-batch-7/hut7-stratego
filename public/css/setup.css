@@ -1,6 +1,11 @@
 body {
   background-image: url(../images/background.png);
   margin: 0vh;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-family: Helvetica, sans-serif !important;
 }
 
 .setUpBoard {
@@ -13,7 +18,6 @@ body {
   width: 74vh;
   border: 0.3vw ridge #fdd847;
   background-size: cover;
-  margin: 3vh 12vh;
 }
 .unavailable {
   filter: opacity(0.4);
@@ -67,7 +71,7 @@ body {
 .palette {
   display: flex;
   justify-content: space-around;
-  margin: 0vw 5vw;
+  margin: 0 auto;
   border: 0.3vw ridge #fdd847;
   height: 12vh;
   padding: 2vh;
@@ -107,11 +111,13 @@ body {
   background: transparent;
   border: 3px ridge #fdd847;
   width: 50vh;
-  margin: 2.8rem;
-  height: 60vh;
+  height: 45vh;
   color: #fdd847;
   padding: 1rem;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 #panel > a {
@@ -130,6 +136,8 @@ body {
 
 #boardAndInfoPanel {
   display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 2rem;
 }
 
 .imageInInfo {
@@ -139,7 +147,6 @@ body {
 
 #infoImage {
   width: 100%;
-  margin: 20% 0%;
 }
 
 .infoPanel {
@@ -153,19 +160,33 @@ body {
 
 .container {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .fightBtn {
   text-align: center;
   color: #fdd847;
   font-size: 2rem;
+  padding: 10px 4rem;
+  width: 8rem;
+  margin: 0 auto;
+  border: 3px ridge #fdd847;
 }
 
 .fightBtn:hover {
   cursor: pointer;
+  box-shadow: 0 0 1rem -5.8px #fff;
 }
 
 .disabled {
   pointer-events: none;
   filter: opacity(0.4);
+}
+
+.actionButtons {
+  border: 3px ridge #fdd847;
+  padding: 4rem;
+  margin-top: 2rem;
 }
