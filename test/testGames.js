@@ -91,18 +91,35 @@ describe('Games', function() {
       };
       games.arrangeBattleField(gameId, dummySetupData);
       const expected = {
+        redArmy: [],
+        blueArmy: [
+          {
+            name: 'flag',
+            position: [9, 9]
+          }
+        ]
+      };
+      assert.deepStrictEqual(games.getArmy(gameId, 'blue'), expected);
+    });
+    it('should return the army of a player', () => {
+      const games = createGames();
+      const gameId = games.createNewGame('venky');
+      games.addPlayerInGame(gameId, 'venky');
+      const dummySetupData = {
+        unit: 'red',
+        piecesInfo: [{ position: '9_9', name: 'flag' }]
+      };
+      games.arrangeBattleField(gameId, dummySetupData);
+      const expected = {
         redArmy: [
           {
             name: 'flag',
-            position: [9, 9],
-            movable: false,
-            isAlive: true,
-            rank: 0
+            position: [9, 9]
           }
         ],
         blueArmy: []
       };
-      assert.deepStrictEqual(games.getArmy(gameId, 'blue'), expected);
+      assert.deepStrictEqual(games.getArmy(gameId, 'red'), expected);
     });
   });
 
