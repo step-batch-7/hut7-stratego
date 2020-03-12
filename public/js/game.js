@@ -48,16 +48,18 @@ const attackPiece = function(res) {
     lost: [sourceTileId],
     draw: [sourceTileId, targetTileId]
   };
-
   const tileIdToClear = tileIds[status];
   tileIdToClear.forEach(tileId => {
     document.getElementById(tileId).innerHTML = '';
   });
+  if (status === 'won') {
+    movePiece({ sourceTileId, targetTileId });
+  }
 };
 
-const movePiece = function(res) {
-  const sourceTile = document.getElementById(res.sourceTileId);
-  const targetTile = document.getElementById(res.targetTileId);
+const movePiece = function({ sourceTileId, targetTileId }) {
+  const sourceTile = document.getElementById(sourceTileId);
+  const targetTile = document.getElementById(targetTileId);
   const piece = sourceTile.firstChild;
   targetTile.appendChild(piece);
 };

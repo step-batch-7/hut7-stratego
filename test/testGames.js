@@ -151,7 +151,7 @@ describe('Games', function() {
     });
   });
 
-  context('isSetupDone', function() {
+  context('.isSetupDone()', function() {
     it('should give true if setup is done', function() {
       const games = createGames();
       const gameId = games.createNewGame('venky');
@@ -163,6 +163,36 @@ describe('Games', function() {
       const gameId = games.createNewGame('venky');
       games.addPlayerInGame(gameId, 'player');
       assert.isTrue(games.isSetupDone(gameId));
+    });
+  });
+  context('.attack()', function() {
+    const games = createGames();
+    const gameId = games.createNewGame('venky');
+    this.beforeEach(() => {
+      games.addPlayerInGame(gameId, 'venky');
+      const dummySetupData1 = {
+        unit: 'red',
+        piecesInfo: [
+          { position: '0_0', name: 'flag' },
+          { position: '1_2', name: 'marshal' }
+        ]
+      };
+      const dummySetupData2 = {
+        unit: 'blue',
+        piecesInfo: [
+          { position: '0_1', name: 'flag' },
+          { position: '9_8', name: 'marshal' },
+          { position: '0_1', name: 'flag' }
+        ]
+      };
+      games.arrangeBattleField(gameId, dummySetupData1);
+      games.arrangeBattleField(gameId, dummySetupData2);
+    });
+    it('should return attack status won if defenders rank is less than attackers rank', () => {
+      assert.strictEqual(games.attack(gameId, '1_2', '0_1', 'red'), 'won');
+    });
+    it('should return attack status lost if defenders rank is greater than attackers rank', () => {
+      assert.strictEqual(games.attack(gameId, '1_2', '0_1', 'red'), 'won');
     });
   });
 });
