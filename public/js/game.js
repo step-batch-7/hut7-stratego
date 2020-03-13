@@ -1,4 +1,4 @@
-const BOARD_LENGTH = 74;
+const BOARD_LENGTH = 80;
 const numberOfTilesInRow = 10;
 
 const htmlLength = length => `${length}vh`;

@@ -23,13 +23,7 @@ const createEnemyTerritory = function() {
     }
   }
 };
-const getCookie = function(key) {
-  const regexp = new RegExp(`.*${key}=([^;]*)`);
-  const result = regexp.exec(document.cookie);
-  if (result) {
-    return result[1];
-  }
-};
+
 const createElement = (element, className) => {
   const htmlElement = document.createElement(element);
   htmlElement.classList.add(className);

@@ -12,7 +12,7 @@ body {
 @font-face {
   font-family: Parchment;
   src: url('./../fonts/parchment.ttf');
-} 
+}
 
 .setUpBoard {
   display: flex;
@@ -90,7 +90,7 @@ body {
   flex-direction: column;
   align-items: center;
   color: #fdd847;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
 }
 
 .pieceData span:last-child {
@@ -152,7 +152,7 @@ body {
 #boardAndInfoPanel {
   display: flex;
   justify-content: space-evenly;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 .imageInInfo {
@@ -204,11 +204,11 @@ body {
 }
 
 .actionButtons {
-  padding: 3rem;
-  margin-top: 2rem;
+  padding: 2rem 3rem;
+  margin-top: 1rem;
   background: url('./../images/parchment90.png');
   background-repeat: no-repeat;
-  background-size: 40vh 16vh;
+  background-size: 40vh 13vh;
   background-position-x: center;
 }
 
@@ -218,4 +218,6 @@ body {
 
 .infoPanel span:first-child {
   margin-top: 2rem;
+  position: relative;
+  top: -1rem;
 }

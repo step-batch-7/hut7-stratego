@@ -106,3 +106,11 @@ const pieceInfo = [
     ability: 'Immovable; its capture ends the game'
   }
 ];
+
+const getCookie = function(key) {
+  const regexp = new RegExp(`.*${key}=([^;]*)`);
+  const result = regexp.exec(document.cookie);
+  if (result) {
+    return result[1];
+  }
+};
