@@ -4,8 +4,13 @@ body {
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
-  font-family: Helvetica, sans-serif !important;
+  font-family: Parchment !important;
 }
+
+@font-face {
+  font-family: Parchment;
+  src: url('./../fonts/parchment.ttf');
+} 
 
 .center {
   position: absolute;

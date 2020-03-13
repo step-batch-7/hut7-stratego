@@ -5,8 +5,14 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  font-family: Helvetica, sans-serif !important;
+  font-family: Parchment !important;
+  font-weight: 900;
 }
+
+@font-face {
+  font-family: Parchment;
+  src: url('./../fonts/parchment.ttf');
+} 
 
 .setUpBoard {
   display: flex;
@@ -76,6 +82,7 @@ body {
   height: 12vh;
   padding: 2vh;
   width: 90vw;
+  background-repeat: no-repeat;
 }
 
 .pieceData {
@@ -83,6 +90,11 @@ body {
   flex-direction: column;
   align-items: center;
   color: #fdd847;
+  font-size: 1.5rem;
+}
+
+.pieceData span:last-child {
+  margin-top: -0.5rem;
 }
 
 .pieceContainer {
@@ -109,15 +121,18 @@ body {
 
 #panel {
   background: transparent;
-  border: 3px ridge #fdd847;
-  width: 50vh;
-  height: 45vh;
-  color: #fdd847;
+  width: 40vh;
+  height: 50vh;
+  color: #230000;
   padding: 1rem;
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  background: url('./../images/parchment.png');
+  background-repeat: no-repeat;
+  background-size: 40vh 50vh;
+  background-position-x: center;
 }
 
 #panel > a {
@@ -142,16 +157,18 @@ body {
 
 .imageInInfo {
   width: 15vh;
-  border: 1px solid;
+  border: solid #230000;
 }
 
 #infoImage {
-  width: 100%;
+  width: 104%;
+  margin-bottom: 2rem;
 }
 
 .infoPanel {
-  width: 100%;
+  width: 80%;
   text-align: center;
+  margin: 0 auto;
 }
 .infoPanel > p {
   text-align: left;
@@ -167,26 +184,38 @@ body {
 
 .fightBtn {
   text-align: center;
-  color: #fdd847;
+  color: #230000;
   font-size: 2rem;
-  padding: 10px 4rem;
+  padding: 10px 2rem 6px;
   width: 8rem;
   margin: 0 auto;
-  border: 3px ridge #fdd847;
+  filter: opacity(0.7);
+  border: 1px solid #230000;
 }
 
 .fightBtn:hover {
   cursor: pointer;
-  box-shadow: 0 0 1rem -5.8px #fff;
+  filter: opacity(1);
 }
 
 .disabled {
   pointer-events: none;
-  filter: opacity(0.4);
+  filter: opacity(0.5);
 }
 
 .actionButtons {
-  border: 3px ridge #fdd847;
-  padding: 4rem;
+  padding: 3rem;
+  margin-top: 2rem;
+  background: url('./../images/parchment90.png');
+  background-repeat: no-repeat;
+  background-size: 40vh 16vh;
+  background-position-x: center;
+}
+
+.welcomeMsg {
+  font-size: 1.7rem;
+}
+
+.infoPanel span:first-child {
   margin-top: 2rem;
 }

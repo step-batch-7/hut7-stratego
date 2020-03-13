@@ -30,6 +30,8 @@ const isValidInput = function() {
 const removeErrorMessage = function() {
   const serverMsg = document.querySelector('.serverMsg');
   serverMsg.style.visibility = 'hidden';
+  const errorMsg = document.querySelector('.errorMsg');
+  errorMsg.style.visibility = 'hidden';
 };
 
 const attachListeners = function() {
@@ -39,8 +41,24 @@ const attachListeners = function() {
   });
 };
 
+const manageInputLabel = function(labelClass, inputClass, errorId) {
+  const label = document.querySelector(`span.${labelClass}`);
+  label.style.top = '-2rem';
+  const input = document.querySelector(`.${inputClass}`);
+  input.addEventListener('input', () => {
+    label.style.top = '-2rem';
+    if (input.value) {
+      label.style.top = '0';
+      const errElement = document.querySelector(`#${errorId}`);
+      errElement.style.visibility = 'hidden';
+    }
+  });
+};
+
 const main = function() {
   attachListeners();
+  manageInputLabel('enterYourName', 'nameInput', 'nameValid');
+  manageInputLabel('enterGameId', 'gameIdInput', 'gameIdValid');
 };
 
 window.onload = main;

@@ -4,38 +4,53 @@ html(lang='en')
     meta(charset='UTF-8')
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
     title Stratego | Join
-    link(rel='stylesheet', href='./css/index.css')
+    link(rel='stylesheet', href='./css/host.css')
     link(rel='stylesheet', href='https://use.fontawesome.com/releases/v5.7.0/css/all.css')
     script(src='./js/hostPage.js')
   body
     a(href='/')
       i#back.far.fa-arrow-alt-circle-left
-    #hostGame.center
-      .title Stratego
-      form.inputFields(method='POST', action='join', onsubmit='return isValidInput()')
-        table
-          tbody
-            tr
-            tr
-              td
-                label(for='username') Name : 
-              td
-                div
-                  input.input(name='playerName', placeholder='Enter Name', type='text', autocomplete='off')
-            tr
-              td
-              td
-                p#nameValid.errorMsg Please enter your name
-            tr
-            tr
-              td
-                label(for='username') Game Id : 
-              td
-                div
-                  input.input(name='gameId', placeholder='Enter Game Id', type='text', autocomplete='off')
-            tr
-              td
-              td
-                p#gameIdValid.errorMsg Please enter Game Id
-        input.btn.input(value='Join', type='submit')
-        p.serverMsg= errorMsg
+    #hostPage.center
+      .container
+        span.title Stratego
+        form.inputFields(method='POST', action='join', onsubmit='return isValidInput()')
+          input.nameInput.input(name='playerName', type='text', autocomplete='off')
+          span.enterYourName Enter Your Name
+          p#nameValid.errorMsg Please enter your name
+
+          input.gameIdInput.input(name='gameId', type='text', autocomplete='off')
+          span.enterGameId Enter GameId
+          p#gameIdValid.gameIdErr.errorMsg Please enter Game Id
+
+          input.joinBtn.btn(value='Join', type='submit')
+        p.joinBtn.serverMsg= errorMsg
+
+    //- #hostGame.center
+    //-   .title Stratego
+    //-   form.inputFields(method='POST', action='join', onsubmit='return isValidInput()')
+    //-     table
+    //-       tbody
+    //-         tr
+    //-         tr
+    //-           td
+    //-             label(for='username') Name : 
+    //-           td
+    //-             div
+    //-               input.input(name='playerName', placeholder='Enter Name', type='text', autocomplete='off')
+    //-         tr
+    //-           td
+    //-           td
+    //-             p#nameValid.errorMsg Please enter your name
+    //-         tr
+    //-         tr
+    //-           td
+    //-             label(for='username') Game Id : 
+    //-           td
+    //-             div
+    //-               input.input(name='gameId', placeholder='Enter Game Id', type='text', autocomplete='off')
+    //-         tr
+    //-           td
+    //-           td
+    //-             p#gameIdValid.errorMsg Please enter Game Id
+    //-     input.btn.input(value='Join', type='submit')
+    //-     p.serverMsg= errorMsg

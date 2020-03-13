@@ -1,0 +1,167 @@
+body {
+  font-family: sans-serif;
+  background-image: url('../images/background.png');
+  background-size: cover;
+  font-family: Parchment !important;
+}
+
+@font-face {
+  font-family: Parchment;
+  src: url('./../fonts/parchment.ttf');
+}
+
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(35, 0, 0, 0.3);
+  border: 2px solid #fdd847;
+  padding: 1rem 0.9rem;
+  border-radius: 8px;
+  height: 26rem;
+  width: 17rem;
+}
+
+#hostPage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.container {
+  text-align: center;
+  position: relative;
+  display: contents;
+}
+
+.title {
+  color: #fdd847;
+  margin-bottom: 2rem;
+  font-weight: 300;
+  font-size: 3rem;
+}
+
+.btn {
+  padding: 10px 0;
+  font-size: 1.2rem;
+  border-radius: 25px;
+  background: transparent;
+  color: #fdd847;
+  border: 1px solid #fdd847;
+  cursor: pointer;
+  width: -webkit-fill-available;
+  margin: 0.8rem 2rem;
+  outline: none;
+  margin-top: 0;
+}
+
+.joinBtn {
+  position: relative;
+  top: 1.6rem;
+}
+
+.btn:hover {
+  background-color: #fdd847;
+  color: #1f0000;
+}
+
+.btn:active {
+  border: 1px ridge #1f0000;
+}
+
+#back {
+  font-size: 2rem;
+  color: #fdd847;
+}
+
+.input {
+  border: none;
+  border-bottom: 1.2px solid #fdd847;
+  background-color: transparent;
+  padding: 2px;
+  font-size: 1rem;
+  color: #fdd847;
+  outline: none;
+  padding-bottom: 6px;
+}
+
+.serverMsg {
+  color: rgb(200, 200, 200);
+  font-style: italic;
+  font-weight: 100;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.errorMsg {
+  visibility: hidden;
+  font-weight: 100;
+  font-size: 0.8rem;
+  text-align: left;
+  text-align: center;
+  font-size: 1.2rem;
+  margin: 0;
+  color: rgb(200, 200, 200);
+  font-style: italic;
+}
+
+.enterYourName {
+  position: relative;
+  text-align: left;
+  padding: 10px 6px;
+  color: #fdd847;
+  top: 0rem;
+  transition: top 0.1s ease-in-out, font-size 0.1s ease-in-out;
+  z-index: -1;
+  padding-bottom: 0;
+}
+
+input {
+  font-family: Parchment !important;
+  outline: none;
+}
+
+.input {
+  padding-left: 6px;
+  outline: none;
+  font-size: 1.4rem;
+}
+
+.inputFields {
+  display: contents;
+}
+
+.gameIdInput:focus ~ .enterGameId {
+  font-size: 0.8rem;
+  transition: top 0.1s ease-in-out, font-size 0.1s ease-in-out;
+  top: 0 !important;
+}
+
+.nameInput:focus ~ .enterYourName {
+  font-size: 0.8rem;
+  transition: top 0.1s ease-in-out, font-size 0.1s ease-in-out;
+  top: 0 !important;
+}
+
+.input:focus ~ .errorMsg {
+  visibility: hidden !important;
+}
+
+.enterGameId {
+  position: relative;
+  text-align: left;
+  padding: 10px 6px;
+  color: #fdd847;
+  top: 0rem;
+  transition: top 0.1s ease-in-out, font-size 0.1s ease-in-out;
+  z-index: -1;
+  padding-bottom: 0;
+}
+
+.gameIdErr {
+  position: relative;
+  top: 0rem;
+  color: rgb(200, 200, 200);
+  font-style: italic;
+}

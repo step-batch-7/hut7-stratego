@@ -2,13 +2,19 @@ body {
   font-family: sans-serif;
   background-image: url('../images/background.png');
   background-size: cover;
-  font-family: Helvetica, sans-serif !important;
+  font-family: Parchment !important;
+}
+
+@font-face {
+  font-family: Parchment;
+  src: url('./../fonts/parchment.ttf');
 }
 
 .center {
   position: absolute;
   top: 50%;
   left: 50%;
+  background: rgba(35, 0, 0, 0.3);
   transform: translate(-50%, -50%);
   border: 2px solid #fdd847;
   padding: 1rem 0.9rem;
@@ -46,15 +52,6 @@ a {
   justify-content: center;
 }
 
-.title {
-  color: #fdd847;
-  position: absolute;
-  top: -4px;
-  padding: 39px 75.6px;
-  font-weight: 300;
-  font-size: 2rem;
-}
-
 .inputFields {
   padding: 3.8rem 0.5rem;
   color: #fdd847;
@@ -82,13 +79,28 @@ a {
   text-align: center;
 }
 
+.container {
+  text-align: center;
+  position: relative;
+  display: contents;
+}
+
+.title {
+  color: #fdd847;
+  margin-bottom: 2rem;
+  font-weight: 300;
+  font-size: 3rem;
+}
+
 .btn {
-  padding: 0.8rem 4rem;
+  padding: 10px 0;
+  font-size: 1.2rem;
   border-radius: 25px;
   color: #fdd847;
   border: 1px solid #fdd847;
   cursor: pointer;
-  margin: 1.9rem 3rem;
+  margin: 0.8rem 2rem;
+  outline: none;
 }
 
 .btn:hover {
@@ -125,6 +137,7 @@ a {
 
 .waitingMsg {
   margin-top: 3rem;
+  font-size: 1.4rem;
   font-weight: 100;
   color: #fdd847;
 }
