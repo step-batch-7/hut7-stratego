@@ -14,27 +14,13 @@
     "ecmaVersion": 2018
   },
   "rules": {
-    "indent": [
-      "error",
-      2
-    ],
-    "quotes": [
-      "error",
-      "single"
-    ],
-    "linebreak-style": [
-      "error",
-      "unix"
-    ],
-    "semi": [
-      "error",
-      "always"
-    ],
+    "indent": ["error", 2],
+    "quotes": ["error", "single"],
+    "linebreak-style": ["error", "unix"],
+    "semi": ["error", "always"],
     "camelcase": "error",
     "class-methods-use-this": "warn",
-    "array-bracket-spacing": [
-      "error"
-    ],
+    "array-bracket-spacing": ["error"],
     "comma-spacing": "error",
     "arrow-spacing": "error",
     "no-var": "error",
@@ -67,10 +53,7 @@
     "no-useless-return": "error",
     "max-depth": "error",
     "no-mixed-operators": "error",
-    "complexity": [
-      "error",
-      4
-    ],
+    "complexity": ["error", 4],
     "no-extra-parens": "error",
     "no-template-curly-in-string": "error",
     "array-callback-return": "error",
@@ -91,13 +74,12 @@
       {
         "max": 1
       }
-    ]
+    ],
+    "spaced-comment": ["error", "never"]
   },
   "overrides": [
     {
-      "files": [
-        "test*.js"
-      ],
+      "files": ["test*.js"],
       "rules": {
         "max-len": "warn",
         "no-magic-numbers": "off",
@@ -105,18 +87,14 @@
       }
     },
     {
-      "files": [
-        "public/js/*.js"
-      ],
+      "files": ["public/js/*.js"],
       "rules": {
         "no-undef": "off",
         "no-unused-vars": "off"
       }
     },
     {
-      "files": [
-        "public/js/htmlUtils.js"
-      ],
+      "files": ["public/js/htmlUtils.js"],
       "rules": {
         "max-len": "warn"
       }
