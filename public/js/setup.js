@@ -112,10 +112,11 @@ const increasePieceCount = function(pieceInfo, pieceName) {
 
 const removePieceFromTile = function(tile, pieces, setUpInfo) {
   const name = tile.firstElementChild.id;
+  const piecePosition = tile.id;
   const fightBtn = document.querySelector('.fightBtn');
   fightBtn.classList.add('disabled');
   const removedPieceIndex = setUpInfo.piecesInfo.findIndex(
-    piece => piece.name === name
+    piece => piece.position === piecePosition
   );
   setUpInfo.piecesInfo.splice(removedPieceIndex, 1);
   tile.firstElementChild.remove();
