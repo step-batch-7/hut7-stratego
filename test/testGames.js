@@ -1,5 +1,5 @@
 const assert = require('chai').assert;
-const { createGames, createBattleField } = require('../lib/games');
+const { createGames } = require('../lib/games');
 const { Game } = require('../lib/game');
 const { Player } = require('./../lib/player');
 
@@ -8,10 +8,12 @@ describe('Games', function() {
     it('should add new game into games', function() {
       const gameId = 123;
       const player = new Player('venky', 'red');
-      const game = new Game(gameId, player, createBattleField(10, 10));
+      const game = new Game(gameId, player);
+      game.initBattleField();
       const games = createGames();
       assert.strictEqual(games.addGame(game), 1);
     });
+
     it('should not add new game if its not instance of the game class', function() {
       const games = createGames();
       const game = {
@@ -55,6 +57,7 @@ describe('Games', function() {
       const gameId = games.createNewGame('player');
       assert.strictEqual(games.addPlayerInGame(gameId, 'player1'), true);
     });
+
     it('should not add player in the non existing game', function() {
       const games = createGames();
       games.createNewGame('player');
@@ -69,11 +72,13 @@ describe('Games', function() {
       games.addPlayerInGame(gameId, 'player1');
       assert.strictEqual(games.isGameFull(gameId), true);
     });
+
     it('should send false if game is not full', function() {
       const games = createGames();
       const gameId = games.createNewGame('player');
       assert.strictEqual(games.isGameFull(gameId), false);
     });
+
     it('should give undefined if game is not existed', function() {
       const games = createGames();
       assert.strictEqual(games.isGameFull(10), undefined);
@@ -101,6 +106,7 @@ describe('Games', function() {
       };
       assert.deepStrictEqual(games.getArmy(gameId, 'blue'), expected);
     });
+
     it('should return the army of a player', () => {
       const games = createGames();
       const gameId = games.createNewGame('venky');
@@ -165,6 +171,7 @@ describe('Games', function() {
       assert.isTrue(games.isSetupDone(gameId));
     });
   });
+
   context('.attack()', function() {
     const games = createGames();
     const gameId = games.createNewGame('venky');
@@ -188,9 +195,11 @@ describe('Games', function() {
       games.arrangeBattleField(gameId, dummySetupData1);
       games.arrangeBattleField(gameId, dummySetupData2);
     });
+
     it('should return attack status won if defenders rank is less than attackers rank', () => {
       assert.strictEqual(games.attack(gameId, '1_2', '2_2', 'red'), 'won');
     });
+
     it('should return attack status lost if defenders rank is greater than attackers rank', () => {
       assert.strictEqual(games.attack(gameId, '1_2', '0_2', 'red'), 'won');
     });

@@ -10,7 +10,7 @@ body {
 @font-face {
   font-family: Parchment;
   src: url('./../fonts/parchment.ttf');
-} 
+}
 
 .center {
   position: absolute;
