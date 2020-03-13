@@ -9,6 +9,7 @@ describe('GET', () => {
   });
   context('/game', function() {
     it('should redirect to homepage  when game does not exist', function(done) {
+      this.timeout(4000);
       const isSetupDone = stub()
         .withArgs(1)
         .returns(true);
@@ -25,8 +26,8 @@ describe('GET', () => {
           done();
         });
     });
-
     it('should redirect to /setup when game is not full', function(done) {
+      this.timeout(4000);
       const isSetupDone = stub()
         .withArgs(1)
         .returns(false);
@@ -47,8 +48,8 @@ describe('GET', () => {
           done();
         });
     });
-
     it('should redirect to /game when game is full', function(done) {
+      this.timeout(4000);
       const isSetupDone = stub()
         .withArgs(1)
         .returns(true);
@@ -72,6 +73,7 @@ describe('GET', () => {
   });
   context('/setup', function() {
     it('should send to index page if cookies are not set', function(done) {
+      this.timeout(4000);
       const getGame = stub()
         .withArgs(1)
         .returns(false);
@@ -88,6 +90,7 @@ describe('GET', () => {
         });
     });
     it('should send to setup if game is full', function(done) {
+      this.timeout(4000);
       const isGameFull = stub()
         .withArgs(1)
         .returns(true);
@@ -109,6 +112,7 @@ describe('GET', () => {
         });
     });
     it('should send to waiting if game is not full', function(done) {
+      this.timeout(4000);
       const isGameFull = stub()
         .withArgs(1)
         .returns(false);
@@ -132,6 +136,7 @@ describe('GET', () => {
   });
   context('/host', function() {
     it('should serve the host page', function(done) {
+      this.timeout(4000);
       request(app)
         .get('/host')
         .expect(200)
@@ -146,6 +151,7 @@ describe('GET', () => {
   });
   context('/join', function() {
     it('should serve the join page', function(done) {
+      this.timeout(4000);
       request(app)
         .get('/join')
         .expect(200)
@@ -160,6 +166,7 @@ describe('GET', () => {
   });
   context('/areAllPlayersJoined', function() {
     it('should give false if the game is not full', function(done) {
+      this.timeout(4000);
       const isGameFull = stub()
         .withArgs(1)
         .returns(false);
@@ -177,6 +184,7 @@ describe('GET', () => {
         });
     });
     it('should give true if the game is full', function(done) {
+      this.timeout(4000);
       const isGameFull = stub()
         .withArgs(1)
         .returns(true);
@@ -243,7 +251,6 @@ describe('POST', () => {
         .returns([{}]);
       replace(games, 'getArmy', getArmy);
     });
-
     it('should response back with piecesInfo', function(done) {
       request(app)
         .get('/army')
@@ -257,7 +264,6 @@ describe('POST', () => {
           done();
         });
     });
-
     it('should response back with piecesInfo', function(done) {
       request(app)
         .get('/army')
@@ -328,7 +334,6 @@ describe('POST', () => {
           done();
         });
     });
-
     it('should give game started if game is already started for /join', function(done) {
       this.timeout(4000);
       const isGameFull = stub()
