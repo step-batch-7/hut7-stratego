@@ -406,4 +406,77 @@ describe('Game', function() {
       assert.strictEqual(game.attack('2_3', '2_4', 'red'), 'unsuccessful');
     });
   });
+
+  context('.isScoutPathIsClear()', function() {
+    it('should return true when there is no pieces or lake  between the two positions', function() {
+      const player = new Player('venky', 'red');
+      const player2 = new Player('rajat', 'blue');
+      const game = new Game(123, player, createBattleField(10, 10));
+      game.addPlayer(player2);
+      const setUpInfo1 = {
+        unit: 'red',
+        piecesInfo: [{ position: '2_3', name: 'scout' }]
+      };
+      const setUpInfo2 = {
+        unit: 'blue',
+        piecesInfo: [{ position: '8_3', name: 'marshal' }]
+      };
+      game.arrangeBattleField(setUpInfo1);
+      game.arrangeBattleField(setUpInfo2);
+      assert.isTrue(game.isScoutPathIsClear([2, 3], [8, 3]));
+    });
+    it('should return false when there is pieces or lake  between the two positions', function() {
+      const player = new Player('venky', 'red');
+      const player2 = new Player('rajat', 'blue');
+      const game = new Game(123, player, createBattleField(10, 10));
+      game.addPlayer(player2);
+      const setUpInfo1 = {
+        unit: 'red',
+        piecesInfo: [{ position: '2_3', name: 'scout' }]
+      };
+      const setUpInfo2 = {
+        unit: 'blue',
+        piecesInfo: [{ position: '2_8', name: 'marshal' }]
+      };
+      game.arrangeBattleField(setUpInfo1);
+      game.arrangeBattleField(setUpInfo2);
+      assert.isFalse(game.isScoutPathIsClear([2, 3], [2, 8]));
+    });
+  });
+  context('.ableToKill()', function() {
+    it('should return true when he can kill the other piece', function() {
+      const player = new Player('venky', 'red');
+      const player2 = new Player('rajat', 'blue');
+      const game = new Game(123, player, createBattleField(10, 10));
+      game.addPlayer(player2);
+      const setUpInfo1 = {
+        unit: 'red',
+        piecesInfo: [{ position: '2_3', name: 'scout' }]
+      };
+      const setUpInfo2 = {
+        unit: 'blue',
+        piecesInfo: [{ position: '8_3', name: 'marshal' }]
+      };
+      game.arrangeBattleField(setUpInfo1);
+      game.arrangeBattleField(setUpInfo2);
+      assert.isTrue(game.ableToKill([2, 3], [8, 3], 0));
+    });
+    it('should return false when he cant kill the other piece', function() {
+      const player = new Player('venky', 'red');
+      const player2 = new Player('rajat', 'blue');
+      const game = new Game(123, player, createBattleField(10, 10));
+      game.addPlayer(player2);
+      const setUpInfo1 = {
+        unit: 'red',
+        piecesInfo: [{ position: '2_3', name: 'spy' }]
+      };
+      const setUpInfo2 = {
+        unit: 'blue',
+        piecesInfo: [{ position: '8_3', name: 'marshal' }]
+      };
+      game.arrangeBattleField(setUpInfo1);
+      game.arrangeBattleField(setUpInfo2);
+      assert.isFalse(game.ableToKill([2, 3], [8, 3], 0));
+    });
+  });
 });
