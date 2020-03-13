@@ -23,7 +23,13 @@ const createEnemyTerritory = function() {
     }
   }
 };
-
+const getCookie = function(key) {
+  const regexp = new RegExp(`.*${key}=([^;]*)`);
+  const result = regexp.exec(document.cookie);
+  if (result) {
+    return result[1];
+  }
+};
 const createElement = (element, className) => {
   const htmlElement = document.createElement(element);
   htmlElement.classList.add(className);
@@ -47,7 +53,7 @@ const createPalette = function(pieces) {
     piece.count === 0 && pieceContainer.classList.add('unavailable');
     const pieceImageContainer = createElement('div', 'pieceImageContainer');
     pieceImageContainer.appendChild(
-      createImage(piece.name, 'pieceImage', 'red')
+      createImage(piece.name, 'pieceImage', getCookie('unit'))
     );
     const pieceData = createElement('div', 'pieceData');
     const pieceName = createElementWithData('span', piece.name);
@@ -67,7 +73,7 @@ const showPieceInfo = function() {
   const infoPanel = document.querySelector('.infoPanel');
   infoPanel.innerText = '';
   const name = document.querySelector('.active').id;
-  const image = createImage(name, 'imageInInfo', 'red');
+  const image = createImage(name, 'imageInInfo', getCookie('unit'));
   const pieceName = createElementWithData('h2', name.toUpperCase());
   const requiredPiece = pieceInfo.find(
     piece => piece.Piece.toLowerCase() === name
@@ -135,7 +141,7 @@ const checkIfBoardSet = function(setUpInfo) {
 
 const placePiece = function(setUpInfo, tile, pieces) {
   const name = setUpInfo.selectedPiece;
-  const image = createImage(name, 'boardPieceImage', 'red');
+  const image = createImage(name, 'boardPieceImage', getCookie('unit'));
   if (tile.firstElementChild) {
     return removePieceFromTile(tile, pieces, setUpInfo);
   }
