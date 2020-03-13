@@ -8,7 +8,7 @@ describe('GET', () => {
     restore();
   });
   context('/game', function() {
-    it('should response back with game', function(done) {
+    it('should redirect to homepage  when game does not exist', function(done) {
       const isSetupDone = stub()
         .withArgs(1)
         .returns(true);
@@ -16,8 +16,8 @@ describe('GET', () => {
       request(app)
         .get('/game')
         .set('cookie', ['gameId=1', 'unit=red'])
-        .expect(200)
-        .expect(/Stratego/)
+        .expect(302)
+        .expect(/\//)
         .end(function(err) {
           if (err) {
             return done(err);
@@ -31,6 +31,10 @@ describe('GET', () => {
         .withArgs(1)
         .returns(false);
       replace(games, 'isSetupDone', isSetupDone);
+      const getGame = stub()
+        .withArgs(1)
+        .returns(true);
+      replace(games, 'getGame', getGame);
       request(app)
         .get('/game')
         .set('cookie', ['gameId=1', 'unit=red'])
@@ -44,11 +48,20 @@ describe('GET', () => {
         });
     });
 
-    it('should redirect to /', function(done) {
+    it('should redirect to /game when game is full', function(done) {
+      const isSetupDone = stub()
+        .withArgs(1)
+        .returns(true);
+      replace(games, 'isSetupDone', isSetupDone);
+      const getGame = stub()
+        .withArgs(1)
+        .returns(true);
+      replace(games, 'getGame', getGame);
       request(app)
         .get('/game')
-        .expect(302)
-        .expect(/\//)
+        .set('cookie', ['gameId=1', 'unit=red'])
+        .expect(200)
+        .expect(/Stratego/)
         .end(function(err) {
           if (err) {
             return done(err);
