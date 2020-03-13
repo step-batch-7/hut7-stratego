@@ -9,6 +9,10 @@ describe('GET', () => {
   });
   context('/game', function() {
     it('should response back with game', function(done) {
+      const isSetupDone = stub()
+        .withArgs(1)
+        .returns(true);
+      replace(games, 'isSetupDone', isSetupDone);
       request(app)
         .get('/game')
         .set('cookie', ['gameId=1', 'unit=red'])
