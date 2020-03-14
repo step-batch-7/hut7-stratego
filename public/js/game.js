@@ -41,20 +41,91 @@ const createPieceAt = function(pieceName, tileId, unit) {
   tile.appendChild(piece);
 };
 
+const pieceName = function(tileId) {
+  const tile = document.getElementById(tileId);
+  return tile.querySelector('img').id;
+};
+
+const getPieceInfo = function(pieceName) {
+  const requiredPiece = pieceInfo.find(
+    piece => piece.Piece.toLowerCase() === pieceName.toLowerCase()
+  );
+  return requiredPiece;
+};
+const getAttackerAndDefender = function(sourceTileId, targetTileId) {
+  const attackerName = pieceName(sourceTileId);
+  const defenderName = pieceName(targetTileId);
+  const attacker = getPieceInfo(attackerName);
+  const defender = getPieceInfo(defenderName);
+  return { attacker, defender };
+};
+
+const updateCard = function(cardId, pieceDetails, unit, status) {
+  const card = document.getElementById(cardId);
+  const cardImage = createImage(pieceDetails.Piece.toLowerCase(), 'no', unit);
+  card.querySelector('.cardImage').innerHTML = '';
+  card.querySelector('.cardImage').appendChild(cardImage);
+  card.querySelector('.pieceName span').innerText = pieceDetails.Piece;
+  const rankText = `Rank: ${pieceDetails.Rank}`;
+  card.querySelector('.pieceRank span').innerText = rankText;
+  card.querySelector('.status span').innerText = status;
+  card.style.display = 'block';
+};
+
+const getAttackStatus = function(status) {
+  let attackerStatus = 'draw';
+  let defenderStatus = 'draw';
+  if (status === 'won') {
+    attackerStatus = 'won';
+    defenderStatus = 'lost';
+  }
+  if (status === 'lost') {
+    attackerStatus = 'lost';
+    defenderStatus = 'won';
+  }
+  return { attackerStatus, defenderStatus };
+};
+
+const revealAttackerAndDefender = function(attackDetails) {
+  const { sourceTileId, targetTileId, status } = attackDetails;
+  document.getElementById('board').style.filter = 'blur(4px)';
+  const { attacker, defender } = getAttackerAndDefender(
+    sourceTileId,
+    targetTileId
+  );
+  const { attackerStatus, defenderStatus } = getAttackStatus(status);
+  updateCard('attackCard', attacker, 'red', attackerStatus);
+  updateCard('defenderCard', defender, 'blue', defenderStatus);
+};
+
+const removeCards = function() {
+  document.getElementById('attackCard').style.display = 'none';
+  document.getElementById('defenderCard').style.display = 'none';
+};
+
+const updateBoard = function(tileIds, status) {
+  document.getElementById('board').style.filter = 'blur(0px)';
+  const tileIdToClear = tileIds[status];
+  tileIdToClear.forEach(tileId => {
+    document.getElementById(tileId).innerHTML = '';
+    removeCards();
+  });
+};
+
 const attackPiece = function(res) {
   const { sourceTileId, targetTileId, status } = res;
+  revealAttackerAndDefender(res);
   const tileIds = {
     won: [targetTileId],
     lost: [sourceTileId],
     draw: [sourceTileId, targetTileId]
   };
-  const tileIdToClear = tileIds[status];
-  tileIdToClear.forEach(tileId => {
-    document.getElementById(tileId).innerHTML = '';
-  });
-  if (status === 'won') {
-    movePiece({ sourceTileId, targetTileId });
-  }
+  setTimeout(() => {
+    updateBoard(tileIds, status);
+    if (status === 'won') {
+      movePiece({ sourceTileId, targetTileId });
+    }
+  }, 4000);
 };
 
 const movePiece = function({ sourceTileId, targetTileId }) {
