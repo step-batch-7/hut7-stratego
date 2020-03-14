@@ -505,4 +505,16 @@ describe('Game', function() {
       assert.isFalse(game.ableToKill([2, 3], [8, 3], 0));
     });
   });
+  context('.isSpecificAttack', function() {
+    it('should won if spy attacks opponents marshal', function() {
+      const player = new Player('venky', 'red');
+      const game = new Game(123, player);
+      assert.isTrue(game.isSpecificAttack(10, 1));
+    });
+    it('should won if miner attacks opponents bomb', function() {
+      const player = new Player('venky', 'red');
+      const game = new Game(123, player);
+      assert.isTrue(game.isSpecificAttack(11, 3));
+    });
+  });
 });
