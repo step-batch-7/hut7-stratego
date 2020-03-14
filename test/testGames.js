@@ -158,7 +158,7 @@ describe('Games', function() {
   });
 
   context('.isSetupDone()', function() {
-    it('should give true if setup is done', function() {
+    it('should give false if setup is not done', function() {
       const games = createGames();
       const gameId = games.createNewGame('venky');
       assert.isFalse(games.isSetupDone(gameId));
@@ -168,6 +168,7 @@ describe('Games', function() {
       const games = createGames();
       const gameId = games.createNewGame('venky');
       games.addPlayerInGame(gameId, 'player');
+      games.arrangeBattleField(gameId, [{ name: 'bomb', position: '2_1' }]);
       assert.isTrue(games.isSetupDone(gameId));
     });
   });
