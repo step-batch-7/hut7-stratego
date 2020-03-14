@@ -24,6 +24,14 @@ const createEnemyTerritory = function() {
   }
 };
 
+const getCookie = function(key) {
+  const regexp = new RegExp(`.*${key}=([^;]*)`);
+  const result = regexp.exec(document.cookie);
+  if (result) {
+    return result[1];
+  }
+};
+
 const createElement = (element, className) => {
   const htmlElement = document.createElement(element);
   htmlElement.classList.add(className);
@@ -159,9 +167,11 @@ const attachListeners = function(setUpInfo, pieces) {
   });
 
   const tiles = Array.from(document.querySelectorAll('.tile'));
+
   tiles.forEach(tile => {
     tile.onclick = placePiece.bind(null, setUpInfo, tile, pieces);
   });
+
   fightBtn.addEventListener('click', function() {
     sendReq('POST', '/setupData', redirectToUrl, JSON.stringify(setUpInfo));
   });
@@ -188,4 +198,5 @@ const main = function() {
   createPalette(pieces);
   attachListeners.bind(null, setUpInfo, pieces)();
 };
+
 window.onload = main;
