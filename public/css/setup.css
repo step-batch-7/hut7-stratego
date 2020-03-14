@@ -18,7 +18,8 @@ body {
   display: flex;
   flex-direction: column;
   border: 0.1vh solid;
-  background-image: url(../images/setupBoardBackGround.jpg);
+  background-image: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)),
+    url('./../images/oil_paper.jpg');
   background-position: center;
   height: 74vh;
   width: 74vh;
@@ -206,7 +207,7 @@ body {
 }
 
 .actionButtons {
-  padding: 2rem 3rem;
+  padding: 1.2rem 3rem;
   margin-top: 1rem;
   background: url('./../images/parchment90.png');
   background-repeat: no-repeat;
