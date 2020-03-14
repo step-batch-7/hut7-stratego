@@ -11,4 +11,23 @@ html(lang='en')
     script(src='./js/request.js')
   body
     #root
-    #attackCard
+    .card#attackCard
+      .role Attacker
+      .cardImage
+        img(src='./images/redMarshal.png', alt='attacker')
+      .pieceName.pieceInfo
+        span Marshal
+      .pieceRank.pieceInfo
+        span Rank: 10
+      .status
+        span Won
+    .card#defenderCard
+      .role Defender
+      .cardImage
+        img(src='./images/blueMiner.png', alt='attacker')
+      .pieceName.pieceInfo
+        span Marshal
+      .pieceRank.pieceInfo
+        span Rank: 10
+      .status
+        span Lose

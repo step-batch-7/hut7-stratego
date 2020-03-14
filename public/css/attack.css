@@ -1,3 +1,69 @@
-.attackCard {
-  padding: 1rem;
+.card {
+  height: 42vh;
+  width: 30vh;
+  background: url('./../images/infoParcmentBackground.png');
+  position: absolute;
+  transform: translate(0%, -50%);
+  top: 50%;
+  background-size: 100% 100%;
+  text-align: center;
+  display: none;
+}
+
+#attackCard {
+  left: 54%;
+}
+
+#defenderCard {
+  left: 30%;
+}
+
+.role {
+  margin: 4vh 0 2vh;
+  font-size: 2rem;
+}
+
+.cardImage {
+  height: 10vh;
+  width: 10vh;
+  margin: 0 auto;
+  border: 2px solid #230000;
+}
+
+.cardImage > img {
+  height: 100%;
+  width: 100%;
+}
+
+.pieceInfo {
+  padding: 1rem 0;
+  text-align: center;
+}
+
+.pieceName {
+  font-size: 1.6rem;
+  padding-bottom: 0;
+}
+
+.pieceRank {
+  text-align: center;
+  font-size: 1.2rem;
+  padding: 0;
+}
+
+.pieceDetails {
+  text-align: center;
+  font-size: 1.2rem;
+  padding: 0 1rem;
+}
+
+.status {
+  text-align: center;
+  font-size: 2rem;
+  padding-top: 1rem;
+}
+
+.status > span {
+  border: 1px solid #230000;
+  padding: 2px 2rem 0;
 }
