@@ -125,16 +125,16 @@ body {
 #panel {
   background: transparent;
   width: 40vh;
-  height: 50vh;
+  height: 56vh;
   color: #230000;
   padding: 1rem;
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background: url('./../images/parchment.png');
+  background: url('./../images/infoParcmentBackground.png');
   background-repeat: no-repeat;
-  background-size: 40vh 50vh;
+  background-size: 40vh 56vh;
   background-position-x: center;
 }
 
@@ -171,11 +171,12 @@ body {
 .infoPanel {
   width: 80%;
   text-align: center;
-  margin: 0 auto;
+  margin: 0 auto 10px;
 }
 .infoPanel > p {
   text-align: left;
   font-size: 1.4em;
+  margin: 0 auto 8px;
 }
 
 .container {
