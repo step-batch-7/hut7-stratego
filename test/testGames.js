@@ -4,7 +4,7 @@ const { Game } = require('../lib/game');
 const { Player } = require('./../lib/player');
 
 describe('Games', function() {
-  context('.addGame()', function() {
+  context('.addGame', function() {
     it('should add new game into games', function() {
       const gameId = 123;
       const player = new Player('venky', 'red');
@@ -35,7 +35,7 @@ describe('Games', function() {
     });
   });
 
-  context('.getGame()', function() {
+  context('.getGame', function() {
     it('should return the game of given gameId', function() {
       const games = createGames();
       const gameId = games.createNewGame('stratego');
@@ -44,14 +44,14 @@ describe('Games', function() {
     });
   });
 
-  context('.createNewGame()', function() {
+  context('.createNewGame', function() {
     it('should give game id of the new game', function() {
       const games = createGames();
       assert.strictEqual(games.createNewGame('player'), 1);
     });
   });
 
-  context('.addPlayerInGame()', function() {
+  context('.addPlayerInGame', function() {
     it('should add player in the existing game', function() {
       const games = createGames();
       const gameId = games.createNewGame('player');
@@ -65,7 +65,7 @@ describe('Games', function() {
     });
   });
 
-  context('.isGameFull()', function() {
+  context('.isGameFull', function() {
     it('should send true if game is full', function() {
       const games = createGames();
       const gameId = games.createNewGame('player');
@@ -85,7 +85,7 @@ describe('Games', function() {
     });
   });
 
-  context('.getArmy()', function() {
+  context('.getArmy', function() {
     it('should return the army of a player', () => {
       const games = createGames();
       const gameId = games.createNewGame('venky');
@@ -129,7 +129,7 @@ describe('Games', function() {
     });
   });
 
-  context('.movePiece()', function() {
+  context('.movePiece', function() {
     const games = createGames();
     const gameId = games.createNewGame('venky');
     this.beforeEach(() => {
@@ -145,19 +145,19 @@ describe('Games', function() {
     });
 
     it('should move the piece to the given target Position', () => {
-      assert.isTrue(games.movePiece(gameId, 'blue', '0_0', '0_1'));
+      assert.isTrue(games.movePiece(gameId, 'blue', [0, 0], [0, 1]));
     });
 
     it('should not move the piece to the given target Position when move is invalid', () => {
-      assert.isFalse(games.movePiece(gameId, 'blue', '0_0', '0_9'));
+      assert.isFalse(games.movePiece(gameId, 'blue', [0, 0], [0, 9]));
     });
 
     it('should move the piece to the given target Position when piece is immovable', () => {
-      assert.isFalse(games.movePiece(gameId, 'blue', '9_9', '8_9'));
+      assert.isFalse(games.movePiece(gameId, 'blue', [9, 9], [8, 9]));
     });
   });
 
-  context('.isSetupDone()', function() {
+  context('.isSetupDone', function() {
     it('should give false if setup is not done', function() {
       const games = createGames();
       const gameId = games.createNewGame('venky');
@@ -173,7 +173,7 @@ describe('Games', function() {
     });
   });
 
-  context('.attack()', function() {
+  context('.attack', function() {
     const games = createGames();
     const gameId = games.createNewGame('venky');
     this.beforeEach(() => {
@@ -198,11 +198,11 @@ describe('Games', function() {
     });
 
     it('should return attack status won if defenders rank is less than attackers rank', () => {
-      assert.strictEqual(games.attack(gameId, '1_2', '2_2', 'red'), 'won');
+      assert.strictEqual(games.attack(gameId, [1, 2], [2, 2], 'red'), 'won');
     });
 
     it('should return attack status lost if defenders rank is greater than attackers rank', () => {
-      assert.strictEqual(games.attack(gameId, '1_2', '0_2', 'red'), 'won');
+      assert.strictEqual(games.attack(gameId, [1, 2], [0, 2], 'red'), 'won');
     });
   });
 });

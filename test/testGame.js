@@ -27,7 +27,7 @@ describe('Game', function() {
     });
   });
 
-  context('.addPlayer()', function() {
+  context('.addPlayer', function() {
     it('should add the given player in Game', function() {
       const player1 = new Player('venky', 'red');
       const game = new Game(123, player1);
@@ -49,7 +49,7 @@ describe('Game', function() {
     });
   });
 
-  context('.getPlayer()', function() {
+  context('.getPlayer', function() {
     it('should give player of given unit', function() {
       const player = new Player('venky', 'red');
       const game = new Game(123, player);
@@ -65,7 +65,7 @@ describe('Game', function() {
     });
   });
 
-  context('.arrangeBattleField()', function() {
+  context('.arrangeBattleField', function() {
     it('should record the position of all components of the board', function() {
       const player = new Player('venky', 'red');
       const game = new Game(123, player);
@@ -100,7 +100,7 @@ describe('Game', function() {
     });
   });
 
-  context('.isOccupiedByLake()', () => {
+  context('.isOccupiedByLake', () => {
     it('should return true if given position is occupied by lake', () => {
       const player = new Player('venky', 'red');
       const game = new Game(123, player);
@@ -138,7 +138,7 @@ describe('Game', function() {
     });
   });
 
-  context('.isOccupiedByPiece()', () => {
+  context('.isOccupiedByPiece', () => {
     it('should return true if given position is occupied by piece', () => {
       const player = new Player('venky', 'red');
       const game = new Game(123, player);
@@ -176,7 +176,7 @@ describe('Game', function() {
     });
   });
 
-  context('updateBattleField', function() {
+  context('.updateBattleField', function() {
     it('should update piece from current position to target position', function() {
       const player = new Player('venky', 'red');
       const game = new Game(123, player);
@@ -186,13 +186,13 @@ describe('Game', function() {
         piecesInfo: [{ position: '0_0', name: 'marshal' }]
       };
       game.arrangeBattleField(setUpInfo);
-      game.movePiece('red', '0_0', '0_1');
-      const updatedPosition = game.updateBattleField('0_0', '0_1');
+      game.movePiece('red', [0, 0], [0, 1]);
+      const updatedPosition = game.updateBattleField([0, 0], [0, 1]);
       assert.deepStrictEqual(updatedPosition, '0_1');
     });
   });
 
-  context('.movePiece()', function() {
+  context('.movePiece', function() {
     it('should update the position of piece of given player', function() {
       const player = new Player('venky', 'red');
       const game = new Game(123, player);
@@ -202,7 +202,7 @@ describe('Game', function() {
         piecesInfo: [{ position: '0_0', name: 'marshal' }]
       };
       game.arrangeBattleField(setUpInfo);
-      assert.isTrue(game.movePiece('red', '0_0', '0_1'));
+      assert.isTrue(game.movePiece('red', [0, 0], [0, 1]));
     });
 
     it('should not update the position of the piece if the given target position is a lake', function() {
@@ -214,7 +214,7 @@ describe('Game', function() {
         piecesInfo: [{ position: '1_4', name: 'marshal' }]
       };
       game.arrangeBattleField(setUpInfo);
-      assert.isFalse(game.movePiece('red', '1_4', '2_4'));
+      assert.isFalse(game.movePiece('red', [1, 4], [2, 4]));
     });
 
     it('should not update the position of the piece if the given target position is occupied', function() {
@@ -229,7 +229,7 @@ describe('Game', function() {
         ]
       };
       game.arrangeBattleField(setUpInfo);
-      assert.isFalse(game.movePiece('red', '1_4', '2_4'));
+      assert.isFalse(game.movePiece('red', [1, 4], [2, 4]));
     });
 
     it('should not move the piece to diagonal of current position', function() {
@@ -241,10 +241,10 @@ describe('Game', function() {
         piecesInfo: [{ position: '1_4', name: 'marshal' }]
       };
       game.arrangeBattleField(setUpInfo);
-      assert.isFalse(game.movePiece('red', '1_4', '3_4'));
+      assert.isFalse(game.movePiece('red', [1, 4], [3, 4]));
     });
 
-    it('should not move the piece if the piece is immovalble', function() {
+    it('should not move the piece if the piece is non-movable', function() {
       const player = new Player('venky', 'red');
       const game = new Game(123, player);
       game.initBattleField();
@@ -253,7 +253,7 @@ describe('Game', function() {
         piecesInfo: [{ position: '1_4', name: 'bomb' }]
       };
       game.arrangeBattleField(setUpInfo);
-      assert.isFalse(game.movePiece('red', '1_4', '3_4'));
+      assert.isFalse(game.movePiece('red', [1, 4], [3, 4]));
     });
 
     it('should move the scout to as many tiles vertically and horizontally', function() {
@@ -265,7 +265,7 @@ describe('Game', function() {
         piecesInfo: [{ position: '1_4', name: 'scout' }]
       };
       game.arrangeBattleField(setUpInfo);
-      assert.isTrue(game.movePiece('red', '1_4', '1_8'));
+      assert.isTrue(game.movePiece('red', [1, 4], [1, 8]));
     });
 
     it('should not move the scout to as many tiles vertically and horizontally if lake comes in-between', function() {
@@ -277,7 +277,7 @@ describe('Game', function() {
         piecesInfo: [{ position: '1_4', name: 'scout' }]
       };
       game.arrangeBattleField(setUpInfo);
-      assert.isFalse(game.movePiece('red', '1_4', '8_4'));
+      assert.isFalse(game.movePiece('red', [1, 4], [8, 4]));
     });
 
     it('should not move the scout to as many tiles vertically and horizontally if other piece comes in-between', function() {
@@ -292,7 +292,7 @@ describe('Game', function() {
         ]
       };
       game.arrangeBattleField(setUpInfo);
-      assert.isFalse(game.movePiece('red', '2_3', '7_3'));
+      assert.isFalse(game.movePiece('red', [2, 3], [7, 3]));
     });
 
     it('should not move scout diagonaly', function() {
@@ -304,141 +304,131 @@ describe('Game', function() {
         piecesInfo: [{ position: '2_3', name: 'scout' }]
       };
       game.arrangeBattleField(setUpInfo);
-      assert.isFalse(game.movePiece('red', '2_3', '3_2'));
-    });
-  });
-  context('.getAttackStatus()', function() {
-    it('should return attack status won if defenders rank is less than attackers rank', function() {
-      const player = new Player('venky', 'red');
-      const player2 = new Player('rajat', 'blue');
-      const game = new Game(123, player);
-      game.initBattleField();
-      game.addPlayer(player2);
-      const setUpInfo1 = {
-        unit: 'red',
-        piecesInfo: [{ position: '2_3', name: 'marshal' }]
-      };
-      const setUpInfo2 = {
-        unit: 'blue',
-        piecesInfo: [{ position: '1_3', name: 'miner' }]
-      };
-      game.arrangeBattleField(setUpInfo1);
-      game.arrangeBattleField(setUpInfo2);
-      assert.strictEqual(game.getAttackStatus('2_3', '1_3'), 'won');
-    });
-    it('should return attack status lost if defenders rank is more than attackers rank', function() {
-      const player = new Player('venky', 'red');
-      const player2 = new Player('rajat', 'blue');
-      const game = new Game(123, player);
-      game.initBattleField();
-      game.addPlayer(player2);
-      const setUpInfo1 = {
-        unit: 'red',
-        piecesInfo: [{ position: '2_3', name: 'miner' }]
-      };
-      const setUpInfo2 = {
-        unit: 'blue',
-        piecesInfo: [{ position: '1_3', name: 'marshal' }]
-      };
-      game.arrangeBattleField(setUpInfo1);
-      game.arrangeBattleField(setUpInfo2);
-      assert.strictEqual(game.getAttackStatus('2_3', '1_3'), 'lost');
-    });
-    it('should return attack status draw if defenders rank is equal to attackers rank', function() {
-      const player = new Player('venky', 'red');
-      const player2 = new Player('rajat', 'blue');
-      const game = new Game(123, player);
-      game.initBattleField();
-      game.addPlayer(player2);
-      const setUpInfo1 = {
-        unit: 'red',
-        piecesInfo: [{ position: '2_3', name: 'marshal' }]
-      };
-      const setUpInfo2 = {
-        unit: 'blue',
-        piecesInfo: [{ position: '1_3', name: 'marshal' }]
-      };
-      game.arrangeBattleField(setUpInfo1);
-      game.arrangeBattleField(setUpInfo2);
-      assert.strictEqual(game.getAttackStatus('2_3', '1_3'), 'draw');
-    });
-  });
-  context('attack', function() {
-    it('should return attack status won if defenders rank is less than attackers rank', function() {
-      const player = new Player('venky', 'red');
-      const player2 = new Player('rajat', 'blue');
-      const game = new Game(123, player);
-      game.initBattleField();
-      game.addPlayer(player2);
-      const setUpInfo1 = {
-        unit: 'red',
-        piecesInfo: [{ position: '2_3', name: 'marshal' }]
-      };
-      const setUpInfo2 = {
-        unit: 'blue',
-        piecesInfo: [{ position: '1_3', name: 'miner' }]
-      };
-      game.arrangeBattleField(setUpInfo1);
-      game.arrangeBattleField(setUpInfo2);
-      assert.strictEqual(game.attack('2_3', '1_3', 'red'), 'won');
-    });
-    it('should return attack status lost if defenders rank is more than attackers rank', function() {
-      const player = new Player('venky', 'red');
-      const player2 = new Player('rajat', 'blue');
-      const game = new Game(123, player);
-      game.initBattleField();
-      game.addPlayer(player2);
-      const setUpInfo1 = {
-        unit: 'red',
-        piecesInfo: [{ position: '2_3', name: 'miner' }]
-      };
-      const setUpInfo2 = {
-        unit: 'blue',
-        piecesInfo: [{ position: '1_3', name: 'marshal' }]
-      };
-      game.arrangeBattleField(setUpInfo1);
-      game.arrangeBattleField(setUpInfo2);
-      assert.strictEqual(game.attack('2_3', '1_3', 'red'), 'lost');
-    });
-    it('should return attack status draw if defenders rank is equal to attackers rank', function() {
-      const player = new Player('venky', 'red');
-      const player2 = new Player('rajat', 'blue');
-      const game = new Game(123, player);
-      game.initBattleField();
-      game.addPlayer(player2);
-      const setUpInfo1 = {
-        unit: 'red',
-        piecesInfo: [{ position: '2_3', name: 'marshal' }]
-      };
-      const setUpInfo2 = {
-        unit: 'blue',
-        piecesInfo: [{ position: '1_3', name: 'marshal' }]
-      };
-      game.arrangeBattleField(setUpInfo1);
-      game.arrangeBattleField(setUpInfo2);
-      assert.strictEqual(game.attack('2_3', '1_3', 'red'), 'draw');
-    });
-    it('should return attack status unsuccessful if attack positions is invalid', function() {
-      const player = new Player('venky', 'red');
-      const player2 = new Player('rajat', 'blue');
-      const game = new Game(123, player);
-      game.initBattleField();
-      game.addPlayer(player2);
-      const setUpInfo1 = {
-        unit: 'red',
-        piecesInfo: [{ position: '2_3', name: 'marshal' }]
-      };
-      const setUpInfo2 = {
-        unit: 'blue',
-        piecesInfo: [{ position: '1_3', name: 'marshal' }]
-      };
-      game.arrangeBattleField(setUpInfo1);
-      game.arrangeBattleField(setUpInfo2);
-      assert.strictEqual(game.attack('2_3', '2_4', 'red'), 'unsuccessful');
+      assert.isFalse(game.movePiece('red', [2, 3], [3, 2]));
     });
   });
 
-  context('.isScoutPathIsClear()', function() {
+  context('.getAttackStatus', function() {
+    let game;
+    this.beforeEach(function() {
+      const player = new Player('venky', 'red');
+      const player2 = new Player('rajat', 'blue');
+      game = new Game(123, player);
+      game.initBattleField();
+      game.addPlayer(player2);
+    });
+
+    it('should return attack status won if defenders rank is less than attackers rank', function() {
+      const setUpInfo1 = {
+        unit: 'red',
+        piecesInfo: [{ position: '2_3', name: 'marshal' }]
+      };
+      const setUpInfo2 = {
+        unit: 'blue',
+        piecesInfo: [{ position: '1_3', name: 'miner' }]
+      };
+      game.arrangeBattleField(setUpInfo1);
+      game.arrangeBattleField(setUpInfo2);
+      assert.strictEqual(game.getAttackStatus([2, 3], [1, 3]), 'won');
+    });
+
+    it('should return attack status lost if defenders rank is more than attackers rank', function() {
+      const setUpInfo1 = {
+        unit: 'red',
+        piecesInfo: [{ position: '2_3', name: 'miner' }]
+      };
+      const setUpInfo2 = {
+        unit: 'blue',
+        piecesInfo: [{ position: '1_3', name: 'marshal' }]
+      };
+      game.arrangeBattleField(setUpInfo1);
+      game.arrangeBattleField(setUpInfo2);
+      assert.strictEqual(game.getAttackStatus([2, 3], [1, 3]), 'lost');
+    });
+
+    it('should return attack status draw if defenders rank is equal to attackers rank', function() {
+      const setUpInfo1 = {
+        unit: 'red',
+        piecesInfo: [{ position: '2_3', name: 'marshal' }]
+      };
+      const setUpInfo2 = {
+        unit: 'blue',
+        piecesInfo: [{ position: '1_3', name: 'marshal' }]
+      };
+      game.arrangeBattleField(setUpInfo1);
+      game.arrangeBattleField(setUpInfo2);
+      assert.strictEqual(game.getAttackStatus([2, 3], [1, 3]), 'draw');
+    });
+  });
+
+  context('.attack', function() {
+    let game;
+    this.beforeEach(function() {
+      const player = new Player('venky', 'red');
+      const player2 = new Player('rajat', 'blue');
+      game = new Game(123, player);
+      game.initBattleField();
+      game.addPlayer(player2);
+    });
+
+    it('should return attack status won if defenders rank is less than attackers rank', function() {
+      const setUpInfo1 = {
+        unit: 'red',
+        piecesInfo: [{ position: '2_3', name: 'marshal' }]
+      };
+      const setUpInfo2 = {
+        unit: 'blue',
+        piecesInfo: [{ position: '1_3', name: 'miner' }]
+      };
+      game.arrangeBattleField(setUpInfo1);
+      game.arrangeBattleField(setUpInfo2);
+      assert.strictEqual(game.attack([2, 3], [1, 3], 'red'), 'won');
+    });
+
+    it('should return attack status lost if defenders rank is more than attackers rank', function() {
+      const setUpInfo1 = {
+        unit: 'red',
+        piecesInfo: [{ position: '2_3', name: 'miner' }]
+      };
+      const setUpInfo2 = {
+        unit: 'blue',
+        piecesInfo: [{ position: '1_3', name: 'marshal' }]
+      };
+      game.arrangeBattleField(setUpInfo1);
+      game.arrangeBattleField(setUpInfo2);
+      assert.strictEqual(game.attack([2, 3], [1, 3], 'red'), 'lost');
+    });
+
+    it('should return attack status draw if defenders rank is equal to attackers rank', function() {
+      const setUpInfo1 = {
+        unit: 'red',
+        piecesInfo: [{ position: '2_3', name: 'marshal' }]
+      };
+      const setUpInfo2 = {
+        unit: 'blue',
+        piecesInfo: [{ position: '1_3', name: 'marshal' }]
+      };
+      game.arrangeBattleField(setUpInfo1);
+      game.arrangeBattleField(setUpInfo2);
+      assert.strictEqual(game.attack([2, 3], [1, 3], 'red'), 'draw');
+    });
+
+    it('should return attack status unsuccessful if attack positions is invalid', function() {
+      const setUpInfo1 = {
+        unit: 'red',
+        piecesInfo: [{ position: '2_3', name: 'marshal' }]
+      };
+      const setUpInfo2 = {
+        unit: 'blue',
+        piecesInfo: [{ position: '1_3', name: 'marshal' }]
+      };
+      game.arrangeBattleField(setUpInfo1);
+      game.arrangeBattleField(setUpInfo2);
+      assert.strictEqual(game.attack([2, 3], [2, 4], 'red'), 'unsuccessful');
+    });
+  });
+
+  context('.isScoutPathIsClear', function() {
     it('should return true when there is no pieces or lake  between the two positions', function() {
       const player = new Player('venky', 'red');
       const player2 = new Player('rajat', 'blue');
@@ -476,7 +466,8 @@ describe('Game', function() {
       assert.isFalse(game.isScoutPathIsClear([2, 3], [2, 8]));
     });
   });
-  context('.ableToKill()', function() {
+
+  context('.ableToKill', function() {
     it('should return true when he can kill the other piece', function() {
       const player = new Player('venky', 'red');
       const player2 = new Player('rajat', 'blue');
