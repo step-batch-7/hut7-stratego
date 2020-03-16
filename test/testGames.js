@@ -144,7 +144,11 @@ describe('Games', function() {
       games.arrangeBattleField(gameId, dummySetupData);
     });
 
-    it('should move the piece to the given target Position', () => {
+    it('should not move the piece when the game is not available', function() {
+      assert.isFalse(games.movePiece(gameId + 3, 'blue', [0, 0], [0, 1]));
+    });
+
+    it('should move the piece to the given target Position', function() {
       assert.isTrue(games.movePiece(gameId, 'blue', [0, 0], [0, 1]));
     });
 
