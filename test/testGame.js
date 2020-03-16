@@ -308,59 +308,6 @@ describe('Game', function() {
     });
   });
 
-  context('.getAttackStatus', function() {
-    let game;
-    this.beforeEach(function() {
-      const player = new Player('venky', 'red');
-      const player2 = new Player('rajat', 'blue');
-      game = new Game(123, player);
-      game.initBattleField();
-      game.addPlayer(player2);
-    });
-
-    it('should return attack status won if defenders rank is less than attackers rank', function() {
-      const setUpInfo1 = {
-        unit: 'red',
-        piecesInfo: [{ position: '2_3', name: 'marshal' }]
-      };
-      const setUpInfo2 = {
-        unit: 'blue',
-        piecesInfo: [{ position: '1_3', name: 'miner' }]
-      };
-      game.arrangeBattleField(setUpInfo1);
-      game.arrangeBattleField(setUpInfo2);
-      assert.strictEqual(game.getAttackStatus([2, 3], [1, 3]), 'won');
-    });
-
-    it('should return attack status lost if defenders rank is more than attackers rank', function() {
-      const setUpInfo1 = {
-        unit: 'red',
-        piecesInfo: [{ position: '2_3', name: 'miner' }]
-      };
-      const setUpInfo2 = {
-        unit: 'blue',
-        piecesInfo: [{ position: '1_3', name: 'marshal' }]
-      };
-      game.arrangeBattleField(setUpInfo1);
-      game.arrangeBattleField(setUpInfo2);
-      assert.strictEqual(game.getAttackStatus([2, 3], [1, 3]), 'lost');
-    });
-
-    it('should return attack status draw if defenders rank is equal to attackers rank', function() {
-      const setUpInfo1 = {
-        unit: 'red',
-        piecesInfo: [{ position: '2_3', name: 'marshal' }]
-      };
-      const setUpInfo2 = {
-        unit: 'blue',
-        piecesInfo: [{ position: '1_3', name: 'marshal' }]
-      };
-      game.arrangeBattleField(setUpInfo1);
-      game.arrangeBattleField(setUpInfo2);
-      assert.strictEqual(game.getAttackStatus([2, 3], [1, 3]), 'draw');
-    });
-  });
-
   context('.attack', function() {
     let game;
     this.beforeEach(function() {
@@ -428,7 +375,7 @@ describe('Game', function() {
     });
   });
 
-  context('.isScoutPathIsClear', function() {
+  context('.isPiecePathIsClear', function() {
     it('should return true when there is no pieces or lake  between the two positions', function() {
       const player = new Player('venky', 'red');
       const player2 = new Player('rajat', 'blue');
@@ -445,7 +392,7 @@ describe('Game', function() {
       };
       game.arrangeBattleField(setUpInfo1);
       game.arrangeBattleField(setUpInfo2);
-      assert.isTrue(game.isScoutPathIsClear([2, 3], [8, 3]));
+      assert.isTrue(game.isPiecePathIsClear([2, 3], [8, 3]));
     });
     it('should return false when there is pieces or lake  between the two positions', function() {
       const player = new Player('venky', 'red');
@@ -463,7 +410,7 @@ describe('Game', function() {
       };
       game.arrangeBattleField(setUpInfo1);
       game.arrangeBattleField(setUpInfo2);
-      assert.isFalse(game.isScoutPathIsClear([2, 3], [2, 8]));
+      assert.isFalse(game.isPiecePathIsClear([2, 3], [2, 8]));
     });
   });
 
@@ -503,18 +450,6 @@ describe('Game', function() {
       game.arrangeBattleField(setUpInfo1);
       game.arrangeBattleField(setUpInfo2);
       assert.isFalse(game.ableToKill([2, 3], [8, 3], 0));
-    });
-  });
-  context('.isSpecificAttack', function() {
-    it('should won if spy attacks opponents marshal', function() {
-      const player = new Player('venky', 'red');
-      const game = new Game(123, player);
-      assert.isTrue(game.isSpecificAttack(10, 1));
-    });
-    it('should won if miner attacks opponents bomb', function() {
-      const player = new Player('venky', 'red');
-      const game = new Game(123, player);
-      assert.isTrue(game.isSpecificAttack(11, 3));
     });
   });
 });

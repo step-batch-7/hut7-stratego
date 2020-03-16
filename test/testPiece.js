@@ -1,5 +1,5 @@
 const assert = require('chai').assert;
-const { Piece } = require('./../lib/piece');
+const { Piece, StablePiece } = require('./../lib/piece');
 
 describe('Piece', function() {
   context('.getStatus()', function() {
@@ -18,6 +18,19 @@ describe('Piece', function() {
       const piece = new Piece('marshal', [0, 0]);
       const currentPosition = piece.move([9, 0]);
       assert.deepStrictEqual(currentPosition, [9, 0]);
+    });
+  });
+
+  context('.getAttackStatus()', function() {
+    it('should return won when the mainer attacks the bomb', function() {
+      const piece = new StablePiece('bomb', [0, 0]);
+      const actual = piece.getAttackStatus('miner');
+      assert.strictEqual(actual, 'won');
+    });
+    it('should return lost when the mainer attacks the flag', function() {
+      const piece = new StablePiece('flag', [0, 0]);
+      const actual = piece.getAttackStatus('miner');
+      assert.strictEqual(actual, 'lost');
     });
   });
 });
