@@ -86,62 +86,132 @@ describe('Games', function() {
   });
 
   context('.getArmy', function() {
-    it('should return the army of a player', () => {
-      const games = createGames();
-      const gameId = games.createNewGame('venky');
-      games.addPlayerInGame(gameId, 'venky');
-      const dummySetupData = {
-        unit: 'blue',
-        piecesInfo: [{ position: '9_9', name: 'flag' }]
-      };
-      games.arrangeBattleField(gameId, dummySetupData);
+    let games, gameId;
+    this.beforeEach(function() {
+      games = createGames();
+      gameId = games.createNewGame('venky');
+      games.addPlayerInGame(gameId, 'rajat');
+      const setUpInfo1 = [
+        { position: '9_0', name: 'flag' },
+        { position: '1_0', name: 'bomb' },
+        { position: '4_0', name: 'bomb' },
+        { position: '6_0', name: 'general' },
+        { position: '0_0', name: 'marshal' },
+        { position: '2_3', name: 'miner' },
+        { position: '5_0', name: 'miner' },
+        { position: '3_0', name: 'scout' },
+        { position: '8_0', name: 'scout' },
+        { position: '7_0', name: 'spy' }
+      ];
+      games.arrangeBattleField(gameId, 'red', setUpInfo1);
+      const setUpInfo2 = [
+        { position: '7_6', name: 'flag' },
+        { position: '1_6', name: 'bomb' },
+        { position: '2_6', name: 'bomb' },
+        { position: '2_7', name: 'marshal' },
+        { position: '7_7', name: 'general' },
+        { position: '0_6', name: 'miner' },
+        { position: '4_6', name: 'miner' },
+        { position: '5_6', name: 'scout' },
+        { position: '6_6', name: 'scout' },
+        { position: '9_6', name: 'spy' }
+      ];
+      games.arrangeBattleField(gameId, 'blue', setUpInfo2);
+    });
+
+    it('should return the army of the red player', function() {
       const expected = {
-        redArmy: [],
+        redArmy: [
+          { position: [9, 0], name: 'flag' },
+          { position: [1, 0], name: 'bomb' },
+          { position: [4, 0], name: 'bomb' },
+          { position: [6, 0], name: 'general' },
+          { position: [0, 0], name: 'marshal' },
+          { position: [2, 3], name: 'miner' },
+          { position: [5, 0], name: 'miner' },
+          { position: [3, 0], name: 'scout' },
+          { position: [8, 0], name: 'scout' },
+          { position: [7, 0], name: 'spy' }
+        ],
         blueArmy: [
-          {
-            name: 'flag',
-            position: [9, 9]
-          }
+          { position: [7, 6], name: 'flag' },
+          { position: [1, 6], name: 'bomb' },
+          { position: [2, 6], name: 'bomb' },
+          { position: [2, 7], name: 'marshal' },
+          { position: [7, 7], name: 'general' },
+          { position: [0, 6], name: 'miner' },
+          { position: [4, 6], name: 'miner' },
+          { position: [5, 6], name: 'scout' },
+          { position: [6, 6], name: 'scout' },
+          { position: [9, 6], name: 'spy' }
         ]
       };
       assert.deepStrictEqual(games.getArmy(gameId, 'blue'), expected);
     });
 
-    it('should return the army of a player', () => {
-      const games = createGames();
-      const gameId = games.createNewGame('venky');
-      games.addPlayerInGame(gameId, 'venky');
-      const dummySetupData = {
-        unit: 'red',
-        piecesInfo: [{ position: '9_9', name: 'flag' }]
-      };
-      games.arrangeBattleField(gameId, dummySetupData);
+    it('should return the army of the blue player', function() {
       const expected = {
         redArmy: [
-          {
-            name: 'flag',
-            position: [9, 9]
-          }
+          { position: [9, 0], name: 'flag' },
+          { position: [1, 0], name: 'bomb' },
+          { position: [4, 0], name: 'bomb' },
+          { position: [6, 0], name: 'general' },
+          { position: [0, 0], name: 'marshal' },
+          { position: [2, 3], name: 'miner' },
+          { position: [5, 0], name: 'miner' },
+          { position: [3, 0], name: 'scout' },
+          { position: [8, 0], name: 'scout' },
+          { position: [7, 0], name: 'spy' }
         ],
-        blueArmy: []
+        blueArmy: [
+          { position: [7, 6], name: 'flag' },
+          { position: [1, 6], name: 'bomb' },
+          { position: [2, 6], name: 'bomb' },
+          { position: [2, 7], name: 'marshal' },
+          { position: [7, 7], name: 'general' },
+          { position: [0, 6], name: 'miner' },
+          { position: [4, 6], name: 'miner' },
+          { position: [5, 6], name: 'scout' },
+          { position: [6, 6], name: 'scout' },
+          { position: [9, 6], name: 'spy' }
+        ]
       };
       assert.deepStrictEqual(games.getArmy(gameId, 'red'), expected);
     });
   });
 
   context('.movePiece', function() {
-    const games = createGames();
-    const gameId = games.createNewGame('venky');
-    this.beforeEach(() => {
-      games.addPlayerInGame(gameId, 'venky');
-      const dummySetupData = {
-        unit: 'blue',
-        piecesInfo: [
-          { position: '9_9', name: 'flag' },
-          { position: '0_0', name: 'marshal' }
-        ]
-      };
-      games.arrangeBattleField(gameId, dummySetupData);
+    let games, gameId;
+    this.beforeEach(function() {
+      games = createGames();
+      gameId = games.createNewGame('venky');
+      games.addPlayerInGame(gameId, 'rajat');
+      const setUpInfo1 = [
+        { position: '9_0', name: 'flag' },
+        { position: '1_0', name: 'bomb' },
+        { position: '4_0', name: 'bomb' },
+        { position: '6_0', name: 'general' },
+        { position: '0_0', name: 'marshal' },
+        { position: '2_3', name: 'miner' },
+        { position: '5_0', name: 'miner' },
+        { position: '3_0', name: 'scout' },
+        { position: '8_0', name: 'scout' },
+        { position: '7_0', name: 'spy' }
+      ];
+      games.arrangeBattleField(gameId, 'red', setUpInfo1);
+      const setUpInfo2 = [
+        { position: '7_6', name: 'flag' },
+        { position: '1_6', name: 'bomb' },
+        { position: '2_6', name: 'bomb' },
+        { position: '2_7', name: 'marshal' },
+        { position: '7_7', name: 'general' },
+        { position: '0_6', name: 'miner' },
+        { position: '4_6', name: 'miner' },
+        { position: '5_6', name: 'scout' },
+        { position: '6_6', name: 'scout' },
+        { position: '9_6', name: 'spy' }
+      ];
+      games.arrangeBattleField(gameId, 'blue', setUpInfo2);
     });
 
     it('should not move the piece when the game is not available', function() {
@@ -149,64 +219,102 @@ describe('Games', function() {
     });
 
     it('should move the piece to the given target Position', function() {
-      assert.isTrue(games.movePiece(gameId, 'blue', [0, 0], [0, 1]));
+      assert.isTrue(games.movePiece(gameId, 'blue', [6, 6], [6, 7]));
     });
 
-    it('should not move the piece to the given target Position when move is invalid', () => {
-      assert.isFalse(games.movePiece(gameId, 'blue', [0, 0], [0, 9]));
+    it('should not move the piece to the given target Position when move is invalid', function() {
+      assert.isFalse(games.movePiece(gameId, 'blue', [0, 6], [0, 9]));
     });
 
-    it('should move the piece to the given target Position when piece is immovable', () => {
-      assert.isFalse(games.movePiece(gameId, 'blue', [9, 9], [8, 9]));
+    it('should move the piece to the given target Position when piece is immovable', function() {
+      assert.isFalse(games.movePiece(gameId, 'blue', [2, 6], [3, 6]));
     });
   });
 
   context('.isSetupDone', function() {
-    it('should give false if setup is not done', function() {
-      const games = createGames();
-      const gameId = games.createNewGame('venky');
+    let games, gameId;
+    this.beforeEach(function() {
+      games = createGames();
+      gameId = games.createNewGame('venky');
+      games.addPlayerInGame(gameId, 'rajat');
+    });
+
+    it('should give false if setup is not ', function() {
       assert.isFalse(games.isSetupDone(gameId));
     });
 
-    it('should give true if setup is done', function() {
-      const games = createGames();
-      const gameId = games.createNewGame('venky');
-      games.addPlayerInGame(gameId, 'player');
-      games.arrangeBattleField(gameId, [{ name: 'bomb', position: '2_1' }]);
+    it('should give true if setup is ', function() {
+      const setUpInfo1 = [
+        { position: '9_0', name: 'flag' },
+        { position: '1_0', name: 'bomb' },
+        { position: '4_0', name: 'bomb' },
+        { position: '6_0', name: 'general' },
+        { position: '0_0', name: 'marshal' },
+        { position: '2_3', name: 'miner' },
+        { position: '5_0', name: 'miner' },
+        { position: '3_0', name: 'scout' },
+        { position: '8_0', name: 'scout' },
+        { position: '7_0', name: 'spy' }
+      ];
+      games.arrangeBattleField(gameId, 'red', setUpInfo1);
+      const setUpInfo2 = [
+        { position: '7_6', name: 'flag' },
+        { position: '1_6', name: 'bomb' },
+        { position: '2_6', name: 'bomb' },
+        { position: '2_7', name: 'marshal' },
+        { position: '7_7', name: 'general' },
+        { position: '0_6', name: 'miner' },
+        { position: '4_6', name: 'miner' },
+        { position: '5_6', name: 'scout' },
+        { position: '6_6', name: 'scout' },
+        { position: '9_6', name: 'spy' }
+      ];
+      games.arrangeBattleField(gameId, 'blue', setUpInfo2);
       assert.isTrue(games.isSetupDone(gameId));
     });
   });
 
   context('.attack', function() {
-    const games = createGames();
-    const gameId = games.createNewGame('venky');
-    this.beforeEach(() => {
-      games.addPlayerInGame(gameId, 'venky');
-      const dummySetupData1 = {
-        unit: 'red',
-        piecesInfo: [
-          { position: '0_0', name: 'flag' },
-          { position: '1_2', name: 'marshal' }
-        ]
-      };
-      const dummySetupData2 = {
-        unit: 'blue',
-        piecesInfo: [
-          { position: '2_2', name: 'flag' },
-          { position: '9_8', name: 'marshal' },
-          { position: '0_2', name: 'flag' }
-        ]
-      };
-      games.arrangeBattleField(gameId, dummySetupData1);
-      games.arrangeBattleField(gameId, dummySetupData2);
+    let games, gameId;
+    this.beforeEach(function() {
+      games = createGames();
+      gameId = games.createNewGame('venky');
+      games.addPlayerInGame(gameId, 'rajat');
+      const setUpInfo1 = [
+        { position: '9_0', name: 'flag' },
+        { position: '1_0', name: 'bomb' },
+        { position: '4_0', name: 'bomb' },
+        { position: '6_0', name: 'general' },
+        { position: '0_0', name: 'marshal' },
+        { position: '3_7', name: 'miner' },
+        { position: '5_0', name: 'miner' },
+        { position: '3_0', name: 'scout' },
+        { position: '8_0', name: 'scout' },
+        { position: '7_0', name: 'spy' }
+      ];
+      games.arrangeBattleField(gameId, 'red', setUpInfo1);
+      const setUpInfo2 = [
+        { position: '7_6', name: 'flag' },
+        { position: '1_6', name: 'bomb' },
+        { position: '2_6', name: 'bomb' },
+        { position: '2_7', name: 'marshal' },
+        { position: '7_7', name: 'general' },
+        { position: '0_6', name: 'miner' },
+        { position: '4_6', name: 'miner' },
+        { position: '5_6', name: 'scout' },
+        { position: '6_6', name: 'scout' },
+        { position: '9_6', name: 'spy' }
+      ];
+      games.arrangeBattleField(gameId, 'blue', setUpInfo2);
+      assert.isTrue(games.isSetupDone(gameId));
     });
 
-    it('should return attack status won if defenders rank is less than attackers rank', () => {
-      assert.strictEqual(games.attack(gameId, [1, 2], [2, 2], 'red'), 'won');
+    it('should return attack status won if defenders rank is less than attackers rank', function() {
+      assert.strictEqual(games.attack(gameId, [2, 7], [3, 7], 'blue'), 'won');
     });
 
-    it('should return attack status lost if defenders rank is greater than attackers rank', () => {
-      assert.strictEqual(games.attack(gameId, [1, 2], [0, 2], 'red'), 'won');
+    it('should return attack status lost if defenders rank is greater than attackers rank', function() {
+      assert.strictEqual(games.attack(gameId, [3, 7], [2, 7], 'red'), 'lost');
     });
   });
 });

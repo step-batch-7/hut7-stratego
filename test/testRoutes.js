@@ -3,8 +3,8 @@ const { app } = require('../lib/routes');
 const { games } = require('../lib/games');
 const { replace, restore, stub } = require('sinon');
 
-describe('GET', () => {
-  afterEach(() => {
+describe('GET', function() {
+  afterEach(function() {
     restore();
   });
   context('/game', function() {
@@ -204,12 +204,13 @@ describe('GET', () => {
   });
 });
 
-describe('POST', () => {
-  afterEach(() => {
+describe('POST', function() {
+  afterEach(function() {
     restore();
   });
+
   context('/host', function() {
-    beforeEach(() => {
+    beforeEach(function() {
       const createNewGame = stub()
         .withArgs('player1')
         .returns(1);
@@ -244,8 +245,9 @@ describe('POST', () => {
         });
     });
   });
+
   context('/army', function() {
-    beforeEach(() => {
+    beforeEach(function() {
       const getArmy = stub()
         .withArgs('blue')
         .returns([{}]);
@@ -276,6 +278,7 @@ describe('POST', () => {
         });
     });
   });
+
   context('/movePiece', function() {
     it('should respond with new position if its a valid move', function(done) {
       const movePiece = stub()
@@ -313,6 +316,7 @@ describe('POST', () => {
         });
     });
   });
+
   context('/join', function() {
     it('should join game with given player name and gameId for /join', function(done) {
       const isGameFull = stub()
@@ -376,60 +380,20 @@ describe('POST', () => {
         });
     });
   });
+
   context('/setupData', function() {
-    it('should tell to go to game page when the pieceInfo is valid for the host player', done => {
-      const arrangeBattleField = stub()
-        .withArgs(1, [{}])
-        .returns(true);
+    let arrangeBattleField;
+    this.beforeEach(function() {
+      arrangeBattleField = stub().returns(true);
       replace(games, 'arrangeBattleField', arrangeBattleField);
-      const piecesInfo = [
-        { position: '9_9', name: 'flag' },
-        { position: '1_0', name: 'marshal' },
-        { position: '2_0', name: 'scout' },
-        { position: '3_0', name: 'miner' },
-        { position: '4_0', name: 'bomb' },
-        { position: '5_0', name: 'bomb' },
-        { position: '6_0', name: 'miner' },
-        { position: '7_0', name: 'scout' },
-        { position: '8_0', name: 'general' },
-        { position: '9_0', name: 'spy' }
-      ];
-      request(app)
-        .post('/setupData')
-        .set('cookie', 'unit=blue')
-        .set('Content-Type', 'application/json')
-        .send(JSON.stringify({ piecesInfo }))
-        .expect(200)
-        .expect(/game/)
-        .end(function(err) {
-          if (err) {
-            return done(err);
-          }
-          done();
-        });
     });
-    it('should tell to go to game page when the pieceInfo is valid for the joined player', done => {
-      const arrangeBattleField = stub()
-        .withArgs(1, [{}])
-        .returns(true);
-      replace(games, 'arrangeBattleField', arrangeBattleField);
-      const piecesInfo = [
-        { position: '9_9', name: 'flag' },
-        { position: '1_0', name: 'marshal' },
-        { position: '2_0', name: 'scout' },
-        { position: '3_0', name: 'miner' },
-        { position: '4_0', name: 'bomb' },
-        { position: '5_0', name: 'bomb' },
-        { position: '6_0', name: 'miner' },
-        { position: '7_0', name: 'scout' },
-        { position: '8_0', name: 'general' },
-        { position: '9_0', name: 'spy' }
-      ];
+
+    it('should tell to go to game page when the pieceInfo is valid for the joined player', function(done) {
       request(app)
         .post('/setupData')
         .set('cookie', 'unit=red')
         .set('Content-Type', 'application/json')
-        .send(JSON.stringify({ piecesInfo }))
+        .send(JSON.stringify({ piecesInfo: [] }))
         .expect(200)
         .expect(/game/)
         .end(function(err) {
@@ -439,27 +403,14 @@ describe('POST', () => {
           done();
         });
     });
-    it('should tell to go to game page when the pieceInfo is valid', done => {
-      const arrangeBattleField = stub()
-        .withArgs(1, [{}])
-        .returns(true);
-      replace(games, 'arrangeBattleField', arrangeBattleField);
-      const piecesInfo = [
-        { position: '1_0', name: 'marshal' },
-        { position: '2_0', name: 'scout' },
-        { position: '3_0', name: 'miner' },
-        { position: '4_0', name: 'bomb' },
-        { position: '5_0', name: 'bomb' },
-        { position: '6_0', name: 'miner' },
-        { position: '7_0', name: 'scout' },
-        { position: '8_0', name: 'general' },
-        { position: '9_0', name: 'spy' }
-      ];
+
+    it('should tell to go to game page when the pieceInfo is valid', function(done) {
+      arrangeBattleField.returns(false);
       request(app)
         .post('/setupData')
         .set('cookie', 'unit=blue')
         .set('Content-Type', 'application/json')
-        .send(JSON.stringify({ piecesInfo }))
+        .send(JSON.stringify({ piecesInfo: [] }))
         .expect(/Bad Request/)
         .expect(400)
         .end(function(err) {
@@ -470,6 +421,7 @@ describe('POST', () => {
         });
     });
   });
+
   context('/attack', function() {
     it('should give lost if the defender has more rank than attacker', function(done) {
       const attack = stub()
