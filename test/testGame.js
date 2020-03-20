@@ -313,19 +313,19 @@ describe('Game', function() {
     });
 
     it('should return attack status won if defenders rank is less than attackers rank', function() {
-      assert.strictEqual(game.attack([0, 0], [1, 0], 'red'), 'won');
+      assert.strictEqual(game.attack('red', [0, 0], [1, 0]), 'won');
     });
 
     it('should return attack status lost if defenders rank is more than attackers rank', function() {
-      assert.strictEqual(game.attack([0, 3], [1, 3], 'red'), 'lost');
+      assert.strictEqual(game.attack('red', [0, 3], [1, 3]), 'lost');
     });
 
     it('should return attack status draw if defenders rank is equal to attackers rank', function() {
-      assert.strictEqual(game.attack([0, 5], [1, 5], 'red'), 'draw');
+      assert.strictEqual(game.attack('red', [0, 5], [1, 5]), 'draw');
     });
 
     it('should return attack status unsuccessful if attack positions is invalid', function() {
-      assert.strictEqual(game.attack([2, 3], [2, 4], 'red'), 'unsuccessful');
+      assert.strictEqual(game.attack('red', [2, 3], [2, 4]), 'unsuccessful');
     });
   });
 

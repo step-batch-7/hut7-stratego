@@ -310,11 +310,18 @@ describe('Games', function() {
     });
 
     it('should return attack status won if defenders rank is less than attackers rank', function() {
-      assert.strictEqual(games.attack(gameId, [2, 7], [3, 7], 'blue'), 'won');
+      assert.strictEqual(games.attack(gameId, 'blue', [2, 7], [3, 7]), 'won');
     });
 
     it('should return attack status lost if defenders rank is greater than attackers rank', function() {
-      assert.strictEqual(games.attack(gameId, [3, 7], [2, 7], 'red'), 'lost');
+      assert.strictEqual(games.attack(gameId, 'red', [3, 7], [2, 7]), 'lost');
+    });
+
+    it('should reply with unsuccessful status when gameId is wrong', function() {
+      assert.strictEqual(
+        games.attack(gameId + 3, 'red', [3, 7], [2, 7]),
+        'unsuccessful'
+      );
     });
   });
 });
