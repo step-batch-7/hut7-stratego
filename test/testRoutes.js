@@ -7,6 +7,7 @@ describe('GET', function() {
   afterEach(function() {
     restore();
   });
+
   context('/game', function() {
     it('should redirect to homepage  when game does not exist', function(done) {
       this.timeout(4000);
@@ -71,6 +72,7 @@ describe('GET', function() {
         });
     });
   });
+
   context('/setup', function() {
     it('should send to index page if cookies are not set', function(done) {
       this.timeout(4000);
@@ -134,6 +136,7 @@ describe('GET', function() {
         });
     });
   });
+
   context('/host', function() {
     it('should serve the host page', function(done) {
       this.timeout(4000);
@@ -149,6 +152,7 @@ describe('GET', function() {
         });
     });
   });
+
   context('/join', function() {
     it('should serve the join page', function(done) {
       this.timeout(4000);
@@ -164,6 +168,7 @@ describe('GET', function() {
         });
     });
   });
+
   context('/areAllPlayersJoined', function() {
     it('should give false if the game is not full', function(done) {
       this.timeout(4000);
@@ -253,12 +258,13 @@ describe('POST', function() {
         .returns([{}]);
       replace(games, 'getArmy', getArmy);
     });
+
     it('should response back with piecesInfo', function(done) {
       request(app)
         .get('/army')
         .set('Cookie', ['unit=blue', 'gameId=1'])
         .expect(200)
-        .expect(/[{}]]/)
+        .expect(/[{}]/)
         .end(function(err) {
           if (err) {
             return done(err);
@@ -266,7 +272,8 @@ describe('POST', function() {
           done();
         });
     });
-    it('should response back with piecesInfo', function(done) {
+
+    it('should respond with bad request when the cookies are not present', function(done) {
       request(app)
         .get('/army')
         .expect(404)
